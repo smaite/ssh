@@ -5,10 +5,9 @@
 <head>
   <title>Learn with Fun</title>
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <meta name="keywords" content="quiz, Learn, Fun, Nabaraj, Dhungana, Upadhyaya, Paschimanchal, School, 
-
-nabarajupadhyaya">
-   <meta name="author" content="Nabaraj Dhungana"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <meta name="keywords" content="quiz, Learn, Fun, Nabaraj, Dhungana, Upadhyaya, Paschimanchal, School, nabarajupadhyaya">
+   <meta name="author" content="Nabaraj Dhungana">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
@@ -17,7 +16,6 @@ nabarajupadhyaya">
    background-color: #1abc9c;
    
   }
-   
   .bg-1 { 
       background-color: #1abc9c; /* Green */
       color: #ffffff;
@@ -104,9 +102,7 @@ input[type=number]{
 $(document).ready(function(){
     $(".wronganswer").click(function(){
             $("#myAudio")[0].play();
-            $(this).replaceWith("<h3> <strong>Your 
-
-answer is wrong!<br> Try another answer.<strong></h3>");
+            $(this).replaceWith("<h3> <strong>Your answer is wrong!<br> Try another answer.<strong></h3>");
             initialScore--;
             $("#scorePoint").text(initialScore);
             
@@ -114,9 +110,7 @@ answer is wrong!<br> Try another answer.<strong></h3>");
     $(".rightanswer").click(function(){
             $("#myAudio")[0].play();
             $(".btn").show();
-            $(this).replaceWith("Your answer is right!
-
-<br> Congratulations!!!");
+            $(this).replaceWith("Your answer is right!<br> Congratulations!!!");
             initialScore++;
             $("#scorePoint").text(initialScore);
             
@@ -391,17 +385,9 @@ $(document).ready(function(){
 
 <body>
 
-<!-- Load an icon library to show a hamburger menu 
-
-(bars) on small screens -->
-<link rel="stylesheet" 
-
-href="https://cdnjs.cloudflare.com/ajax/libs/font-
-
-awesome/4.7.0/css/font-awesome.min.css">
-<link rel= "stylesheet" 
-
-href="https://nabaraj.w3spaces.com/top_nav_css.css" >
+<!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel= "stylesheet" href="https://nabaraj.w3spaces.com/top_nav_css.css" >
 
 <div class="topnav" id="myTopnav">
   <a href="#home.html" class="active">Home</a>
@@ -411,9 +397,7 @@ href="https://nabaraj.w3spaces.com/top_nav_css.css" >
   <a href="./photo_galary.html">Photo Gallary</a>
 
 
-  <a href="javascript:void(0);" class="icon" 
-
-onclick="myFunction()">
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
   <!--
@@ -422,24 +406,12 @@ onclick="myFunction()">
   -->
 </div> 
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
+<!--Space for each question and its optional answers alongwith next button-->
   
-<div id="qNoPlace" class="bg-1"><h4> Question No.<span 
-
-id="qNumber"></span></h4></div> 
-<div id="scorePlace" class="bg-1"><h4>Your Score: <span 
-
-id="scorePoint">0 </span></h4></div>
+<div id="qNoPlace" class="bg-1"><h4> Question No.<span id="qNumber"></span></h4></div> 
+<div id="scorePlace" class="bg-1"><h4>Your Score: <span id="scorePoint">0 </span></h4></div>
  
-<h4 class="bg-2 text-center" 
-
-id="nameAge"><span>Player:&nbsp;</span><span 
-
-id="namePlace"></span><span>&nbsp;(Age: </span><span 
-
-id="yourAge"></span><span>years)</span></h4> 
+<h4 class="bg-2 text-center" id="nameAge"><span>Player:&nbsp;</span><span id="namePlace"></span><span>&nbsp;(Age: </span><span id="yourAge"></span><span>years)</span></h4> 
 <p id="audioPlace">
     <audio id="myAudio">
     <source src="/sounds/click.wav" type="audio/wav">
@@ -448,27 +420,17 @@ id="yourAge"></span><span>years)</span></h4>
   
 <div id="divIntro" class="container-fluid bg-1 text-center">    
     <h2 class="title"> Learn with Fun </h2> 
-    <h3 class="introduction">Rules:<br>Right Answer:  +1 
-
-point.<br>Wrong Answer: -1 point.<br>
-    Next Button will be available only when you give the 
-
-right answer.<br>Play! Learn! and Have Fun!
+    <h3 class="introduction">Rules:<br>Right Answer:  +1 point.<br>Wrong Answer: -1 point.<br>
+    Next Button will be available only when you give the right answer.<br>Play! Learn! and Have Fun!
     </h3>
     <p class="btncontainer text-center" style="padding-bottom:30px" >
-    <input type="text" id="name" placeholder="Enter your 
-
-name:" maxlength="21" size="15" autofocus><br>
-    <input type="number" id="age" placeholder="Your 
-
-age:" min="5" max="100"><br>
+    <input type="text" id="name" placeholder="Enter your name:" maxlength="21" size="15" autofocus><br>
+    <input type="number" id="age" placeholder="Your age:" min="5" max="100"><br>
     <button type="button" id="readybutton" class="btn btn-primary btn-lg">I'm ready to play</button>  
 </div>    
 
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
+<!--Space for each question and its optional answers alongwith next button-->
 <div id="div1" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
@@ -476,1910 +438,1160 @@ alongwith next button-->
     </div>
     <div class= "container"><img src="https://nabaraj.w3spaces.com/photos/manakamana-tample.jpg"></div> 
     <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Pathivara 
-
-Temple</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Pathivara Temple</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" 
-
-class="wronganswer">Pashupatinath Temple </p></h3>
+       <p id= "wrongopt1" class="wronganswer">Pashupatinath Temple </p></h3>
     </div>
      <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  
-
-Manakamana Temple </p></h3>
+       <p id= "rightopt" class="rightanswer">  Manakamana Temple </p></h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Krishna 
-
-Temple </p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Krishna Temple </p> </h3>
     </div>
     <div class="container">
-    <button type="button" id="btn1" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn1" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div2" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div2" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Who is the prime minister of 
-
-Nepal? </p> </h2>
+        <p id="qspace"> Who is the prime minister of Nepal? </p> </h2>
     </div>
     
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Puspa 
-
-Kamal Dahal</p> </h3>
+       <p id= "wrongopt1" class="wronganswer"> Puspa Kamal Dahal</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Khadga 
-
-Prasad Oli</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Khadga Prasad Oli</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">Sher 
-
-Bahadur Deuba </p> </h3>
+       <p id= "rightopt" class="rightanswer">Sher Bahadur Deuba </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Madhav 
-
-Kumar Nepal</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Madhav Kumar Nepal</p> </h3>
     </div>
        
     
     <div class="container">
-    <button type="button" id="btn2" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn2" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>    
 
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div3" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div3" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Who is the president of Nepal? 
-
-</p> </h2>
+        <p id="qspace"> Who is the president of Nepal? </p> </h2>
     </div>
     
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Dr. 
-
-Ramvaran Yadav</p> </h3>
+       <p id= "wrongopt1" class="wronganswer"> Dr. Ramvaran Yadav</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Sher 
-
-Bahadur Deuba</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Sher Bahadur Deuba</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Vidya Devi 
-
-Bhandari</p> </h3>
+       <p id= "rightopt" class="rightanswer"> Vidya Devi Bhandari</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Barshaman 
-
-Pun</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Barshaman Pun</p> </h3>
     </div>
        
     
     <div class="container">
-    <button type="button" id="btn3" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn3" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
 
 
-<!--Space for each question and its optional answers 
-
-alongwith next button -->
-<div id="div4" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button -->
+<div id="div4" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> In which district does the 
-
-temple of Halesi Mahadev lie </p> </h2>
+        <p id="qspace"> In which district does the temple of Halesi Mahadev lie </p> </h2>
     </div>
     
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Panchthar 
-
-district </p> </h3>
+       <p id= "wrongopt1" class="wronganswer"> Panchthar district </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Ramechhap 
-
-district </p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Ramechhap district </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer">  
-
-Sankhuwasava district  </p> </h3>
+       <p id= "wrongopt3" class="wronganswer">  Sankhuwasava district  </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Khotang 
-
-district</p> </h3>
+       <p id= "rightopt" class="rightanswer"> Khotang district</p> </h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn4" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn4" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div5" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div5" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Who is the chief minister of 
-
-State No. 5? </p> </h2>
+        <p id="qspace"> Who is the chief minister of State No. 5? </p> </h2>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Kul Prasad 
-
-KC </p> </h3>
+       <p id= "rightopt" class="rightanswer"> Kul Prasad KC </p> </h3>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Shankar 
-
-Poudel</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Shankar Poudel</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Umakanta 
-
-Jha</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Umakanta Jha</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Lalbabu 
-
-Raut </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Lalbabu Raut </p></h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn5" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn5" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div6" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div6" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Who won the golden ball in FIFA 
-
-World Cup 2018? </p> </h2>
+        <p id="qspace"> Who won the golden ball in FIFA World Cup 2018? </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Harry 
-
-Kane</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Harry Kane</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Romelu 
-
-Lukaku</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Romelu Lukaku</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Kylian 
-
-Mbappe </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Kylian Mbappe </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Luka 
-
-Modric </p> </h3>
+       <p id= "rightopt" class="rightanswer"> Luka Modric </p> </h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn6" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn6" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div7" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div7" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Which is the capital city of 
-
-Finland?  </p> </h2>
+        <p id="qspace"> Which is the capital city of Finland?  </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 
-
-Warsaw</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Warsaw</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Helsinki 
-
-</p> </h3>
+       <p id= "rightopt" class="rightanswer"> Helsinki </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 
-
-Amesterdam</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Amesterdam</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> 
-
-Copenhagen </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Copenhagen </p></h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn7" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn7" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div8" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div8" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Who was the father of Hindu 
-
-legend Parshuram? </p> </h2>
+        <p id="qspace"> Who was the father of Hindu legend Parshuram? </p> </h2>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Rishi 
-
-Jamadagni </p> </h3>
+       <p id= "rightopt" class="rightanswer"> Rishi Jamadagni </p> </h3>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Rishi 
-
-Bharadwaj</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Rishi Bharadwaj</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Rishi 
-
-Vishwamitra</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Rishi Vishwamitra</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Rishi 
-
-Vashistha </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Rishi Vashistha </p></h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn8" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn8" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div9" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div9" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Who is the founder of Google? 
-
-</p> </h2>
+        <p id="qspace"> Who is the founder of Google? </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Mark 
-
-Jukerberg</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Mark Jukerberg</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Sundar 
-
-Pichai</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Sundar Pichai</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Larry Page 
-
-</p> </h3>
+       <p id= "rightopt" class="rightanswer"> Larry Page </p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Jan Koum 
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Jan Koum </p></h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn9" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn9" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div10" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div10" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Who scored the fastest century 
-
-in ODI cricket? </p> </h2>
+        <p id="qspace"> Who scored the fastest century in ODI cricket? </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Corey 
-
-Anderson</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Corey Anderson</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Shahid 
-
-Afridi</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Shahid Afridi</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Brian 
-
-Lara </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Brian Lara </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> AB De 
-
-Villiers </p> </h3>
+       <p id= "rightopt" class="rightanswer"> AB De Villiers </p> </h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn10" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn10" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
     </div>
     
-    <!--Space for each question and its optional answers 
-
-alongwith next button-->
-    <div id="div11" class="container-fluid bg-1 text-
-
-center question">
+    <!--Space for each question and its optional answers alongwith next button-->
+    <div id="div11" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> What does ICAO stand for? </p> 
-
-</h2>
+        <p id="qspace"> What does ICAO stand for? </p> </h2>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> 
-
-International Civil Aviation Organization </p> </h3>
+       <p id= "rightopt" class="rightanswer"> International Civil Aviation Organization </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt2" 
-
-class="wronganswer">Internation Civil Agricultural 
-
-Organization </p> </h3>
+       <p id= "wrongopt2" class="wronganswer">Internation Civil Agricultural Organization </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Indian 
-
-Corporation of Agriculture Organization</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Indian Corporation of Agriculture Organization</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Institute 
-
-of Company of Accounts Organization </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Institute of Company of Accounts Organization </p></h3>
     </div>
     
     
     <div class="container">
-    <button type="button" id="btn11" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn11" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div12" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div12" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> How many members are there in 
-
-House of Representative in Nepal? </p> </h2>
+        <p id="qspace"> How many members are there in House of Representative in Nepal? </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 165</p> 
-
-</h3>
+       <p id= "wrongopt2" class="wronganswer"> 165</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 601</p> 
-
-</h3>
+       <p id= "wrongopt3" class="wronganswer"> 601</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> 275 </p> 
-
-</h3>
+       <p id= "rightopt" class="rightanswer"> 275 </p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> 59 
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer"> 59 </p></h3>
     </div>
     
     
     <div class="container">
-    <button type="button" id="btn12" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn12" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div13" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div13" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> What is the full form of HTML? 
-
-</p> </h2>
+        <p id="qspace"> What is the full form of HTML? </p> </h2>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Hypertext 
-
-Markup Language </p> </h3>
+       <p id= "rightopt" class="rightanswer"> Hypertext Markup Language </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Higher 
-
-Technology Machine Language</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Higher Technology Machine Language</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> High Tech 
-
-Machanical Load</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> High Tech Machanical Load</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Hypertext 
-
-Machine Language </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Hypertext Machine Language </p></h3>
     </div>
     <div class="container">
-    <button type="button" id="btn13" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn13" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div14" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div14" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Who invented mobile phone? </p> 
-
-</h2>
+        <p id="qspace"> Who invented mobile phone? </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Graham 
-
-Bell</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Graham Bell</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Martin 
-
-Cooper </p> </h3>
+       <p id= "rightopt" class="rightanswer"> Martin Cooper </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Galileo 
-
-Galilei</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Galileo Galilei</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Antonio 
-
-Meucci </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Antonio Meucci </p></h3>
     </div>
     
     
     <div class="container">
-    <button type="button" id="btn14" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn14" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div15" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div15" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> In which country does Mt. 
-
-Kilimanjaro lie? </p> </h2>
+        <p id="qspace"> In which country does Mt. Kilimanjaro lie? </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 
-
-Uganda</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Uganda</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 
-
-Mozambique</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Mozambique</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Kenya 
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Kenya </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Tanzania 
-
-</p> </h3>
+       <p id= "rightopt" class="rightanswer"> Tanzania </p> </h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn15" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn15" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div16" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div16" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Who is the governor of state 
-
-number 5 in Nepal? </p> </h2>
+        <p id="qspace"> Who is the governor of state number 5 in Nepal? </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Shankar 
-
-Pokhrel</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Shankar Pokhrel</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Anuradha 
-
-Koirala</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Anuradha Koirala</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Baburam 
-
-Kunwar </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Baburam Kunwar </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Amik 
-
-Sherchan </p> </h3>
+       <p id= "rightopt" class="rightanswer"> Amik Sherchan </p> </h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn16" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn16" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div17" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div17" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Which among the following 
-
-radiations carries maximum energy? </p> </h2>
+        <p id="qspace"> Which among the following radiations carries maximum energy? </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 
-
-Ultraviolet Rays</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Ultraviolet Rays</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Infrared 
-
-Rays</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Infrared Rays</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> X-rays 
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer"> X-rays </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Gama Rays 
-
-</p> </h3>
+       <p id= "rightopt" class="rightanswer"> Gama Rays </p> </h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn17" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn17" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div18" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div18" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Fuel for jet planes consists of 
-
-purified...... </p> </h2>
+        <p id="qspace"> Fuel for jet planes consists of purified...... </p> </h2>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Kerosene 
-
-</p> </h3>
+       <p id= "rightopt" class="rightanswer"> Kerosene </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 
-
-Petrol</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Petrol</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 
-
-Diesel</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Diesel</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Gasoline 
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Gasoline </p></h3>
     </div>
     
     
     <div class="container">
-    <button type="button" id="btn18" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn18" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div19" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div19" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Who said "Child is the father of 
-
-Man?" </p> </h2>
+        <p id="qspace">Who said "Child is the father of Man?" </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> John 
-
-Keats</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> John Keats</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Lord 
-
-Byron</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Lord Byron</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> William 
-
-Shakespeare </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> William Shakespeare </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> William 
-
-Wordsworth </p> </h3>
+       <p id= "rightopt" class="rightanswer"> William Wordsworth </p> </h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn19" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn19" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button -->
-<div id="div20" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button -->
+<div id="div20" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Who wrote the Nepali novel 
-
-'Firfire' </p> </h2>
+        <p id="qspace"> Who wrote the Nepali novel 'Firfire' </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Bhimnidhi 
-
-Tiwari </p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Bhimnidhi Tiwari </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Krishna 
-
-Dharawasi </p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Krishna Dharawasi </p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Narayan 
-
-Wagle  </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Narayan Wagle  </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Buddhi 
-
-Sagar  </p> </h3>
+       <p id= "rightopt" class="rightanswer"> Buddhi Sagar  </p> </h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn20" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn20" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div> -->
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div21" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div21" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">What is the full form of SEE?" 
-
-</p> </h2>
+        <p id="qspace">What is the full form of SEE?" </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Student's 
-
-Education Examination</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Student's Education Examination</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> School 
-
-Entrance Examination</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> School Entrance Examination</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Secondary 
-
-Education Examination </p> </h3>
+       <p id= "rightopt" class="rightanswer"> Secondary Education Examination </p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> School 
-
-Education Examination </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> School Education Examination </p></h3>
     </div>
     
     
     <div class="container">
-    <button type="button" id="btn21" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn21" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div22" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div22" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Who is the youngest person to 
-
-climb Mt. Everest?" </p> </h2>
+        <p id="qspace">Who is the youngest person to climb Mt. Everest?" </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Pasang 
-
-Lhamu Sherpa</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Pasang Lhamu Sherpa</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Jordan 
-
-Romero </p></h3>
+       <p id= "rightopt" class="rightanswer">  Jordan Romero </p></h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Malavath 
-
-Purna</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Malavath Purna</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Temba 
-
-Tsheri </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Temba Tsheri </p></h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn22" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn22" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button -->
-<div id="div23" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button -->
+<div id="div23" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">How many districts are there in 
-
-province number 1" </p> </h2>
+        <p id="qspace">How many districts are there in province number 1" </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 12 
-
-districts </p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> 12 districts </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 13 
-
-districts </p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> 13 districts </p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">14 
-
-districts  </p> </h3>
+       <p id= "rightopt" class="rightanswer">14 districts  </p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> 15 
-
-districts  </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> 15 districts  </p></h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn23" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn23" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div> 
 
-<!--Space for each question and its optional answers 
-
-alongwith next button -->
-<div id="div24" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button -->
+<div id="div24" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Which country's flag is this?" 
-
-</p> </h2>
+        <p id="qspace">Which country's flag is this?" </p> </h2>
     </div>
-    <div class="container"><img 
-
-src="https://nabaraj.w3spaces.com/photos/canada.jpg"></d
-
-iv>
+    <div class="container"><img src="https://nabaraj.w3spaces.com/photos/canada.jpg"></div>
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> The 
-
-United States </p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> The United States </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> The 
-
-United Kingdom </p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> The United Kingdom </p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Japan  
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Japan  </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Canada  
-
-</p> </h3>
+       <p id= "rightopt" class="rightanswer"> Canada  </p> </h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn24" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn24" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div> 
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div25" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div25" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Who is the education minister of 
-
-Nepal?" </p> </h2>
+        <p id="qspace">Who is the education minister of Nepal?" </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Giriraj 
-
-Mani Pokhrel</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Giriraj Mani Pokhrel</p> </h3>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 
-
-Chitralekha Yadav</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Chitralekha Yadav</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Gokarna 
-
-Bista </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Gokarna Bista </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Devendra 
-
-Poudel </p></h3>
+       <p id= "rightopt" class="rightanswer">  Devendra Poudel </p></h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn25" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn25" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div26" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div26" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Which is the capital city of 
-
-Karnali province? </p> </h2>
+        <p id="qspace">Which is the capital city of Karnali province? </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Surkhet 
-
-</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Surkhet </p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  
-
-Birendranagar  </p></h3>
+       <p id= "rightopt" class="rightanswer">  Birendranagar  </p></h3>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Dhangadhi 
-
-</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Dhangadhi </p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> none of 
-
-these </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> none of these </p></h3>
     </div>
     
     
     <div class="container">
-    <button type="button" id="btn26" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn26" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div27" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div27" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Which is the largest district of 
-
-Nepal?" </p> </h2>
+        <p id="qspace">Which is the largest district of Nepal?" </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 
-
-Kathmandu</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Kathmandu</p> </h3>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 
-
-Surkhet</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Surkhet</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Humla 
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Humla </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Dolpa 
-
-</p></h3>
+       <p id= "rightopt" class="rightanswer">  Dolpa </p></h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn27" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn27" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div28" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div28" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Which is the largest national 
-
-park of Nepal?" </p> </h2>
+        <p id="qspace">Which is the largest national park of Nepal?" </p> </h2>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Rara 
-
-National Park</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Rara National Park</p> </h3>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Chitwan 
-
-National Park</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Chitwan National Park</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> 
-
-Sagarmatha National Park </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> Sagarmatha National Park </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  She-
-
-phoksundo National Park </p></h3>
+       <p id= "rightopt" class="rightanswer">  She-phoksundo National Park </p></h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn28" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn28" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div29" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div29" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">What portion of the world is 
-
-occupied by Nepal?" </p> </h2>
+        <p id="qspace">What portion of the world is occupied by Nepal?" </p> </h2>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  0.03 
-
-percent </p></h3>
+       <p id= "rightopt" class="rightanswer">  0.03 percent </p></h3>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 0.3 
-
-percent</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> 0.3 percent</p> </h3>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 0.33 
-
-percent</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> 0.33 percent</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> 3.0 
-
-percent </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> 3.0 percent </p></h3>
     </div>
     
     
     <div class="container">
-    <button type="button" id="btn29" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn29" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div30" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div30" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">What does entomology study about? 
-
-</p> </h2>
+        <p id="qspace">What does entomology study about? </p> </h2>
     </div>
     
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> behaviour 
-
-of human beings</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> behaviour of human beings</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  insects 
-
-</p></h3>
+       <p id= "rightopt" class="rightanswer">  insects </p></h3>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> formation 
-
-of rocks</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> formation of rocks</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> wild 
-
-animals </p></h3>
+       <p id= "wrongopt1" class="wronganswer"> wild animals </p></h3>
     </div>
 
     <div class="container">
-    <button type="button" id="btn30" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn30" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div31" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div31" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">For which of the following 
-
-disciplines Nobel Prize is awarded? </p> </h2>
+        <p id="qspace">For which of the following disciplines Nobel Prize is awarded? </p> </h2>
     </div>
     
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> physics 
-
-and chemistry</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> physics and chemistry</p> </h3>
     </div>
     
     
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 
-
-physiology and medicine</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> physiology and medicine</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="wronganswer">  
-
-literature, peace and economics </p></h3>
+       <p id= "rightopt" class="wronganswer">  literature, peace and economics </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="rightanswer"> all of 
-
-the above </p></h3>
+       <p id= "wrongopt1" class="rightanswer"> all of the above </p></h3>
     </div>
     
     
     <div class="container">
-    <button type="button" id="btn31" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn31" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div32" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div32" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Each year World Red Cross Day is 
-
-celebrated on? </p> </h2>
+        <p id="qspace">Each year World Red Cross Day is celebrated on? </p> </h2>
     </div>
     
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> February 
-
-8</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> February 8</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> March 
-
-8</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> March 8</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer">March 18 
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer">March 18 </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  May 8 
-
-</p></h3>
+       <p id= "rightopt" class="rightanswer">  May 8 </p></h3>
     </div>
 
     <div class="container">
-    <button type="button" id="btn32" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn32" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div33" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div33" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Which mountain is 8,586 meters 
-
-high? </p> </h2>
+        <p id="qspace">Which mountain is 8,586 meters high? </p> </h2>
     </div>
     
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Mt. Cho 
-
-Oyu</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Mt. Cho Oyu</p> </h3>
     </div>
      <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Mt. 
-
-Kanchanjungha </p></h3>
+       <p id= "rightopt" class="rightanswer">  Mt. Kanchanjungha </p></h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Mt. 
-
-Makalu</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Mt. Makalu</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer">Mt. Lhotse 
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer">Mt. Lhotse </p></h3>
     </div>
    
 
     <div class="container">
-    <button type="button" id="btn33" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn33" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div34" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div34" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Which district does not lie in 
-
-State No. 1? </p> </h2>
+        <p id="qspace">Which district does not lie in State No. 1? </p> </h2>
     </div>
     
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Ramechhap 
-
-</p></h3>
+       <p id= "rightopt" class="rightanswer">  Ramechhap </p></h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 
-
-Taplejung</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Taplejung</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 
-
-Udaypur</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Udaypur</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer">Panchthar 
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer">Panchthar </p></h3>
     </div>
     
 
     <div class="container">
-    <button type="button" id="btn34" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn34" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div35" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div35" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">When was Sugauli treaty signed? 
-
-</p> </h2>
+        <p id="qspace">When was Sugauli treaty signed? </p> </h2>
     </div>
     
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 2 
-
-February 1818</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> 2 February 1818</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 15 March 
-
-1980</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> 15 March 1980</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer">12 
-
-December 1815 </p></h3>
+       <p id= "wrongopt1" class="wronganswer">12 December 1815 </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  2 
-
-December 1815 </p></h3>
+       <p id= "rightopt" class="rightanswer">  2 December 1815 </p></h3>
     </div>
 
     <div class="container">
-    <button type="button" id="btn35" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn35" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div36" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div36" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">In which district does Dhorpatan 
-
-Hunting Reserve not lie? </p> </h2>
+        <p id="qspace">In which district does Dhorpatan Hunting Reserve not lie? </p> </h2>
     </div>
     
     <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Baglung 
-
-</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Baglung </p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Myagdi 
-
-</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Myagdi </p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer">Rukum  
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer">Rukum  </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Dolpa  
-
-</p></h3>
+       <p id= "rightopt" class="rightanswer">  Dolpa  </p></h3>
     </div>
 
     <div class="container">
-    <button type="button" id="btn36" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn36" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div37" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div37" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Which international game among 
-
-these is played only in Nepal? </p> </h2>
+        <p id="qspace">Which international game among these is played only in Nepal? </p> </h2>
     </div>
     
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 
-
-Volleyball</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Volleyball</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer">Air Hockey 
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer">Air Hockey </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="wronganswer">  Mountain 
-
-Biking </p></h3>
+       <p id= "rightopt" class="wronganswer">  Mountain Biking </p></h3>
     </div>
      <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Elephant 
-
-Polo </p></h3>
+       <p id= "rightopt" class="rightanswer">  Elephant Polo </p></h3>
     </div>
 
     <div class="container">
-    <button type="button" id="btn37" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn37" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div38" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div38" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Which country's flag is this? 
-
-</p> </h2>
+        <p id="qspace">Which country's flag is this? </p> </h2>
     </div>
-    <div class= "container"><img 
-
-src="https://nabaraj.w3spaces.com/photos/Brazil.jpg"> 
-
-</div>
+    <div class= "container"><img src="https://nabaraj.w3spaces.com/photos/Brazil.jpg"> </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 
-
-Bolivia</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Bolivia</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 
-
-Pakistan</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Pakistan</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer">Argentina 
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer">Argentina </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Brazil 
-
-</p></h3>
+       <p id= "rightopt" class="rightanswer">  Brazil </p></h3>
     </div>
 
     <div class="container">
-    <button type="button" id="btn38" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn38" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div39" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div39" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Which of the following grasslands 
-
-lie in North America? </p> </h2>
+        <p id="qspace">Which of the following grasslands lie in North America? </p> </h2>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 
-
-Pampas</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Pampas</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> 
-
-Savannas</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Savannas</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Prairies 
-
-</p></h3>
+       <p id= "rightopt" class="rightanswer">  Prairies </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer">Steppes 
-
-</p></h3>
+       <p id= "wrongopt1" class="wronganswer">Steppes </p></h3>
     </div>
     <div class="container">
-    <button type="button" id="btn39" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn39" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div40" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div40" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Who is the first Nepali player to 
-
-play IPL cricket? </p> </h2>
+        <p id="qspace">Who is the first Nepali player to play IPL cricket? </p> </h2>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Shakti 
-
-Gauchan</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Shakti Gauchan</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer">Gyanendra 
-
-Malla </p></h3>
+       <p id= "wrongopt1" class="wronganswer">Gyanendra Malla </p></h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Parash 
-
-Khadka</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Parash Khadka</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Sandeep 
-
-Lamichhane </p></h3>
+       <p id= "rightopt" class="rightanswer">  Sandeep Lamichhane </p></h3>
     </div>
     
     <div class="container">
-    <button type="button" id="btn40" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn40" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div41" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div41" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Which of these countries will 
-
-host FIFA world cup 2022? </p> </h2>
+        <p id="qspace">Which of these countries will host FIFA world cup 2022? </p> </h2>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Qatar 
-
-</p></h3>
+       <p id= "rightopt" class="rightanswer">  Qatar </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> 
-
-England</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> England</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer">South 
-
-Koria </p></h3>
+       <p id= "wrongopt1" class="wronganswer">South Koria </p></h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Saudi 
-
-Arabia</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Saudi Arabia</p> </h3>
     </div>
     <div class="container">
-    <button type="button" id="btn41" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn41" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div42" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div42" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Which Nepali writer is shown in 
-
-this picture? </p> </h2>
+        <p id="qspace">Which Nepali writer is shown in this picture? </p> </h2>
     </div>
-    <div class= "container"><img 
-
-src="https://nabaraj.w3spaces.com/photos/Balkrishna.jpg"
-
-></div> 
+    <div class= "container"><img src="https://nabaraj.w3spaces.com/photos/Balkrishna.jpg"></div> 
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  
-
-Balkrishna Sama </p></h3>
+       <p id= "rightopt" class="rightanswer">  Balkrishna Sama </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Motiram 
-
-Bhatta </p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Motiram Bhatta </p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" 
-
-class="wronganswer">Dharanidhar Koirala  </p></h3>
+       <p id= "wrongopt1" class="wronganswer">Dharanidhar Koirala  </p></h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Lekhnath 
-
-Poudel </p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Lekhnath Poudel </p> </h3>
     </div>
     <div class="container">
-    <button type="button" id="btn42" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn42" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div43" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div43" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Who is the richest person in the 
-
-world ? </p> </h2>
+        <p id="qspace">Who is the richest person in the world ? </p> </h2>
     </div>
     
     <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Bill 
-
-Gates</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Bill Gates</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Elon Musk 
-
-</p></h3>
+       <p id= "rightopt" class="rightanswer">  Elon Musk </p></h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer">Carlos 
-
-Slim </p></h3>
+       <p id= "wrongopt1" class="wronganswer">Carlos Slim </p></h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Kim 
-
-Jong-un</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Kim Jong-un</p> </h3>
     </div>
     <div class="container">
-    <button type="button" id="btn43" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn43" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div44" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div44" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace">Who is shown in this picture?</p> 
-
-</h2>
+        <p id="qspace">Who is shown in this picture?</p> </h2>
     </div>
-    <div class= "container"><img 
-
-src="https://nabaraj.w3spaces.com/photos/smriti.jpg"></d
-
-iv> 
+    <div class= "container"><img src="https://nabaraj.w3spaces.com/photos/smriti.jpg"></div> 
     <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Hema 
-
-Malini</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Hema Malini</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer">Sushma 
-
-Swaraj </p></h3>
+       <p id= "wrongopt1" class="wronganswer">Sushma Swaraj </p></h3>
     </div>
      <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer">  Smriti 
-
-Irani </p></h3>
+       <p id= "rightopt" class="rightanswer">  Smriti Irani </p></h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Mamta 
-
-Benerji </p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> Mamta Benerji </p> </h3>
     </div>
     <div class="container">
-    <button type="button" id="btn44" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn44" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div45" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div45" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Who said this?<br>"Democracy is 
-
-the government of the people, by the people and for the 
-
-people".</p> </h2>
+        <p id="qspace"> Who said this?<br>"Democracy is the government of the people, by the people and for the people".</p> </h2>
     </div>
     
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Leo 
-
-Tolstoy</p> </h3>
+       <p id= "wrongopt1" class="wronganswer"> Leo Tolstoy</p> </h3>
     </div>
     <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Abraham 
-
-Lincoln</p> </h3>
+       <p id= "rightopt" class="rightanswer"> Abraham Lincoln</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Benjamin 
-
-Franklin</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Benjamin Franklin</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> Plato</p> 
-
-</h3>
+       <p id= "wrongopt3" class="wronganswer"> Plato</p> </h3>
     </div>
     <div class="container">
-    <button type="button" id="btn45" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn45" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
-<!--Space for each question and its optional answers 
-
-alongwith next button-->
-<div id="div46" class="container-fluid bg-1 text-center 
-
-question">
+<!--Space for each question and its optional answers alongwith next button-->
+<div id="div46" class="container-fluid bg-1 text-center question">
     <div class="container">
         <h2>
-        <p id="qspace"> Who was the last king of Nepal?
-
-</p> </h2>
+        <p id="qspace"> Who was the last king of Nepal?</p> </h2>
     </div>
     
     <div class= "container"> <h3>
-       <p id= "wrongopt1" class="wronganswer"> Prithvi 
-
-Narayan Shah</p> </h3>
+       <p id= "wrongopt1" class="wronganswer"> Prithvi Narayan Shah</p> </h3>
     </div>
     
        <div class= "container"> <h3>
-       <p id= "wrongopt2" class="wronganswer"> Birendra 
-
-Bir Bikram Shah</p> </h3>
+       <p id= "wrongopt2" class="wronganswer"> Birendra Bir Bikram Shah</p> </h3>
     </div>
        <div class= "container"> <h3>
-       <p id= "wrongopt3" class="wronganswer"> King 
-
-Tribhuvan</p> </h3>
+       <p id= "wrongopt3" class="wronganswer"> King Tribhuvan</p> </h3>
        </div>
        <div class= "container"> <h3>
-       <p id= "rightopt" class="rightanswer"> Gyanendra 
-
-Bir Bikram Shah</p> </h3>
+       <p id= "rightopt" class="rightanswer"> Gyanendra Bir Bikram Shah</p> </h3>
         </div> 
     <div class="container">
-    <button type="button" id="btn46" class="btn btn-
-
-primary btn-lg">Next Question</button>  
+    <button type="button" id="btn46" class="btn btn-primary btn-lg">Next Question</button>  
     </div>
 </div>
 
@@ -2389,23 +1601,13 @@ primary btn-lg">Next Question</button>
 
 
 
-<div id= "divThankYou" class="container-fluid bg-1 
-
-text-center"><h1>More questions will be coming soon. 
-
-Thank you for playing.</h1>  <br><button id="btnAgain" 
-
-class="btn-primary btn-lg">Play Again</button>  </div>
+<div id= "divThankYou" class="container-fluid bg-1 text-center"><h1>More questions will be coming soon. Thank you for playing.</h1>  <br><button id="btnAgain" class="btn-primary btn-lg">Play Again</button>  </div>
 
 
-<div id="bottomText" class="container-fluid bg-1 text-
-
-center">This space is for advertisement.</div>
+<div id="bottomText" class="container-fluid bg-1 text-center">This space is for advertisement.</div>
 <div class="footer">Author: Nabaraj Upadhyay</div>
 <script>
-/* Toggle between adding and removing the "responsive" 
-
-class to topnav when the user clicks on the icon */
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
