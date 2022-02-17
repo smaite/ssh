@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans">
+
 <style>
 body {
-  font-family: Arial;
+  font-family: "Open Sans", sans-serif, Arial;
   margin: 0;
- background-color: lightblue;
-}
+  background-color: lightblue;
+ }
 
 .mycard{
  position: absolute;
- display: inline-block;
+ display: none;
  width: 92vw;
  height: 77vh;
  box-sizing: border-box;
@@ -18,21 +21,60 @@ body {
  background-color: rgba(21, 8, 68);
  background-image: linear-gradient(to right, rgba(21, 8, 68),  rgba(190, 0, 0));
  color: white;
- font-size: 5vw;
+ font-size: 8vw;
  text-align: justify;
- box-shadow: 2vw 2vw 2vw black;
- border-left: 2vw groove red;
- border-top: 2vw groove red;
  backface-visibility: hidden;
- padding: 7px;
+ padding: 10px;
  margin: 0 auto;
  overflow: auto;
  top: 5vh;
  left: 4vw;
+ z-index:10;
 }
+#topbanner{
+ background-color: white;
+ height: 5vh;
+ color: blue;
+ box-sizing: border-box;
+ text-align: center;
+ top: 0;
+ margin: 0;
+}
+#navbar{
+ background-color: blue;
+ height: 5vh;
+ color: white;
+ box-sizing: border-box;
+ text-align: center;
+}
+#footer{
+ position: fixed;
+ width: 100%;
+ bottom: 0;
+ height: 5vh;
+ background-color: white;
+ box-sizing: border-box;
+ text-align: center;
+}
+#left{
+ width: 20%;
+ height: 85vh;
+ background-color: orange;
+ box-sizing: border-box;
+ text-align: center;
+ display: none;
+}
+.big-name{
+ font-size: 4vh;
+ color: blue;
+ padding: 0;
+ margin: 0;
+}
+
 .mycard:hover{
- transform: translate(3px, 3px); 
- box-shadow: 2vh 2vh 2vw black;
+ transform: translate(-2px, -2px); 
+ box-shadow: 1vh 1vh 1vh black;
+
 }
 ul li{
   text-align: left;
@@ -43,13 +85,30 @@ h3{
  @media only screen and (min-width: 920px){
   .mycard{
       font-size: 2vw;
-      box-shadow: 1vh 1vh 2vh black;
-      border-left: 3vh groove red;
-      border-top: 2vh groove red;
       height: 87vh;
       width: 92vw;
   } 
- } 
+#topbanner{
+ height: 10vh;
+ top: 0;
+}
+#navbar{
+ height: 8vh;
+}
+#footer{
+ height: 8vh;
+}
+#left{
+ height: 76vh;
+ display: block;
+}
+.big-name{
+ font-size: 3vw;
+ color: blue;
+ padding: 0;
+ margin: 0;
+}
+} 
  
 
 </style>
@@ -57,14 +116,16 @@ h3{
 
 <body>
 
-
-
+<div id="topbanner"><p class="big-name">Paschimanchal English School</p></div>
+<div id="navbar">Here's the navigation bar.</div>
 <div id="card5" class="mycard" onclick="this.style.display='none'"> <h3>Card 5</h3>This is a card.This is a card.
 
 </div> 
-<div id="card4" class="mycard" onclick="this.style.display='none'"> <h3>Card 4</h3>This is a card.This is a card.This is a card.This is a card.
+<div id="card4" class="mycard" onclick="this.style.display='none'"> <h3>Card 4</h3>This is a card.This is a card.This is 
+
+a card.This is a card.
 </div>
-<div id="card3" class="mycard" onclick="this.style.display='none'"> <h3>Card 3</h3>This is a card.This is a card.
+<div id="card3" class="mycard" onclick="this.style.display='none'"> <h3>Card 3 <br> </h3>This is a card.This is a card.
 </div>
 <!-- card 1-->
 <div id="card2" class="mycard" onclick="this.style.display='none'"> 
@@ -83,12 +144,14 @@ h3{
 </div>
 <!-- card 1-->
 <div id="card1" class="mycard" onclick="this.style.display='none'"> <h3>Welcome to Paschimanchal English School</h3> <hr>
-<p> Paschimanchal English School firmly beelieves that every child is special. Giving the right place and oppurtunity is essential for them. 
+<p> Paschimanchal English School firmly beelieves that every child is special. Giving the right place and oppurtunity is 
+
+essential for them. 
   Many a times parents fall in a dillema about where to admit their child.     </p>
 
 </div>
-
-
+<div id="left">Here's the left panel.</div>
+<div id="footer">Here's the footer.</div>
 
 </body>
 </html>
