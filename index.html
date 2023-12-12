@@ -51,6 +51,7 @@
   #bottomText{
       height: 100px;
       background-color: #1abc9c;
+      font-size: 25px; 
       
   }
   .footer {
@@ -1619,32 +1620,6 @@ function myFunction() {
 
 
   
- const textEl = document.getElementById('#bottomText');
-const text = 'Paschimanchal English School';
-const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
-
-let fontSize = 16;
-let growing = true;
-let colorIndex = 0;
-
-setInterval(() => {
-  if (growing) {
-    fontSize++;
-    if (fontSize >= 48) {
-      growing = false;
-    }
-  } else {
-    fontSize--;
-    if (fontSize <= 16) {
-      growing = true;
-    }
-  }
-
-  textEl.style.fontSize = `${fontSize}px`;
-  textEl.style.color = colors[colorIndex];
-  colorIndex = (colorIndex + 1) % colors.length; // Cycle through colors
-},500);
-
 </script>
 </body>
 
