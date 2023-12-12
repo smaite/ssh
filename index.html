@@ -1617,19 +1617,21 @@ function myFunction() {
     }
 }
 $(function() {
-  const textEl = $('#bottomText');
+  const textEl = $('#text');
   const text = 'Paschimanchal English School';
 
   let index = 0;
 
+  textEl.css('background-color', 'black');
+
   setInterval(() => {
     if (index === text.length) index = 0;
 
-    textEl.text(text.substring(0, index + 1));
+    const color = '#' + Math.floor(Math.random() * 16777215).toString(16); // Generate random hex color
+    textEl.text(text[index]).css('color', color);
     index++;
   }, 100);
 });
-
 
 
 </script>
