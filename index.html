@@ -1616,7 +1616,19 @@ function myFunction() {
         x.className = "topnav";
     }
 }
+$(function() {
+  const textEl = $('#bottomText');
+  const text = 'Paschimanchal English School';
 
+  let index = 0;
+
+  setInterval(() => {
+    if (index === text.length) index = 0;
+
+    textEl.text(text.substring(0, index + 1));
+    index++;
+  }, 100);
+});
 
 
 
