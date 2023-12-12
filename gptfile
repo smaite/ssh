@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quiz</title>
+    
+<style>
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+#question-container {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#choices-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+label {
+    margin-right: 10px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+#next-question-btn {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+    <h1>Random Quiz</h1>
+    <div id="question-container"></div>
+    <div id="choices-container"></div>
+    <button id="next-question-btn">Next Question</button>
+    <script src="script.js"></script>
+
+
+<script>
+
+const questions = [
+  {
+    question: "What is the capital of France?",
+    choices: [
+      { text: "London", isCorrect: false },
+      { text: "Berlin", isCorrect: false },
+      { text: "Paris", isCorrect: true },
+      { text: "Rome", isCorrect: false },
+    ],
+  },
+  {
+    question: "What is the largest mammal on Earth?",
+    choices: [
+      { text: "Blue Whale", isCorrect: true },
+      { text: "Elephant", isCorrect: false },
+      { text: "Giraffe", isCorrect: false },
+      { text: "Hippopotamus", isCorrect: false },
+    ],
+  },
+  // Add more questions here ...
+];
+
+let currentQuestionIndex = 0;
+
+function showQuestion(question) {
+  const questionElement = document.getElementById("question-container");
+  questionElement.textContent = question.question;
+
+  const choicesElement = document.getElementById("choices-container");
+  choicesElement.innerHTML = ""; // Clear previous choices
+
+  for (const choice of question.choices) {
+    const labelElement = document.createElement("label");
+    labelElement.textContent = choice.text;
+
+    const inputElement = document.createElement("input");
+    inputElement.type = "radio";
+    inputElement.name = "choice";
+    inputElement.value = choice.isCorrect;
+
+    choicesElement.appendChild(labelElement);
+    choicesElement.appendChild(inputElement);
+  }
+}
+
+function nextQuestion() {
+  if (currentQuestionIndex >= questions.length - 1) {
+    // End of quiz
+    alert("Congratulations! You have completed the quiz.");
+    return;
+  }
+
+  currentQuestionIndex++;
+  showQuestion(questions[currentQuestionIndex]);
+}
+
+document.getElementById("next-question-btn").addEventListener("click", nextQuestion);
+
+showQuestion(questions[currentQuestionIndex]);
+<script>
+</body>
+</html>
