@@ -49,7 +49,7 @@
   
   
   #bottomText{
-      height: 200px;
+      height: 100px;
       background-color: #1abc9c;
       
   }
@@ -1617,24 +1617,33 @@ function myFunction() {
     }
 }
 
-$(function() {
-  const textEl = $('#bottomText');
-  const text = 'Paschimanchal English School';
-  const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
 
-  let index = 0;
+  
+ const textEl = document.getElementById('text');
+const text = 'Paschimanchal English School';
+const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
 
-  setInterval(() => {
-    if (index === text.length) index = 0;
+let fontSize = 16;
+let growing = true;
+let colorIndex = 0;
 
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    textEl.text(text.substring(0, index + 1)).css({
-      backgroundColor: 'black',
-      color: color,
-    });
-    index++;
-  }, 100);
-});
+setInterval(() => {
+  if (growing) {
+    fontSize++;
+    if (fontSize >= 48) {
+      growing = false;
+    }
+  } else {
+    fontSize--;
+    if (fontSize <= 16) {
+      growing = true;
+    }
+  }
+
+  textEl.style.fontSize = `${fontSize}px`;
+  textEl.style.color = colors[colorIndex];
+  colorIndex = (colorIndex + 1) % colors.length; // Cycle through colors
+}, 50);
 
 </script>
 </body>
