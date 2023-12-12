@@ -1616,23 +1616,25 @@ function myFunction() {
         x.className = "topnav";
     }
 }
+
 $(function() {
-  const textEl = $('#text');
+  const textEl = $('#bottomText');
   const text = 'Paschimanchal English School';
+  const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
 
   let index = 0;
-
-  textEl.css('background-color', 'black');
 
   setInterval(() => {
     if (index === text.length) index = 0;
 
-    const color = '#' + Math.floor(Math.random() * 16777215).toString(16); // Generate random hex color
-    textEl.text(text[index]).css('color', color);
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    textEl.text(text.substring(0, index + 1)).css({
+      backgroundColor: 'black',
+      color: color,
+    });
     index++;
   }, 100);
 });
-
 
 </script>
 </body>
