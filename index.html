@@ -380,6 +380,27 @@ $(document).ready(function(){
             $(location.reload(true))
             
         });
+  // Function to generate a random color in hex format
+      function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      // Function to change the color of the span element
+      function changeColor() {
+        const randomColor = getRandomColor();
+        $('#smartSpan').css('color', randomColor);
+      }
+
+      // Set interval to change color every 3 seconds (3000 milliseconds)
+      setInterval(function() {
+        changeColor();
+      }, 3000); // Change color every 3 seconds
+    });
 });
 </script> 
 </head>
@@ -1605,7 +1626,7 @@ $(document).ready(function(){
 <div id= "divThankYou" class="container-fluid bg-1 text-center"><h1>More questions will be coming soon. Thank you for playing.</h1>  <br><button id="btnAgain" class="btn-primary btn-lg">Play Again</button>  </div>
 
 
-<div id="bottomText" class="container-fluid bg-1 text-center">Welcome to Paschimanchal English School</div>
+<div id="bottomText" class="container-fluid bg-1 text-center">Welcome to Paschimanchal English <span name="smartSpan">smart</span> School</div>
 <div class="footer">Author: Nabaraj Upadhyay</div>
 <script>
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
