@@ -146,7 +146,21 @@ $(document).ready(function(){
             $("#rightAudio")[0].stop();
             $("#wrongAudio")[0].stop();
         });
-   
+
+// Function to shuffle an array
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// Create an array of div numbers
+const divNumbers = Array.from({ length: 45 }, (_, index) => index + 1);
+
+// Shuffle the divNumbers array
+shuffleArray(divNumbers);
+  
 for (let i = 1; i <= 45; i++) {
   $(`#btn${i}`).click(function () {
     $(`#div${i}`).slideToggle(800);
