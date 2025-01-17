@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Grammar Quiz</title>
+    <link rel="stylesheet" href="articlesDragAndDrop.css">
+</head>
+<body>
+
+    <h1>Article Exercise: Easy</h1>
+<p class="instructions"> Drag and drop the correct article.</p>
+    <!-- Floating Draggable Articles -->
+    <div class="drag-container">
+        <div class="draggable" draggable="true" id="a">a</div>
+        <div class="draggable" draggable="true" id="an">an</div>
+        <div class="draggable" draggable="true" id="the">the</div>
+        <div class="draggable" draggable="true" id="none">none</div>
+    </div>
+
+    <!-- Questions with blanks -->
+    <div class="question-container">
+        <div class="sentence" data-hint="Use 'a' or 'an' before nouns when introducing them for the first time.">
+            1. <span class="word">____</span> dog is barking loudly.
+        </div>
+        <div class="sentence" data-hint="Use 'the' for something specific.">
+            2. The teacher is standing next to <span class="word">____</span> apple tree.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before vowel sounds.">
+            3. I saw<span class="word">____</span> elephant at the zoo.
+        </div>
+        <div class="sentence" data-hint="Use 'a' for singular, non-specific objects.">
+            4. She wants to adopt <span class="word">____</span> dog.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before words that start with a vowel sound.">
+            5. I met<span class="word">____</span> interesting person at the conference.
+        </div>
+        <div class="sentence" data-hint="Use 'the' for something known or specific.">
+            6. We visited <span class="word">____</span> Eiffel Tower.
+        </div>
+        <div class="sentence" data-hint="Use 'a' for singular objects that are unspecified.">
+            7. I bought <span class="word">____</span> new book yesterday.
+        </div>
+        <div class="sentence" data-hint="Use 'the' when referring to something specific.">
+            8. He is going to <span class="word">____</span> restaurant for dinner.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before words starting with a vowel sound.">
+            9. She wants to eat <span class="word">____</span> apple.
+        </div>
+        <div class="sentence" data-hint="Use 'a' for singular objects starting with consonant sounds.">
+            10. It’s <span class="word">____</span> sunny day today.
+        </div>
+    </div>
+
+    <!-- Result & Reset -->
+    <div class="result">
+        <p>Your Score: <span id="score">0</span> / 10</p>
+        <button onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+<footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+ <!-- Sound Files -->
+    <audio id="correct-sound" src="../sounds/right.wav"></audio>
+    <audio id="wrong-sound" src="../sounds/wrong.wav"></audio>
+
+    <script src="article easy1.js"></script>
+
+</body>
+</html>
