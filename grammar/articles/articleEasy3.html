@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Article Quiz</title>
+    <link rel="stylesheet" href="articlesDragAndDrop.css">
+</head>
+<body>
+    <h1> Article Exercise: Easy</h1>
+<p class="instructions">Drag and drop the correct article. </p>
+    <!-- Floating Draggable Items -->
+    <div class="drag-container">
+        <div class="draggable" draggable="true" id="a">a</div>
+        <div class="draggable" draggable="true" id="an">an</div>
+        <div class="draggable" draggable="true" id="the">the</div>
+        <div class="draggable" draggable="true" id="none">none</div>
+    </div>
+
+    <!-- Questions -->
+    <div class="question-container">
+        <div class="sentence" data-hint="Use 'the' for a heavenly body like 'the sun', 'the moon' etc.">
+            1. <span class="word">____</span> sun is shining brightly today.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before a vowel sound when it is not specific.">
+            2. There is <span class="word">____</span> apple on the table.
+        </div>
+        <div class="sentence" data-hint="Use 'a' for a non-specific singular noun when the word starts with a consonant sound.">
+            3. He is <span class="word">____</span> teacher at a local school.
+        </div>
+        <div class="sentence" data-hint="Use 'none' for general statements when the noun is uncountable.">
+            4. Water is <span class="word">____</span> essential for life.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before a vowel sound when the following word is a none specific countable noun.">
+            5. She bought <span class="word">____</span> orange from the market.
+        </div>
+        <div class="sentence" data-hint="Use 'the' for something mentioned earlier.">
+            6. I saw <span class="word">____</span> movie you recommended.
+        </div>
+        <div class="sentence" data-hint="Use 'the' for specific references, in contextualized situation.">
+            7. Please pass <span class="word">____</span> salt.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before singular words with vowel sounds when the noun does not refer to a specific person or thing.">
+            8. He met <span class="word">____</span> artist in the gallery.
+        </div>
+        <div class="sentence" data-hint="Use 'none' when talking about a general activity. Here, a/an is not suitable as 'books' is a plural noun and 'the' is not suitable as it is not about a particular book.">
+            9. Reading <span class="word">____</span> books is my favorite pastime.
+        </div>
+        <div class="sentence" data-hint="Use 'a' for general, non-specific singular objects.">
+            10. She has <span class="word">____</span> dog as a pet.
+        </div>
+    </div>
+
+    <!-- Results and Reset -->
+    <div class="result">
+        <p>Your Score: <span id="score">0</span> / 10</p>
+        <button onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+<footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+    <!-- Sound Files -->
+    <audio id="correct-sound" src="../sounds/right.wav"></audio>
+    <audio id="wrong-sound" src="../sounds/wrong.wav"></audio>
+
+    <script src="articleEasy3.js"></script>
+</body>
+</html>
