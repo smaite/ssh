@@ -104,7 +104,7 @@ const questions = [
     answer: "Khadga Prasad Oli"
   },
   {
-    question: "Who is present the president of Nepal?",
+    question: "Who is the present president of Nepal?",
     options: [
       "Dr. Ramvaran Yadav",
       "Sher Bahadur Deuba",
