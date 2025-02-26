@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classroom Smart Board</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: transparent;
+      color: #333;
+      user-select: none; /* Prevent text selection */
+      overflow: hidden; /* Hide scrollbars */
+    }
+
+    /* Container for the content */
+    .container {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      width: 300px;
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(5px); /* Frosted glass effect */
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Header Styles */
+    .header {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    /* Period, Subject, and Teacher Styles */
+    #period-info {
+      margin: 10px 0;
+    }
+
+    #period, #subject, #teacher {
+      font-size: 14px;
+      margin: 5px 0;
+      color: #555;
+    }
+
+    #period {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    #subject, #teacher {
+      font-style: italic;
+      color: #34495e;
+    }
+
+    /* Remaining Time Styles */
+    #remaining-time {
+      font-size: 13px;
+      color: #e74c3c;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="day-date" class="header"></div>
+    <div id="time" class="header"></div>
+    <div id="period-info">
+      <div id="period"></div>
+      <div id="subject"></div>
+      <div id="teacher"></div>
+    </div>
+    <div id="remaining-time"></div>
+  </div>
+  <script>
+    // Class routine and teacher names
+    const routine = [
+      { start: "6:10", end: "6:50", period: "1st Period", subject: "Science", teacher: "Substitution" },
+      { start: "6:50", end: "7:30", period: "2nd Period", subject: "English", teacher: "N. Upadhyay" },
+      { start: "7:30", end: "8:10", period: "3rd Period", subject: "Mathematics", teacher: "S. Khan" },
+      { start: "8:10", end: "8:50", period: "4th Period", subject: "Opt. Maths", teacher: "S. Khan" },
+      { start: "8:50", end: "9:00", period: "Recess Time", subject: "", teacher: "" },
+      { start: "9:00", end: "9:40", period: "5th Period", subject: "Social St.", teacher: "U. Pandey" },
+      { start: "9:40", end: "10:20", period: "6th Period", subject: "Nepali", teacher: "H. Pandey" },
+      { start: "10:20", end: "11:00", period: "7th Period", subject: "Computer", teacher: "R. Dhakal" }
+    ];
+
+    // Function to get the current period
+    function getCurrentPeriod() {
+      const now = new Date();
+      const currentTime = now.toTimeString().slice(0, 5); // Get current time in HH:MM format
+
+      return routine.find(period => currentTime >= period.start && currentTime < period.end) || null;
+    }
+
+    // Function to update the display
+    function updateDisplay() {
+      const now = new Date();
+      const dayDate = now.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      const currentTime = now.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+      // Update day, date, and time
+      document.getElementById("day-date").textContent = dayDate;
+      document.getElementById("time").textContent = currentTime;
+
+      const currentPeriod = getCurrentPeriod();
+      if (currentPeriod) {
+        document.getElementById("period").textContent = currentPeriod.period;
+        document.getElementById("subject").textContent = currentPeriod.subject ? `Sub: ${currentPeriod.subject}` : "";
+        document.getElementById("teacher").textContent = currentPeriod.teacher ? `Teacher: ${currentPeriod.teacher}` : "";
+
+        const endTime = new Date(now.toDateString() + " " + currentPeriod.end);
+        const remainingTime = endTime - now; // Time difference in milliseconds
+        const minutesRemaining = Math.floor(remainingTime / 60000); // Convert to minutes
+        const secondsRemaining = Math.floor((remainingTime % 60000) / 1000); // Convert remaining milliseconds to seconds
+
+        // Display remaining time in minutes and seconds
+        document.getElementById("remaining-time").textContent = remainingTime > 0 ? `Remaining Time: ${minutesRemaining}m ${secondsRemaining}s` : "";
+      } else {
+        document.getElementById("period").textContent = "No ongoing classes";
+        document.getElementById("subject").textContent = "";
+        document.getElementById("teacher").textContent = "";
+        document.getElementById("remaining-time").textContent = "";
+      }
+    }
+
+    // Update the display every second
+    setInterval(updateDisplay, 1000);
+
+    // Initial call to display data immediately
+    updateDisplay();
+  </script>
+</body>
+</html>
