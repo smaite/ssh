@@ -93,11 +93,17 @@
 
     // Function to get the current period
     function getCurrentPeriod() {
-      const now = new Date();
-      const currentTime = now.toTimeString().slice(0, 5); // Get current time in HH:MM format
+  const now = new Date();
+  const currentTotal = now.getHours() * 60 + now.getMinutes();
 
-      return routine.find(period => currentTime >= period.start && currentTime < period.end) || null;
-    }
+  return routine.find(period => {
+    const [startH, startM] = period.start.split(':').map(Number);
+    const startTotal = startH * 60 + startM;
+    const [endH, endM] = period.end.split(':').map(Number);
+    const endTotal = endH * 60 + endM;
+    return currentTotal >= startTotal && currentTotal < endTotal;
+  }) || null;
+}
 
     // Function to update the display
     function updateDisplay() {
