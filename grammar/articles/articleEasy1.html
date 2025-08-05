@@ -4,175 +4,300 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Article Grammar Quiz</title>
-    <script>
-        // Array of CSS file names
-        const stylesheets = ["../css/dragAndDrop.css", "../css/dragAndDrop1.css", "../css/dragAndDrop2.css", "../css/dragAndDrop3.css", "../css/dragAndDrop4.css"];
+    <link rel="stylesheet" href="../../shared3D.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* Game specific styles while maintaining 3D AMOLED theme */
+        .game-container {
+            margin: 30px auto;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .instructions {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .drag-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .draggable {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: grab;
+            user-select: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(80, 80, 255, 0.6);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .draggable:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(80, 80, 255, 0.8);
+        }
+        
+        .draggable.dragging {
+            opacity: 0.7;
+            transform: scale(1.1);
+        }
+        
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .sentence {
+            background: var(--card-bg);
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--card-border);
+        }
+        
+        .word {
+            display: inline-block;
+            min-width: 60px;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 5px;
+            background: rgba(80, 80, 255, 0.2);
+            border: 1px dashed var(--accent-blue);
+            text-align: center;
+            color: var(--text-primary);
+        }
+        
+        .correct {
+            background: rgba(0, 204, 153, 0.3);
+            border: 1px solid var(--success-color);
+        }
+        
+        .incorrect {
+            background: rgba(255, 51, 102, 0.3);
+            border: 1px solid var(--danger-color);
+        }
+        
+        .result {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 30px;
+        }
+        
+        .result p {
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        
+        #score {
+            font-weight: bold;
+            color: var(--accent-cyan);
+            font-size: 1.3rem;
+        }
+        
+        button {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(80, 80, 255, 0.5);
+        }
 
-        // Select a random stylesheet
-        const randomStylesheet = stylesheets[Math.floor(Math.random() * stylesheets.length)];
-
-        // Create a link element
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = randomStylesheet;
-
-        // Append to head
-        document.head.appendChild(link);
-    </script>
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .game-container {
+                width: 95%;
+            }
+            
+            .draggable {
+                padding: 10px 18px;
+                font-size: 1rem;
+            }
+            
+            .sentence {
+                font-size: 1rem;
+                padding: 12px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div id="canvas-container"></div>
+    
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1 class="glow-text">Article Exercise: Easy</h1>
+            <p>Test your understanding of articles with this interactive game</p>
+        </div>
+    </header>
+    
+    <!-- Navigation Section -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="../../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="articleContent.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Articles</a></li>
+                <li><a href="articleEasy2.html" class="nav-link"><i class="fas fa-forward"></i> Next Game</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <h1>Article Exercise: Easy</h1>
-<p class="instructions"> Drag and drop the correct article.</p>
-    <!-- Floating Draggable Articles -->
-    <div class="drag-container">
-        <div class="draggable" draggable="true" id="a">a</div>
-        <div class="draggable" draggable="true" id="an">an</div>
-        <div class="draggable" draggable="true" id="the">the</div>
-        <div class="draggable" draggable="true" id="none">none</div>
+    <div class="game-container">
+        <p class="instructions">Drag and drop the correct article.</p>
+        
+        <!-- Floating Draggable Articles -->
+        <div class="drag-container">
+            <div class="draggable" draggable="true" id="a">a</div>
+            <div class="draggable" draggable="true" id="an">an</div>
+            <div class="draggable" draggable="true" id="the">the</div>
+            <div class="draggable" draggable="true" id="none">none</div>
+        </div>
+
+        <!-- Questions with blanks -->
+        <div class="question-container">
+            <div class="sentence" data-hint="Use 'a' or 'an' before nouns when introducing them for the first time.">
+                1. <span class="word">____</span> dog is barking loudly.
+            </div>
+            <div class="sentence" data-hint="Use 'the' for something specific.">
+                2. The teacher is standing next to <span class="word">____</span> apple tree.
+            </div>
+            <div class="sentence" data-hint="Use 'an' before vowel sounds.">
+                3. I saw<span class="word">____</span> elephant at the zoo.
+            </div>
+            <div class="sentence" data-hint="Use 'a' for singular, non-specific objects.">
+                4. She wants to adopt <span class="word">____</span> dog.
+            </div>
+            <div class="sentence" data-hint="Use 'an' before words that start with a vowel sound.">
+                5. I met<span class="word">____</span> interesting person at the conference.
+            </div>
+            <div class="sentence" data-hint="Use 'the' for something known or specific.">
+                6. We visited <span class="word">____</span> Eiffel Tower.
+            </div>
+            <div class="sentence" data-hint="Use 'a' for singular objects that are unspecified.">
+                7. I bought <span class="word">____</span> new book yesterday.
+            </div>
+            <div class="sentence" data-hint="Use 'the' when referring to something specific.">
+                8. He is going to <span class="word">____</span> restaurant for dinner.
+            </div>
+            <div class="sentence" data-hint="Use 'an' before words starting with a vowel sound.">
+                9. She wants to eat <span class="word">____</span> apple.
+            </div>
+            <div class="sentence" data-hint="Use 'a' for singular objects starting with consonant sounds.">
+                10. It's <span class="word">____</span> sunny day today.
+            </div>
+        </div>
+
+        <!-- Result & Reset -->
+        <div class="result">
+            <p>Your Score: <span id="score">0</span> / 10</p>
+            <button onclick="resetQuiz()">Reset Quiz</button>
+        </div>
     </div>
 
-    <!-- Questions with blanks -->
-    <div class="question-container">
-        <div class="sentence" data-hint="Use 'a' or 'an' before nouns when introducing them for the first time.">
-            1. <span class="word">____</span> dog is barking loudly.
-        </div>
-        <div class="sentence" data-hint="Use 'the' for something specific.">
-            2. The teacher is standing next to <span class="word">____</span> apple tree.
-        </div>
-        <div class="sentence" data-hint="Use 'an' before vowel sounds.">
-            3. I saw<span class="word">____</span> elephant at the zoo.
-        </div>
-        <div class="sentence" data-hint="Use 'a' for singular, non-specific objects.">
-            4. She wants to adopt <span class="word">____</span> dog.
-        </div>
-        <div class="sentence" data-hint="Use 'an' before words that start with a vowel sound.">
-            5. I met<span class="word">____</span> interesting person at the conference.
-        </div>
-        <div class="sentence" data-hint="Use 'the' for something known or specific.">
-            6. We visited <span class="word">____</span> Eiffel Tower.
-        </div>
-        <div class="sentence" data-hint="Use 'a' for singular objects that are unspecified.">
-            7. I bought <span class="word">____</span> new book yesterday.
-        </div>
-        <div class="sentence" data-hint="Use 'the' when referring to something specific.">
-            8. He is going to <span class="word">____</span> restaurant for dinner.
-        </div>
-        <div class="sentence" data-hint="Use 'an' before words starting with a vowel sound.">
-            9. She wants to eat <span class="word">____</span> apple.
-        </div>
-        <div class="sentence" data-hint="Use 'a' for singular objects starting with consonant sounds.">
-            10. It’s <span class="word">____</span> sunny day today.
-        </div>
-    </div>
-
-    <!-- Result & Reset -->
-    <div class="result">
-        <p>Your Score: <span id="score">0</span> / 10</p>
-        <button onclick="resetQuiz()">Reset Quiz</button>
-    </div>
-<footer class="footer">
-        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
-    </footer>
- <!-- Sound Files -->
+    <!-- Sound Files -->
     <audio id="correct-sound" src="../sounds/right.wav"></audio>
     <audio id="wrong-sound" src="../sounds/wrong.wav"></audio>
 
+    <script src="../../shared3D.js"></script>
     <script>
-         // Correct answers for the 10 questions
-const correctAnswers = ["a", "the", "an", "a", "an", "the", "a", "the", "an", "a"];
+        // Correct answers for the 10 questions
+        const correctAnswers = ["a", "the", "an", "a", "an", "the", "a", "the", "an", "a"];
 
-const blanks = document.querySelectorAll('.word');
-const draggables = document.querySelectorAll('.draggable');
-const scoreElement = document.getElementById('score');
-let score = 0;
+        const blanks = document.querySelectorAll('.word');
+        const draggables = document.querySelectorAll('.draggable');
+        const scoreElement = document.getElementById('score');
+        let score = 0;
 
-draggables.forEach(draggable => {
-    draggable.addEventListener('dragstart', handleDragStart);
-    draggable.addEventListener('dragend', handleDragEnd);
-});
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', handleDragStart);
+            draggable.addEventListener('dragend', handleDragEnd);
+        });
 
-blanks.forEach((blank, index) => {
-    blank.addEventListener('dragover', handleDragOver);
-    blank.addEventListener('drop', (event) => handleDrop(event, index));
-});
+        blanks.forEach((blank, index) => {
+            blank.addEventListener('dragover', handleDragOver);
+            blank.addEventListener('drop', (event) => handleDrop(event, index));
+        });
 
-let draggedItem = null;
+        let draggedItem = null;
 
-// Drag Start
-function handleDragStart(event) {
-    draggedItem = event.target;
-    setTimeout(() => {
-        event.target.style.display = "none";
-    }, 0);
-}
-
-// Drag End
-function handleDragEnd(event) {
-    setTimeout(() => {
-        draggedItem.style.display = "inline-block";
-        draggedItem = null;
-    }, 0);
-}
-
-// Allow drop
-function handleDragOver(event) {
-    event.preventDefault();
-}
-
-// Handle Drop
-function handleDrop(event, index) {
-    event.preventDefault();
-    const blank = event.target;
-    const draggedText = draggedItem.textContent;
-
-    if (blank.textContent === "____") {
-        blank.textContent = draggedText;
-
-        if (draggedText === correctAnswers[index]) {
-            blank.style.color = "green";
-            correctSound.play(); // Play correct sound
-            score++;
-        } else {
-            blank.style.color = "red";
-            wrongSound.play(); // Play wrong sound
-            showHint(blank.parentElement.dataset.hint, blank);
+        function handleDragStart(e) {
+            draggedItem = this;
+            e.dataTransfer.setData('text/plain', this.id);
+            setTimeout(() => {
+                this.classList.add('dragging');
+            }, 0);
         }
 
-        scoreElement.textContent = score;
-    }
-}
+        function handleDragEnd() {
+            this.classList.remove('dragging');
+        }
 
-// Show Hint
-function showHint(hintText, element) {
-    const hint = document.createElement('div');
-    hint.className = 'hint';
-    hint.textContent = hintText;
-    element.appendChild(hint);
+        function handleDragOver(e) {
+            e.preventDefault();
+        }
 
-    setTimeout(() => {
-        element.removeChild(hint);
-    }, 5000);
-}
+        function handleDrop(e, index) {
+            e.preventDefault();
+            const articleId = e.dataTransfer.getData('text/plain');
+            
+            // Clear any previous classes and text
+            this.className = 'word';
+            this.textContent = document.getElementById(articleId).textContent;
+            
+            // Check if the answer is correct
+            if (articleId === correctAnswers[index]) {
+                this.classList.add('correct');
+                playSound('correct-sound');
+                updateScore(1);
+            } else {
+                this.classList.add('incorrect');
+                playSound('wrong-sound');
+            }
+        }
 
-// Reset Quiz
-function resetQuiz() {
-    blanks.forEach(blank => {
-        blank.textContent = "____";
-        blank.style.color = "black";
-    });
+        function updateScore(points) {
+            score += points;
+            scoreElement.textContent = score;
+        }
 
-    draggables.forEach(draggable => {
-        draggable.style.display = "inline-block";
-    });
+        function resetQuiz() {
+            blanks.forEach(blank => {
+                blank.className = 'word';
+                blank.textContent = '____';
+            });
+            score = 0;
+            scoreElement.textContent = score;
+        }
 
-    score = 0;
-    scoreElement.textContent = score;
-}
-// Load sound files
-const correctSound = new Audio('../sounds/right.wav'); // Replace with actual path
-const wrongSound = new Audio('../sounds/wrong.wav'); // Replace with actual path
-   </script>
-
+        function playSound(soundId) {
+            const sound = document.getElementById(soundId);
+            sound.currentTime = 0;
+            sound.play();
+        }
+    </script>
 </body>
 </html>

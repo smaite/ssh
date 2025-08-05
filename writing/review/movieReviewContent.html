@@ -5,27 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Review</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<script>
-        // Array of CSS file names
-        const stylesheets = ["content1.css", "content2.css", "content3.css"];
-
-        // Select a random stylesheet
-        const randomStylesheet = stylesheets[Math.floor(Math.random() * stylesheets.length)];
-
-        // Create a link element
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = randomStylesheet;
-
-        // Append to head
-        document.head.appendChild(link);
-    </script>
+  <link rel="stylesheet" href="../../shared3D.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    /* Custom styles to enhance card appearance */
+    .quiz-links, .video-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .quiz-card, .video-card {
+      display: block;
+      background: var(--card-bg);
+      border: 2px solid var(--accent-blue);
+      padding: 0;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.5);
+      text-decoration: none;
+      overflow: hidden;
+    }
+    
+    .quiz-card, .video-card {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .quiz-card i, .video-card i {
+      font-size: 2.5rem;
+      color: var(--accent-blue);
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 5px rgba(0, 102, 255, 0.7));
+    }
+    
+    .quiz-card h3, .video-card h3 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: white;
+    }
+  </style>
 </head>
 <body>
+  <div id="canvas-container"></div>
+  
   <!-- Header Section -->
   <header>
     <div class="container">
-      <h1>Writing a Movie Review</h1>
+      <h1 class="glow-text">Writing a Movie Review</h1>
       <p>Write engaging movie reviews and bring to the fore.</p>
     </div>
   </header>
@@ -34,11 +66,11 @@
   <nav>
     <div class="container">
       <ul>
-        <li><a href="../../index.html">Home</a></li>
-        <li><a href="#instruction">Instructions</a></li>
-        <li><a href="#sample">Sample Reviews</a></li>
-        <li><a href="#videos">Video Section</a></li>
-        <li><a href="#about">About Me</a></li>
+        <li><a href="../../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#instruction" class="nav-link"><i class="fas fa-book"></i> Instructions</a></li>
+        <li><a href="#sample" class="nav-link"><i class="fas fa-file-alt"></i> Sample Reviews</a></li>
+        <li><a href="#videos" class="nav-link"><i class="fas fa-video"></i> Video Section</a></li>
+        <li><a href="#about" class="nav-link"><i class="fas fa-user"></i> About Me</a></li>
       </ul>
     </div>
   </nav>
@@ -46,18 +78,17 @@
   <!-- Instruction Section -->
   <section id="instruction" class="section">
     <div class="container">
-      <h2>Instruction Section</h2>
+      <h2 class="section-title">Instruction Section</h2>
       <p>Be informed about the format and style of writing a movie review.</p>
       <div class="quiz-links">
         <a href="movieReviewTaare.html" class="quiz-card">
           <i class="fas fa-chalkboard-teacher"></i>
-          <h3>Get Instructions with Examples of Hindi Movie </h3>
+          <h3>Get Instructions with Examples of Hindi Movie</h3>
         </a>
         <a href="movieReviewHostel.html" class="quiz-card">
           <i class="fas fa-chalkboard-teacher"></i>
-          <h3>Get Instructions with Examples of NepaliMovie</h3>
+          <h3>Get Instructions with Examples of Nepali Movie</h3>
         </a>
-        
       </div>
     </div>
   </section>
@@ -65,7 +96,7 @@
   <!-- Sample Section -->
   <section id="sample" class="section">
     <div class="container">
-      <h2>Sample Section</h2>
+      <h2 class="section-title">Sample Section</h2>
       <p>Read well written sample to deepen your understanding.</p>
       <div class="quiz-links">
         <a href="koiMilGaya.html" class="quiz-card">
@@ -87,7 +118,7 @@
   <!-- Video Section -->
   <section id="videos" class="section">
     <div class="container">
-      <h2>Video Section</h2>
+      <h2 class="section-title">Video Section</h2>
       <p>Watch these YouTube videos to deepen your understanding of movie review writing.</p>
       <div class="video-links">
         <a href="https://www.youtube.com/watch?v=9LGMYNDZBDk" class="video-card" target="_blank">
@@ -98,17 +129,10 @@
           <i class="fas fa-play-circle"></i>
           <h3>Watch: Chhakka Panja 4</h3>
         </a>
-        <a href="#video" class="video-card" target="_blank">
-          <i class="fas fa-play-circle"></i>
-          <h3>3 Idiots: Coming Soon</h3>
-        </a>
       </div>
     </div>
   </section>
 
-  <!-- Footer Section -->
- <footer class="footer">
-        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
-    </footer>
+  <script src="../../shared3D.js"></script>
 </body>
 </html>

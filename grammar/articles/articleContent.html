@@ -7,6 +7,55 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="../../shared3D.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    /* Custom styles to enhance card appearance */
+    .quiz-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .topic-card {
+      display: block;
+      background: var(--card-bg);
+      border: 2px solid var(--accent-blue);
+      padding: 0;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.5);
+      text-decoration: none;
+      overflow: hidden;
+    }
+    
+    .topic-card .card-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .topic-card i {
+      font-size: 2.5rem;
+      color: var(--accent-blue);
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 5px rgba(0, 102, 255, 0.7));
+    }
+    
+    .topic-card h3 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: white;
+    }
+
+    .video-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+  </style>
 </head>
 <body>
   <div id="canvas-container"></div>
@@ -37,7 +86,7 @@
     <div class="container">
       <h2 class="section-title">Easy Section</h2>
       <p>Start with these beginner-friendly quizzes to build a strong foundation in using articles.</p>
-      <div class="quiz-links topics-grid">
+      <div class="quiz-links">
         <a href="articleEasy1.html" class="topic-card">
           <div class="card-content">
             <i class="fas fa-gamepad"></i>
@@ -65,7 +114,7 @@
     <div class="container">
       <h2 class="section-title">Difficult Section</h2>
       <p>Challenge yourself with these advanced quizzes to master the nuances of articles.</p>
-      <div class="quiz-links topics-grid">
+      <div class="quiz-links">
         <a href="articleDifficult1.html" class="topic-card">
           <div class="card-content">
             <i class="fas fa-gamepad"></i>
@@ -93,7 +142,7 @@
     <div class="container">
       <h2 class="section-title">Video Section</h2>
       <p>Watch these YouTube videos to deepen your understanding of articles.</p>
-      <div class="video-links topics-grid">
+      <div class="video-links">
         <a href="https://www.youtube.com/watch?v=YrrvjQGkgNw" class="topic-card" target="_blank">
           <div class="card-content">
             <i class="fas fa-play-circle"></i>
