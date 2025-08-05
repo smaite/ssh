@@ -5,37 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Stars Tracker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="shared3D.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        :root {
-            --primary-color: #4285f4;
-            --secondary-color: #34a853;
-            --danger-color: #ea4335;
-            --warning-color: #fbbc05;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Auth Section */
+        /* Additional styles specific to star3.html */
         .auth-section {
             display: flex;
             justify-content: flex-end;
             padding: 10px;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: rgba(20, 20, 30, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
         .auth-form {
@@ -44,15 +25,17 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
+            background: var(--card-bg);
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 0 30px rgba(0, 102, 255, 0.4);
             z-index: 100;
+            border: 1px solid var(--card-border);
         }
 
         .auth-form.active {
             display: block;
+            animation: fadeIn 0.3s forwards;
         }
 
         /* Dashboard */
@@ -65,700 +48,501 @@
         /* Class Controls */
         .class-controls {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
             align-items: center;
-            background: white;
+            background: var(--card-bg);
             padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--card-border);
         }
 
-        select, input, button {
-            padding: 8px 12px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-
-        button {
-            cursor: pointer;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            opacity: 0.9;
-        }
-
-        button.danger {
-            background-color: var(--danger-color);
-        }
-
-        button.success {
-            background-color: var(--secondary-color);
-        }
-
-        button.warning {
-            background-color: var(--warning-color);
-        }
-
-        /* Students Grid */
+        /* Student Grid & Stars */
         .students-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
+            gap: 20px;
         }
 
         .student-card {
-            background: white;
-            border-radius: 8px;
+            background: var(--card-bg);
+            border-radius: 10px;
             padding: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--card-border);
+            transform-style: preserve-3d;
         }
 
         .student-card:hover {
             transform: translateY(-5px);
-        }
-
-        .student-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(80, 80, 255, 0.3);
         }
 
         .student-name {
-            font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
         }
 
-        .delete-student {
-            color: var(--danger-color);
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-size: 1rem;
-        }
-
-        .stars-display {
+        .stars-container {
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
-            margin: 15px 0;
-            min-height: 24px;
+            margin-top: 10px;
         }
 
         .star {
             color: var(--warning-color);
             font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            filter: drop-shadow(0 0 3px rgba(251, 188, 5, 0.5));
         }
 
-        .student-actions {
-            display: flex;
-            gap: 5px;
+        .star:hover {
+            transform: scale(1.2);
         }
 
-        /* Modal */
-        .modal {
-            display: none;
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 99;
-            justify-content: center;
-            align-items: center;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 90;
+            display: none;
         }
 
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 500px;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
+        .overlay.active {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
         }
 
-        /* Loading spinner */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(0,0,0,.3);
-            border-radius: 50%;
-            border-top-color: var(--primary-color);
-            animation: spin 1s ease-in-out infinite;
+        /* Response Messages */
+        .response-message {
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            text-align: center;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .success-message {
+            background: rgba(0, 204, 153, 0.3);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
         }
 
-        /* Responsive */
+        .error-message {
+            background: rgba(255, 51, 102, 0.3);
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+        }
+
         @media (max-width: 768px) {
             .class-controls {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: stretch;
             }
             
             .students-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .student-name {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="auth-section">
-        <button id="authButton">Login</button>
-    </div>
-
-    <div class="auth-form" id="loginForm">
-        <h2>Teacher Login</h2>
-        <div class="form-group">
-            <label for="loginEmail">Email</label>
-            <input type="email" id="loginEmail" required>
-        </div>
-        <div class="form-group">
-            <label for="loginPassword">Password</label>
-            <input type="password" id="loginPassword" required>
-        </div>
-        <button class="success" id="loginBtn">Login</button>
-        <button id="closeLoginBtn">Cancel</button>
-    </div>
-
     <div class="container">
-        <div class="dashboard" id="dashboard">
-            <div class="class-controls">
-                <select id="classSelector"></select>
-                <button id="addClassBtn">Add Class</button>
-                <button class="danger" id="deleteClassBtn">Delete Class</button>
-                <button id="addStudentBtn">Add Student</button>
-            </div>
+        <header class="header">
+            <h1 class="glow-text">Student Stars Tracker</h1>
+            <p>Reward and motivate your students with stars</p>
+        </header>
 
-            <div class="students-grid" id="studentsContainer"></div>
+        <!-- Authentication Section -->
+        <div class="auth-section card">
+            <button id="login-btn" class="btn"><i class="fas fa-user"></i> Login</button>
+            <button id="signup-btn" class="btn"><i class="fas fa-user-plus"></i> Sign up</button>
+            <button id="logout-btn" class="btn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
-    </div>
 
-    <!-- Add Class Modal -->
-    <div class="modal" id="addClassModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Add New Class</h3>
-                <button class="close-modal">&times;</button>
+        <!-- Login Form -->
+        <div id="login-form" class="auth-form">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" required>
             </div>
             <div class="form-group">
-                <label for="className">Class Name</label>
-                <input type="text" id="className" required>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" required>
             </div>
-            <div style="display: flex; gap: 10px;">
-                <button class="success" id="confirmAddClass">Add Class</button>
-                <button class="danger" id="cancelAddClass">Cancel</button>
-            </div>
-            <div id="addClassError" style="color: red; margin-top: 10px;"></div>
+            <button id="submit-login" class="btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button class="cancel-btn btn btn-danger"><i class="fas fa-times"></i> Cancel</button>
+            <div id="login-message"></div>
         </div>
-    </div>
 
-    <!-- Add Student Modal -->
-    <div class="modal" id="addStudentModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Add New Student</h3>
-                <button class="close-modal">&times;</button>
+        <!-- Signup Form -->
+        <div id="signup-form" class="auth-form">
+            <h2>Sign Up</h2>
+            <div class="form-group">
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" required>
             </div>
             <div class="form-group">
-                <label for="studentName">Student Name</label>
-                <input type="text" id="studentName" required>
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" required>
             </div>
-            <div style="display: flex; gap: 10px;">
-                <button class="success" id="confirmAddStudent">Add Student</button>
-                <button class="danger" id="cancelAddStudent">Cancel</button>
+            <button id="submit-signup" class="btn"><i class="fas fa-user-plus"></i> Sign Up</button>
+            <button class="cancel-btn btn btn-danger"><i class="fas fa-times"></i> Cancel</button>
+            <div id="signup-message"></div>
+        </div>
+
+        <div class="overlay"></div>
+
+        <!-- Main Dashboard -->
+        <div id="dashboard" class="dashboard">
+            <!-- Class Controls -->
+            <div class="class-controls card">
+                <select id="class-select">
+                    <option value="">Select a Class</option>
+                    <!-- Classes will be loaded here -->
+                </select>
+                <input type="text" id="new-class-name" placeholder="New Class Name">
+                <button id="add-class-btn" class="btn"><i class="fas fa-plus"></i> Add Class</button>
+                <button id="delete-class-btn" class="btn btn-danger"><i class="fas fa-trash"></i> Delete Class</button>
+                <input type="text" id="new-student-name" placeholder="New Student Name">
+                <button id="add-student-btn" class="btn"><i class="fas fa-user-plus"></i> Add Student</button>
             </div>
-            <div id="addStudentError" style="color: red; margin-top: 10px;"></div>
+
+            <!-- Response Messages -->
+            <div id="response-container"></div>
+
+            <!-- Students Grid -->
+            <div id="students-grid" class="students-grid">
+                <!-- Students will be loaded here -->
+            </div>
         </div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
-
+    <script src="shared3D.js"></script>
     <script>
-        // Firebase configuration
+        // Firebase Configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyCD2VnEX3SI_w9yPVVuK-DHAhKelWb3fRo",
-            authDomain: "startracker-1940b.firebaseapp.com",
-            projectId: "startracker-1940b",
-            storageBucket: "startracker-1940b.firebasestorage.app",
-            messagingSenderId: "100743840345",
-            appId: "1:100743840345:web:672488faca9894fa46a748",
-            measurementId: "G-25WNW486BT"
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const auth = firebase.auth();
+        
+        // Initialize Firebase (uncommnet this if you have the actual config)
+        // firebase.initializeApp(firebaseConfig);
+        // const db = firebase.firestore();
+        // const auth = firebase.auth();
 
         // DOM Elements
-        const authButton = document.getElementById('authButton');
-        const loginForm = document.getElementById('loginForm');
-        const loginEmail = document.getElementById('loginEmail');
-        const loginPassword = document.getElementById('loginPassword');
-        const loginBtn = document.getElementById('loginBtn');
-        const closeLoginBtn = document.getElementById('closeLoginBtn');
-        
-        const dashboard = document.getElementById('dashboard');
-        const classSelector = document.getElementById('classSelector');
-        const addClassBtn = document.getElementById('addClassBtn');
-        const deleteClassBtn = document.getElementById('deleteClassBtn');
-        const addStudentBtn = document.getElementById('addStudentBtn');
-        const studentsContainer = document.getElementById('studentsContainer');
-        
-        const addClassModal = document.getElementById('addClassModal');
-        const addStudentModal = document.getElementById('addStudentModal');
-        const classNameInput = document.getElementById('className');
-        const studentNameInput = document.getElementById('studentName');
-        const confirmAddClass = document.getElementById('confirmAddClass');
-        const confirmAddStudent = document.getElementById('confirmAddStudent');
-        const cancelAddClass = document.getElementById('cancelAddClass');
-        const cancelAddStudent = document.getElementById('cancelAddStudent');
-        const closeModals = document.querySelectorAll('.close-modal');
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const overlay = document.querySelector('.overlay');
+        const cancelBtns = document.querySelectorAll('.cancel-btn');
+        const submitLogin = document.getElementById('submit-login');
+        const submitSignup = document.getElementById('submit-signup');
+        const classSelect = document.getElementById('class-select');
+        const newClassName = document.getElementById('new-class-name');
+        const addClassBtn = document.getElementById('add-class-btn');
+        const deleteClassBtn = document.getElementById('delete-class-btn');
+        const newStudentName = document.getElementById('new-student-name');
+        const addStudentBtn = document.getElementById('add-student-btn');
+        const studentsGrid = document.getElementById('students-grid');
+        const responseContainer = document.getElementById('response-container');
 
-        // State
-        let currentUser = null;
-        let currentClassId = null;
-        let classes = [];
-        let studentListener = null;
-
-        // Auth Functions
-        function toggleLoginForm() {
-            loginForm.classList.toggle('active');
-        }
-
-        function handleAuthStateChange(user) {
-            currentUser = user;
-            if (user) {
-                authButton.textContent = 'Logout';
-                dashboard.style.display = 'flex';
-                loadClasses();
-            } else {
-                authButton.textContent = 'Login';
-                dashboard.style.display = 'none';
-                if (studentListener) studentListener(); // Clean up listener
-                studentsContainer.innerHTML = '';
-                classSelector.innerHTML = '';
-            }
-        }
-
-        function login() {
-            const email = loginEmail.value;
-            const password = loginPassword.value;
-            
-            if (!email || !password) {
-                alert('Please enter both email and password');
-                return;
-            }
-
-            loginBtn.innerHTML = '<div class="loading"></div> Logging in...';
-            loginBtn.disabled = true;
-            
-            auth.signInWithEmailAndPassword(email, password)
-                .then(() => {
-                    loginForm.classList.remove('active');
-                    loginEmail.value = '';
-                    loginPassword.value = '';
-                })
-                .catch(error => {
-                    alert('Login failed: ' + error.message);
-                })
-                .finally(() => {
-                    loginBtn.textContent = 'Login';
-                    loginBtn.disabled = false;
-                });
-        }
-
-        function logout() {
-            auth.signOut();
-        }
-
-        // Class Functions
-        function loadClasses() {
-            db.collection('classes').where('teacherId', '==', currentUser.uid)
-                .orderBy('createdAt')
-                .get()
-                .then(snapshot => {
-                    classes = [];
-                    classSelector.innerHTML = '';
-                    
-                    snapshot.forEach(doc => {
-                        classes.push({
-                            id: doc.id,
-                            ...doc.data()
-                        });
-                        
-                        const option = document.createElement('option');
-                        option.value = doc.id;
-                        option.textContent = doc.data().name;
-                        classSelector.appendChild(option);
-                    });
-                    
-                    if (classes.length > 0) {
-                        currentClassId = classes[0].id;
-                        loadStudents();
-                    } else {
-                        studentsContainer.innerHTML = '<p>No classes found. Add your first class!</p>';
-                    }
-                })
-                .catch(error => {
-                    console.error("Error loading classes:", error);
-                    alert('Error loading classes: ' + error.message);
-                });
-        }
-
-        function addClass() {
-            const name = classNameInput.value.trim();
-            if (!name) {
-                document.getElementById('addClassError').textContent = 'Please enter a class name';
-                return;
-            }
-            
-            confirmAddClass.innerHTML = '<div class="loading"></div> Adding...';
-            confirmAddClass.disabled = true;
-            document.getElementById('addClassError').textContent = '';
-            
-            db.collection('classes').add({
-                name: name,
-                teacherId: currentUser.uid,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                classNameInput.value = '';
-                addClassModal.classList.remove('active');
-            })
-            .catch(error => {
-                console.error('Error adding class:', error);
-                document.getElementById('addClassError').textContent = 'Error: ' + error.message;
-            })
-            .finally(() => {
-                confirmAddClass.textContent = 'Add Class';
-                confirmAddClass.disabled = false;
-            });
-        }
-
-        async function deleteClass() {
-            if (!currentClassId) {
-                alert('No class selected');
-                return;
-            }
-            
-            if (!confirm('Are you sure you want to delete this class and all its students?')) {
-                return;
-            }
-            
-            deleteClassBtn.innerHTML = '<div class="loading"></div> Deleting...';
-            deleteClassBtn.disabled = true;
-            
-            try {
-                // Verify the teacher owns this class
-                const classDoc = await db.collection('classes').doc(currentClassId).get();
-                if (!classDoc.exists || classDoc.data().teacherId !== currentUser.uid) {
-                    throw new Error("You don't have permission to delete this class");
-                }
-                
-                // Delete all students in this class
-                const studentsSnapshot = await db.collection('students')
-                    .where('classId', '==', currentClassId)
-                    .get();
-                
-                const batch = db.batch();
-                studentsSnapshot.forEach(doc => {
-                    batch.delete(doc.ref);
-                });
-                await batch.commit();
-                
-                // Delete the class itself
-                await db.collection('classes').doc(currentClassId).delete();
-                
-                // Reset selection and reload
-                currentClassId = null;
-                loadClasses();
-            } catch (error) {
-                console.error('Error deleting class:', error);
-                alert('Error deleting class: ' + error.message);
-            } finally {
-                deleteClassBtn.textContent = 'Delete Class';
-                deleteClassBtn.disabled = false;
-            }
-        }
-
-        // Student Functions
-        function loadStudents() {
-            if (!currentClassId) {
-                studentsContainer.innerHTML = '<p>Select a class first</p>';
-                return;
-            }
-
-            // Clean up previous listener
-            if (studentListener) studentListener();
-            
-            studentsContainer.innerHTML = '<p>Loading students...</p>';
-            
-            // Use real-time listener
-            studentListener = db.collection('students')
-                .where('classId', '==', currentClassId)
-                .orderBy('createdAt')
-                .onSnapshot(
-                    snapshot => {
-                        if (snapshot.empty) {
-                            studentsContainer.innerHTML = '<p>No students in this class yet</p>';
-                            return;
-                        }
-                        
-                        studentsContainer.innerHTML = '';
-                        const students = [];
-                        snapshot.forEach(doc => {
-                            students.push({ id: doc.id, ...doc.data() });
-                        });
-                        
-                        // Sort by name locally
-                        students.sort((a, b) => a.name.localeCompare(b.name));
-                        
-                        // Render students
-                        students.forEach(student => {
-                            addStudentToDOM(student.id, student);
-                        });
-                    },
-                    error => {
-                        console.error("Student load error:", error);
-                        studentsContainer.innerHTML = `<p>Error loading students: ${error.message}</p>`;
-                    }
-                );
-        }
-
-        function addStudentToDOM(id, student) {
-            const card = document.createElement('div');
-            card.className = 'student-card';
-            
-            const stars = [];
-            for (let i = 0; i < student.stars; i++) {
-                stars.push('<i class="fas fa-star star"></i>');
-            }
-            
-            card.innerHTML = `
-                <div class="student-header">
-                    <div class="student-name">${student.name}</div>
-                    <button class="delete-student" data-id="${id}">&times;</button>
-                </div>
-                <div class="stars-display" id="stars-${id}">
-                    ${stars.join('')}
-                </div>
-                <div class="student-actions">
-                    <button class="success" onclick="addStar('${id}')">Add Star</button>
-                    <button class="danger" onclick="removeStar('${id}')">Remove Star</button>
-                </div>
-            `;
-            
-            studentsContainer.appendChild(card);
-        }
-
-        function addStudent() {
-            const name = studentNameInput.value.trim();
-            if (!name) {
-                document.getElementById('addStudentError').textContent = 'Please enter student name';
-                return;
-            }
-            if (!currentClassId) {
-                document.getElementById('addStudentError').textContent = 'No class selected';
-                return;
-            }
-
-            confirmAddStudent.innerHTML = '<div class="loading"></div> Adding...';
-            confirmAddStudent.disabled = true;
-            document.getElementById('addStudentError').textContent = '';
-            
-            db.collection('students').add({
-                name: name,
-                classId: currentClassId,
-                stars: 0,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                teacherId: currentUser.uid
-            })
-            .then(() => {
-                studentNameInput.value = '';
-                addStudentModal.classList.remove('active');
-            })
-            .catch(error => {
-                console.error("Add student error:", error);
-                document.getElementById('addStudentError').textContent = 'Error: ' + error.message;
-            })
-            .finally(() => {
-                confirmAddStudent.textContent = 'Add Student';
-                confirmAddStudent.disabled = false;
-            });
-        }
-
-        function deleteStudent(id) {
-            if (!confirm('Are you sure you want to delete this student?')) return;
-            
-            db.collection('students').doc(id).delete()
-                .catch(error => {
-                    console.error("Error deleting student:", error);
-                    alert('Error deleting student: ' + error.message);
-                });
-        }
-
-        function addStar(id) {
-            const studentRef = db.collection('students').doc(id);
-            
-            db.runTransaction(transaction => {
-                return transaction.get(studentRef).then(doc => {
-                    if (!doc.exists) {
-                        throw "Student not found";
-                    }
-                    
-                    const newStars = (doc.data().stars || 0) + 1;
-                    transaction.update(studentRef, { stars: newStars });
-                    return newStars;
-                });
-            }).then(newStars => {
-                updateStarDisplay(id, newStars);
-            }).catch(error => {
-                console.error("Error adding star:", error);
-                alert('Error: ' + error);
-            });
-        }
-
-        function removeStar(id) {
-            const studentRef = db.collection('students').doc(id);
-            
-            db.runTransaction(transaction => {
-                return transaction.get(studentRef).then(doc => {
-                    if (!doc.exists) {
-                        throw "Student not found";
-                    }
-                    
-                    const currentStars = doc.data().stars || 0;
-                    const newStars = Math.max(0, currentStars - 1);
-                    transaction.update(studentRef, { stars: newStars });
-                    return newStars;
-                });
-            }).then(newStars => {
-                updateStarDisplay(id, newStars);
-            }).catch(error => {
-                console.error("Error removing star:", error);
-                alert('Error: ' + error);
-            });
-        }
-
-        function updateStarDisplay(id, count) {
-            const starsDisplay = document.getElementById(`stars-${id}`);
-            if (!starsDisplay) return;
-            
-            starsDisplay.innerHTML = '';
-            for (let i = 0; i < count; i++) {
-                const star = document.createElement('i');
-                star.className = 'fas fa-star star';
-                starsDisplay.appendChild(star);
-            }
-        }
-
-        // Global functions (needed for HTML onclick)
-        window.addStar = addStar;
-        window.removeStar = removeStar;
-
-        // Event Listeners
-        authButton.addEventListener('click', () => {
-            if (currentUser) {
-                logout();
-            } else {
-                toggleLoginForm();
-            }
+        // Auth UI Handling
+        loginBtn.addEventListener('click', () => {
+            loginForm.classList.add('active');
+            overlay.classList.add('active');
         });
 
-        loginBtn.addEventListener('click', login);
-        closeLoginBtn.addEventListener('click', toggleLoginForm);
-
-        classSelector.addEventListener('change', (e) => {
-            currentClassId = e.target.value;
-            loadStudents();
+        signupBtn.addEventListener('click', () => {
+            signupForm.classList.add('active');
+            overlay.classList.add('active');
         });
 
-        addClassBtn.addEventListener('click', () => {
-            classNameInput.value = '';
-            document.getElementById('addClassError').textContent = '';
-            addClassModal.classList.add('active');
-        });
-
-        deleteClassBtn.addEventListener('click', deleteClass);
-
-        addStudentBtn.addEventListener('click', () => {
-            if (currentClassId) {
-                studentNameInput.value = '';
-                document.getElementById('addStudentError').textContent = '';
-                addStudentModal.classList.add('active');
-            } else {
-                alert('Please select a class first');
-            }
-        });
-
-        confirmAddClass.addEventListener('click', addClass);
-        confirmAddStudent.addEventListener('click', addStudent);
-
-        cancelAddClass.addEventListener('click', () => {
-            classNameInput.value = '';
-            addClassModal.classList.remove('active');
-        });
-
-        cancelAddStudent.addEventListener('click', () => {
-            studentNameInput.value = '';
-            addStudentModal.classList.remove('active');
-        });
-
-        closeModals.forEach(btn => {
+        cancelBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelector('.modal.active').classList.remove('active');
+                loginForm.classList.remove('active');
+                signupForm.classList.remove('active');
+                overlay.classList.remove('active');
             });
         });
 
-        studentsContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('delete-student')) {
-                deleteStudent(e.target.dataset.id);
+        overlay.addEventListener('click', () => {
+            loginForm.classList.remove('active');
+            signupForm.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Mock Implementation (since we don't have actual Firebase)
+        let currentUser = null;
+        let classes = [];
+        let students = {};
+
+        // Mock Auth
+        submitLogin.addEventListener('click', () => {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            if (email && password) {
+                // Mock successful login
+                currentUser = { email };
+                loginForm.classList.remove('active');
+                overlay.classList.remove('active');
+                updateAuthUI();
+                loadMockData();
+                showResponse('Successfully logged in!', 'success');
+            } else {
+                showResponse('Please enter both email and password', 'error');
             }
         });
 
-        // Initialize
-        auth.onAuthStateChanged(handleAuthStateChange);
+        submitSignup.addEventListener('click', () => {
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            
+            if (email && password) {
+                // Mock successful signup
+                currentUser = { email };
+                signupForm.classList.remove('active');
+                overlay.classList.remove('active');
+                updateAuthUI();
+                showResponse('Account created successfully!', 'success');
+            } else {
+                showResponse('Please enter both email and password', 'error');
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            currentUser = null;
+            updateAuthUI();
+            resetDashboard();
+            showResponse('Logged out successfully', 'success');
+        });
+
+        function updateAuthUI() {
+            if (currentUser) {
+                loginBtn.style.display = 'none';
+                signupBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+            } else {
+                loginBtn.style.display = 'inline-block';
+                signupBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'none';
+            }
+        }
+
+        // Mock Data Loading
+        function loadMockData() {
+            classes = ['Class 10A', 'Class 9B', 'Class 8C'];
+            students = {
+                'Class 10A': [
+                    { id: 1, name: 'Alice Smith', stars: 5 },
+                    { id: 2, name: 'Bob Johnson', stars: 3 },
+                    { id: 3, name: 'Charlie Brown', stars: 7 }
+                ],
+                'Class 9B': [
+                    { id: 4, name: 'Diana Prince', stars: 10 },
+                    { id: 5, name: 'Edward Norton', stars: 2 }
+                ],
+                'Class 8C': [
+                    { id: 6, name: 'Fiona Apple', stars: 6 }
+                ]
+            };
+            
+            updateClassList();
+        }
+
+        // Update Class Dropdown
+        function updateClassList() {
+            classSelect.innerHTML = '<option value="">Select a Class</option>';
+            
+            classes.forEach(className => {
+                const option = document.createElement('option');
+                option.value = className;
+                option.textContent = className;
+                classSelect.appendChild(option);
+            });
+        }
+
+        // Handle Class Selection
+        classSelect.addEventListener('change', () => {
+            const selectedClass = classSelect.value;
+            if (selectedClass) {
+                renderStudents(selectedClass);
+            } else {
+                studentsGrid.innerHTML = '';
+            }
+        });
+
+        // Add New Class
+        addClassBtn.addEventListener('click', () => {
+            const className = newClassName.value.trim();
+            if (className && !classes.includes(className)) {
+                classes.push(className);
+                students[className] = [];
+                updateClassList();
+                classSelect.value = className;
+                renderStudents(className);
+                newClassName.value = '';
+                showResponse(`Class "${className}" added successfully`, 'success');
+            } else if (classes.includes(className)) {
+                showResponse('This class already exists', 'error');
+            } else {
+                showResponse('Please enter a class name', 'error');
+            }
+        });
+
+        // Delete Class
+        deleteClassBtn.addEventListener('click', () => {
+            const selectedClass = classSelect.value;
+            if (selectedClass) {
+                classes = classes.filter(c => c !== selectedClass);
+                delete students[selectedClass];
+                updateClassList();
+                studentsGrid.innerHTML = '';
+                showResponse(`Class "${selectedClass}" deleted`, 'success');
+            } else {
+                showResponse('Please select a class to delete', 'error');
+            }
+        });
+
+        // Add New Student
+        addStudentBtn.addEventListener('click', () => {
+            const selectedClass = classSelect.value;
+            const studentName = newStudentName.value.trim();
+            
+            if (!selectedClass) {
+                showResponse('Please select a class first', 'error');
+                return;
+            }
+            
+            if (studentName) {
+                const newId = Date.now();
+                const newStudent = { id: newId, name: studentName, stars: 0 };
+                students[selectedClass].push(newStudent);
+                renderStudents(selectedClass);
+                newStudentName.value = '';
+                showResponse(`Student "${studentName}" added to ${selectedClass}`, 'success');
+            } else {
+                showResponse('Please enter a student name', 'error');
+            }
+        });
+
+        // Render Students for a Class
+        function renderStudents(className) {
+            studentsGrid.innerHTML = '';
+            
+            if (students[className]?.length > 0) {
+                students[className].forEach(student => {
+                    const studentCard = document.createElement('div');
+                    studentCard.className = 'student-card card';
+                    studentCard.innerHTML = `
+                        <div class="student-name">${student.name}</div>
+                        <div class="stars-container">
+                            ${getStarsHTML(student.stars)}
+                        </div>
+                        <button class="add-star-btn btn" data-id="${student.id}">
+                            <i class="fas fa-plus"></i> Add Star
+                        </button>
+                        <button class="remove-star-btn btn btn-danger" data-id="${student.id}">
+                            <i class="fas fa-minus"></i> Remove Star
+                        </button>
+                        <button class="delete-student-btn btn btn-danger" data-id="${student.id}">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    `;
+                    studentsGrid.appendChild(studentCard);
+                    
+                    // Add event listeners for buttons
+                    studentCard.querySelector('.add-star-btn').addEventListener('click', () => addStar(className, student.id));
+                    studentCard.querySelector('.remove-star-btn').addEventListener('click', () => removeStar(className, student.id));
+                    studentCard.querySelector('.delete-student-btn').addEventListener('click', () => deleteStudent(className, student.id));
+                });
+            } else {
+                studentsGrid.innerHTML = '<p>No students in this class yet. Add a student above.</p>';
+            }
+        }
+
+        // Generate Stars HTML
+        function getStarsHTML(count) {
+            let starsHTML = '';
+            for (let i = 0; i < count; i++) {
+                starsHTML += '<span class="star"><i class="fas fa-star"></i></span>';
+            }
+            return starsHTML;
+        }
+
+        // Add Star
+        function addStar(className, studentId) {
+            const studentIndex = students[className].findIndex(s => s.id === studentId);
+            if (studentIndex !== -1) {
+                students[className][studentIndex].stars += 1;
+                renderStudents(className);
+                showResponse(`Star added to ${students[className][studentIndex].name}`, 'success');
+            }
+        }
+
+        // Remove Star
+        function removeStar(className, studentId) {
+            const studentIndex = students[className].findIndex(s => s.id === studentId);
+            if (studentIndex !== -1 && students[className][studentIndex].stars > 0) {
+                students[className][studentIndex].stars -= 1;
+                renderStudents(className);
+                showResponse(`Star removed from ${students[className][studentIndex].name}`, 'success');
+            }
+        }
+
+        // Delete Student
+        function deleteStudent(className, studentId) {
+            const studentIndex = students[className].findIndex(s => s.id === studentId);
+            if (studentIndex !== -1) {
+                const studentName = students[className][studentIndex].name;
+                students[className] = students[className].filter(s => s.id !== studentId);
+                renderStudents(className);
+                showResponse(`Student "${studentName}" deleted`, 'success');
+            }
+        }
+
+        // Show Response Message
+        function showResponse(message, type) {
+            const responseDiv = document.createElement('div');
+            responseDiv.className = `response-message ${type}-message`;
+            responseDiv.textContent = message;
+            
+            responseContainer.appendChild(responseDiv);
+            
+            // Auto-remove after 3 seconds
+            setTimeout(() => {
+                responseDiv.style.opacity = '0';
+                setTimeout(() => responseContainer.removeChild(responseDiv), 500);
+            }, 3000);
+        }
+
+        // Reset Dashboard
+        function resetDashboard() {
+            classSelect.innerHTML = '<option value="">Select a Class</option>';
+            studentsGrid.innerHTML = '';
+            classes = [];
+            students = {};
+        }
     </script>
 </body>
 </html>

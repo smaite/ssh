@@ -5,27 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Essay Writing</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<script>
-        // Array of CSS file names
-        const stylesheets = ["content1.css", "content2.css", "content3.css"];
-
-        // Select a random stylesheet
-        const randomStylesheet = stylesheets[Math.floor(Math.random() * stylesheets.length)];
-
-        // Create a link element
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = randomStylesheet;
-
-        // Append to head
-        document.head.appendChild(link);
-    </script>
+  <link rel="stylesheet" href="../../shared3D.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
+  <div id="canvas-container"></div>
+  
   <!-- Header Section -->
   <header>
     <div class="container">
-      <h1>Writing an Effective Essay</h1>
+      <h1 class="glow-text">Writing an Effective Essay</h1>
       <p>Write engaging essay and tell the world what you want to.</p>
     </div>
   </header>
@@ -34,11 +23,11 @@
   <nav>
     <div class="container">
       <ul>
-        <li><a href="../../index.html">Home</a></li>
-        <li><a href="#instruction">Instruction</a></li>
-        <li><a href="#sample">Sample Essays</a></li>
-        <li><a href="#videos">Video Section</a></li>
-        <li><a href="#about">About Me</a></li>
+        <li><a href="../../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#instruction" class="nav-link"><i class="fas fa-book"></i> Instruction</a></li>
+        <li><a href="#sample" class="nav-link"><i class="fas fa-file-alt"></i> Sample Essays</a></li>
+        <li><a href="#videos" class="nav-link"><i class="fas fa-video"></i> Video Section</a></li>
+        <li><a href="#about" class="nav-link"><i class="fas fa-user"></i> About Me</a></li>
       </ul>
     </div>
   </nav>
@@ -46,18 +35,21 @@
   <!-- Instruction Section -->
   <section id="instruction" class="section">
     <div class="container">
-      <h2>Instruction Section</h2>
+      <h2 class="section-title">Instruction Section</h2>
       <p>Be informed about the format and style of writing an essay.</p>
-      <div class="quiz-links">
-        <a href="essayGuide.html" class="quiz-card">
-          <i class="fas fa-chalkboard-teacher"></i>
-          <h3>Get Instructions on writing essays. </h3>
+      <div class="quiz-links topics-grid">
+        <a href="essayGuide.html" class="topic-card">
+          <div class="card-content">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <h3>Get Instructions on writing essays.</h3>
+          </div>
         </a>
-        <a href="#essay" class="quiz-card">
-          <i class="fas fa-chalkboard-teacher"></i>
-          <h3>Coming Soon</h3>
+        <a href="#essay" class="topic-card">
+          <div class="card-content">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <h3>Coming Soon</h3>
+          </div>
         </a>
-        
       </div>
     </div>
   </section>
@@ -65,20 +57,26 @@
   <!-- Sample Section -->
   <section id="sample" class="section">
     <div class="container">
-      <h2>Sample Section</h2>
+      <h2 class="section-title">Sample Section</h2>
       <p>Read well written sample essays to deepen your understanding.</p>
-      <div class="quiz-links">
-        <a href="#essay1" class="quiz-card">
-          <i class="fas fa-book-open"></i>
-          <h3>Sample Essay:<br> Coming Soon</h3>
+      <div class="quiz-links topics-grid">
+        <a href="#essay1" class="topic-card">
+          <div class="card-content">
+            <i class="fas fa-book-open"></i>
+            <h3>Sample Essay:<br> Coming Soon</h3>
+          </div>
         </a>
-        <a href="#essay" class="quiz-card">
-          <i class="fas fa-book-open"></i>
-          <h3>Sample Essay: <br> Coming Soon</h3>
+        <a href="#essay" class="topic-card">
+          <div class="card-content">
+            <i class="fas fa-book-open"></i>
+            <h3>Sample Essay: <br> Coming Soon</h3>
+          </div>
         </a>
-        <a href="#essay" class="quiz-card">
-          <i class="fas fa-book-open"></i>
-          <h3>Sample Essay: <br>Coming Soon</h3>
+        <a href="#essay" class="topic-card">
+          <div class="card-content">
+            <i class="fas fa-book-open"></i>
+            <h3>Sample Essay: <br>Coming Soon</h3>
+          </div>
         </a>
       </div>
     </div>
@@ -87,28 +85,25 @@
   <!-- Video Section -->
   <section id="videos" class="section">
     <div class="container">
-      <h2>Video Section</h2>
+      <h2 class="section-title">Video Section</h2>
       <p>Watch these YouTube videos to deepen your understanding of movie review writing.</p>
-      <div class="video-links">
-        <a href="essay" class="video-card" target="_blank">
-          <i class="fas fa-play-circle"></i>
-          <h3>Video Coming Soon</h3>
+      <div class="video-links topics-grid">
+        <a href="#essay" class="topic-card" target="_blank">
+          <div class="card-content">
+            <i class="fas fa-play-circle"></i>
+            <h3>Video Coming Soon</h3>
+          </div>
         </a>
-        <a href="#essay" class="video-card" target="_blank">
-          <i class="fas fa-play-circle"></i>
-          <h3>Video Coming Soon</h3>
-        </a>
-        <a href="#essay" class="video-card" target="_blank">
-          <i class="fas fa-play-circle"></i>
-          <h3>Video Coming Soon</h3>
+        <a href="#essay" class="topic-card" target="_blank">
+          <div class="card-content">
+            <i class="fas fa-play-circle"></i>
+            <h3>Video Coming Soon</h3>
+          </div>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Footer Section -->
- <footer class="footer">
-        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
-    </footer>
+  <script src="../../shared3D.js"></script>
 </body>
 </html>

@@ -4,72 +4,123 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Classroom Smart Board</title>
+  <link rel="stylesheet" href="shared3D.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
-    /* General Styles */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: transparent;
-      color: #333;
-      user-select: none; /* Prevent text selection */
-      overflow: hidden; /* Hide scrollbars */
-    }
-
-    /* Container for the content */
-    .container {
+    /* Routine-specific styles */
+    .time-container {
       position: fixed;
       top: 15px;
       right: 15px;
-      width: 200px;
-      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(5px); /* Frosted glass effect */
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      width: 220px;
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      z-index: 10;
+      transform-style: preserve-3d;
+      transition: all 0.3s ease;
+      animation: float 6s infinite ease-in-out;
     }
 
-    /* Header Styles */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotateX(0deg);
+      }
+      50% {
+        transform: translateY(-10px) rotateX(5deg);
+      }
+    }
+
+    .time-container:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 
+                  0 0 20px rgba(80, 80, 255, 0.4);
+    }
+
     .header {
       font-size: 16px;
       font-weight: bold;
-      margin-bottom: 10px;
-      color: #444;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+      text-shadow: 0 0 5px rgba(0, 102, 255, 0.5);
     }
 
-    /* Period, Subject, and Teacher Styles */
     #period-info {
-      margin: 10px 0;
-    }
-
-    #period, #subject, #teacher {
-      font-size: 14px;
-      margin: 5px 0;
-      color: #555;
+      margin: 15px 0;
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(25, 25, 35, 0.7);
+      border: 1px solid rgba(80, 80, 255, 0.2);
     }
 
     #period {
       font-weight: bold;
-      color: #2c3e50;
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: var(--accent-cyan);
     }
 
-    #subject, #teacher {
+    #subject {
+      font-size: 15px;
+      margin-bottom: 5px;
+      color: var(--text-primary);
+    }
+
+    #teacher {
       font-style: italic;
-      color: #34495e;
+      font-size: 14px;
+      color: var(--text-secondary);
     }
 
-    /* Remaining Time Styles */
     #remaining-time {
-      font-size: 13px;
-      color: #e74c3c;
-      margin-top: 10px;
+      margin-top: 15px;
+      font-size: 14px;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .time-badge {
+      background: rgba(134, 16, 242, 0.3);
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-weight: bold;
+      border: 1px solid var(--accent-purple);
+    }
+
+    .current-period {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 5px var(--accent-blue);
+      }
+      50% {
+        box-shadow: 0 0 15px var(--accent-cyan);
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .time-container {
+        width: 180px;
+        padding: 15px;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div id="day-date" class="header"></div>
+  <div id="canvas-container"></div>
+  
+  <div class="time-container">
+    <div id="day-date" class="header glow-text"></div>
     <div id="time" class="header"></div>
     <div id="period-info">
       <div id="period"></div>
@@ -78,6 +129,8 @@
     </div>
     <div id="remaining-time"></div>
   </div>
+  
+  <script src="shared3D.js"></script>
   <script>
     // Class routine and teacher names
     const routine = [
@@ -93,54 +146,133 @@
 
     // Function to get the current period
     function getCurrentPeriod() {
-  const now = new Date();
-  const currentTotal = now.getHours() * 60 + now.getMinutes();
-
-  return routine.find(period => {
-    const [startH, startM] = period.start.split(':').map(Number);
-    const startTotal = startH * 60 + startM;
-    const [endH, endM] = period.end.split(':').map(Number);
-    const endTotal = endH * 60 + endM;
-    return currentTotal >= startTotal && currentTotal < endTotal;
-  }) || null;
-}
-
-    // Function to update the display
-    function updateDisplay() {
       const now = new Date();
-      const dayDate = now.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      const currentTime = now.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const currentTotal = now.getHours() * 60 + now.getMinutes();
 
-      // Update day, date, and time
-      document.getElementById("day-date").textContent = dayDate;
-      document.getElementById("time").textContent = currentTime;
-
-      const currentPeriod = getCurrentPeriod();
-      if (currentPeriod) {
-        document.getElementById("period").textContent = currentPeriod.period;
-        document.getElementById("subject").textContent = currentPeriod.subject ? `Sub: ${currentPeriod.subject}` : "";
-        document.getElementById("teacher").textContent = currentPeriod.teacher ? `Teacher: ${currentPeriod.teacher}` : "";
-
-        const endTime = new Date(now.toDateString() + " " + currentPeriod.end);
-        const remainingTime = endTime - now; // Time difference in milliseconds
-        const minutesRemaining = Math.floor(remainingTime / 60000); // Convert to minutes
-        const secondsRemaining = Math.floor((remainingTime % 60000) / 1000); // Convert remaining milliseconds to seconds
-
-        // Display remaining time in minutes and seconds
-        document.getElementById("remaining-time").textContent = remainingTime > 0 ? `Remaining Time: ${minutesRemaining}m ${secondsRemaining}s` : "";
-      } else {
-        document.getElementById("period").textContent = "No ongoing classes";
-        document.getElementById("subject").textContent = "";
-        document.getElementById("teacher").textContent = "";
-        document.getElementById("remaining-time").textContent = "";
-      }
+      return routine.find(period => {
+        const [startH, startM] = period.start.split(':').map(Number);
+        const [endH, endM] = period.end.split(':').map(Number);
+        const startTotal = startH * 60 + startM;
+        const endTotal = endH * 60 + endM;
+        
+        return currentTotal >= startTotal && currentTotal < endTotal;
+      });
     }
 
-    // Update the display every second
-    setInterval(updateDisplay, 1000);
+    // Function to format time
+    function formatTime(hours, minutes) {
+      return `${hours}:${minutes.toString().padStart(2, '0')}`;
+    }
 
-    // Initial call to display data immediately
+    // Function to calculate remaining time
+    function getRemainingTime(period) {
+      const now = new Date();
+      const currentTotal = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+      
+      const [endH, endM] = period.end.split(':').map(Number);
+      const endTotal = endH * 60 + endM;
+      
+      const remainingMins = Math.floor(endTotal - currentTotal);
+      const remainingSecs = Math.floor(((endTotal - currentTotal) % 1) * 60);
+      
+      return { minutes: remainingMins, seconds: remainingSecs };
+    }
+
+    // Function to get next period
+    function getNextPeriod(currentPeriod) {
+      if (!currentPeriod) return null;
+      
+      const currentIndex = routine.findIndex(period => 
+        period.period === currentPeriod.period);
+      
+      if (currentIndex !== -1 && currentIndex < routine.length - 1) {
+        return routine[currentIndex + 1];
+      }
+      
+      return null;
+    }
+
+    // Update the display
+    function updateDisplay() {
+      // Update day and date
+      const now = new Date();
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const day = days[now.getDay()];
+      const date = now.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+      document.getElementById('day-date').textContent = `${day}, ${date}`;
+      
+      // Update current time
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      const formattedHours = hours % 12 || 12; // Convert 0 to 12 for 12-hour format
+      
+      document.getElementById('time').textContent = 
+        `${formattedHours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm}`;
+      
+      // Update period info
+      const currentPeriod = getCurrentPeriod();
+      const periodInfo = document.getElementById('period-info');
+      
+      if (currentPeriod) {
+        document.getElementById('period').textContent = currentPeriod.period;
+        document.getElementById('subject').textContent = currentPeriod.subject || "Break Time";
+        document.getElementById('teacher').textContent = currentPeriod.teacher || "";
+        
+        // Add current period highlight
+        periodInfo.classList.add('current-period');
+        
+        // Calculate and display remaining time
+        const remaining = getRemainingTime(currentPeriod);
+        document.getElementById('remaining-time').innerHTML = 
+          `Remaining: <span class="time-badge">${remaining.minutes}m ${remaining.seconds}s</span>`;
+      } else {
+        // No current period (classes over or haven't started)
+        periodInfo.classList.remove('current-period');
+        
+        // Find the next period that will start today
+        const now = new Date();
+        const currentTotal = now.getHours() * 60 + now.getMinutes();
+        
+        const nextPeriodToday = routine.find(period => {
+          const [startH, startM] = period.start.split(':').map(Number);
+          const startTotal = startH * 60 + startM;
+          return startTotal > currentTotal;
+        });
+        
+        if (nextPeriodToday) {
+          // Next period today
+          const [startH, startM] = nextPeriodToday.start.split(':').map(Number);
+          const startTotal = startH * 60 + startM;
+          const waitMins = Math.floor(startTotal - currentTotal);
+          
+          document.getElementById('period').textContent = "Coming Up: " + nextPeriodToday.period;
+          document.getElementById('subject').textContent = nextPeriodToday.subject || "Break Time";
+          document.getElementById('teacher').textContent = nextPeriodToday.teacher || "";
+          document.getElementById('remaining-time').innerHTML = 
+            `Starting in: <span class="time-badge">${waitMins}m</span>`;
+        } else {
+          // No more periods today
+          document.getElementById('period').textContent = "Classes Done";
+          document.getElementById('subject').textContent = "No more classes today";
+          document.getElementById('teacher').textContent = "";
+          document.getElementById('remaining-time').textContent = "";
+        }
+      }
+    }
+    
+    // Update the display initially and every second
     updateDisplay();
+    setInterval(updateDisplay, 1000);
+    
+    // Enable 3D effects for the time container
+    document.addEventListener('mousemove', function(e) {
+      const container = document.querySelector('.time-container');
+      const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+      const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+      container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
   </script>
 </body>
 </html>
