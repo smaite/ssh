@@ -217,32 +217,32 @@ body {
 /* Small devices (portrait tablets, 400px-768px) */
 @media (min-width: 401px) and (max-width: 768px) {
     .logo-container img {
-        max-height: 10vw;
-        max-width: 60vw;
+        max-height: 12vw;
+        max-width: 80vw;
     }
 }
 
 /* Medium devices (landscape tablets, 769px-1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
     .logo-container img {
-        max-height: 8vw;
-        max-width: 50vw;
+        max-height: 10vw;
+        max-width: 60vw;
     }
 }
 
 /* Large devices (laptops/desktops, 1025px-1280px) */
 @media (min-width: 1025px) and (max-width: 1280px) {
     .logo-container img {
-        max-height: 8vw;
-        max-width: 50vw;
+        max-height: 10vw;
+        max-width: 60vw;
     }
 }
 
 /* Extra large devices (large laptops/desktops, 1281px and up) */
 @media (min-width: 1281px) {
     .logo-container img {
-        max-height: 9vw;
-        max-width: 60vw;
+        max-height: 11vw;
+        max-width: 70vw;
     }
 }
 
@@ -603,4 +603,5 @@ body {
   --primary-light: var(--theme-primary-light);
   --primary-dark: var(--theme-primary-dark);
   --secondary: var(--theme-secondary);
+
 }
