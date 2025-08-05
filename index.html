@@ -1,4 +1,4 @@
-p<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,12 +6,16 @@ p<!DOCTYPE html>
   <title>Nabaraj - English Teacher</title>
   <link rel="stylesheet" href="indexStyle.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 </head>
 <body>
+  <div id="canvas-container"></div>
+  
   <!-- Header Section -->
   <header>
     <div class="container">
-      <h1>Awsome English Leaning Hub</h1>
+      <h1 class="glow-text">Awesome English Learning Hub</h1>
       <p>English Teacher | Grammar | Writing Skills</p>
     </div>
   </header>
@@ -20,13 +24,13 @@ p<!DOCTYPE html>
   <nav>
     <div class="container">
       <ul>
-        <li><a href="#grammar">Grammar</a></li>
-        <li><a href="#writing">Writing Skills</a></li>
-        <li><a href="gk/gkQuiz.html">GK Quiz</a></li>
-        <li><a href="starboard/index.html">Starboard</a></li>
-        <li><a href="https://online.fliphtml5.com/vzmrl/cjqo/" target="blank">English Book IX</a></li>
-         <li><a href="https://online.fliphtml5.com/vzmrl/bvpp/" target="blank">English Book X</a></li>
-        <li><a href="#about">About Me</a></li>
+        <li><a href="#grammar" class="nav-link"><i class="fas fa-book-open"></i> Grammar</a></li>
+        <li><a href="#writing" class="nav-link"><i class="fas fa-pen-fancy"></i> Writing Skills</a></li>
+        <li><a href="gk/gkQuiz.html" class="nav-link"><i class="fas fa-question-circle"></i> GK Quiz</a></li>
+        <li><a href="starboard/index.html" class="nav-link"><i class="fas fa-star"></i> Starboard</a></li>
+        <li><a href="https://online.fliphtml5.com/vzmrl/cjqo/" target="blank" class="nav-link"><i class="fas fa-book"></i> English Book IX</a></li>
+        <li><a href="https://online.fliphtml5.com/vzmrl/bvpp/" target="blank" class="nav-link"><i class="fas fa-book"></i> English Book X</a></li>
+        <li><a href="#about" class="nav-link"><i class="fas fa-user"></i> About Me</a></li>
       </ul>
     </div>
   </nav>
@@ -43,47 +47,63 @@ p<!DOCTYPE html>
   <!-- Grammar Section -->
   <section id="grammar" class="section">
     <div class="container">
-      <h2>Learn Grammar Through Engaging Games</h2>
+      <h2 class="section-title">Learn Grammar Through Engaging Games</h2>
       <div class="topics-grid">
-      <a href="grammar/articles/articleContent.html" class="topic-card">
-       <i class="fas fa-book"></i>
-       <h3>Articles</h3>
-       <p>Master the art of precision by using the correct article.</p>
-       </a>
-          <a href="grammar/preposition/prepositionContent.html" class="topic-card">
-          <i class="fas fa-map-marker-alt"></i>
-          <h3>Prepositions</h3>
-           <p>Navigate the world of relationships with prepositions.</p>
+        <a href="grammar/articles/articleContent.html" class="topic-card">
+          <div class="card-content">
+            <i class="fas fa-book"></i>
+            <h3>Articles</h3>
+            <p>Master the art of precision by using the correct article.</p>
+          </div>
+        </a>
+        <a href="grammar/preposition/prepositionContent.html" class="topic-card">
+          <div class="card-content">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Prepositions</h3>
+            <p>Navigate the world of relationships with prepositions.</p>
+          </div>
         </a>
         <a href="grammar/questionTags/questionTagContent.html" class="topic-card">
-          <i class="fas fa-question"></i>
-          <h3>Question Tags</h3>
-          <p>Turn statements into conversations with the magic of question tags.</p>
+          <div class="card-content">
+            <i class="fas fa-question"></i>
+            <h3>Question Tags</h3>
+            <p>Turn statements into conversations with the magic of question tags.</p>
+          </div>
         </a>
         <div class="topic-card">
-          <i class="fas fa-clock"></i>
-          <h3>Tenses</h3>
-          <p>Travel through time with tenses—past, present, and future.</p>
+          <div class="card-content">
+            <i class="fas fa-clock"></i>
+            <h3>Tenses</h3>
+            <p>Travel through time with tenses—past, present, and future.</p>
+          </div>
         </div>
         <div class="topic-card">
-          <i class="fas fa-handshake"></i>
-          <h3>Subject Verb Agreement</h3>
-          <p>Build sentences that flow like music with proper syntax.</p>
+          <div class="card-content">
+            <i class="fas fa-handshake"></i>
+            <h3>Subject Verb Agreement</h3>
+            <p>Build sentences that flow like music with proper syntax.</p>
+          </div>
         </div>
         <a href="grammar/voice/voiceContent.html" class="topic-card">
-          <i class="fas fa-exchange-alt"></i>
-          <h3>Active & Passive Voice</h3>
-          <p>From action to observation—master the art of voice.</p>
-          </a>
-          <a href="grammar/reportedSpeech/reportedContent.html" class="topic-card">
-          <i class="fas fa-comments"></i>
-          <h3>Reported Speech</h3>
-          <p>Turn 'he said, she said' into compelling narratives.</p>
-          </a>
-         <a href="grammar/causatives/causativeContent.html" class="topic-card">
-          <i class="fas fa-hand-point-right"></i>
-          <h3>Causative Verbs</h3>
-          <p>Make things happen with 'have,' 'make,'  'get,' and 'let.'</p>
+          <div class="card-content">
+            <i class="fas fa-exchange-alt"></i>
+            <h3>Active & Passive Voice</h3>
+            <p>From action to observation—master the art of voice.</p>
+          </div>
+        </a>
+        <a href="grammar/reportedSpeech/reportedContent.html" class="topic-card">
+          <div class="card-content">
+            <i class="fas fa-comments"></i>
+            <h3>Reported Speech</h3>
+            <p>Turn 'he said, she said' into compelling narratives.</p>
+          </div>
+        </a>
+        <a href="grammar/causatives/causativeContent.html" class="topic-card">
+          <div class="card-content">
+            <i class="fas fa-hand-point-right"></i>
+            <h3>Causative Verbs</h3>
+            <p>Make things happen with 'have,' 'make,'  'get,' and 'let.'</p>
+          </div>
         </a>
       </div>
     </div>
@@ -92,106 +112,143 @@ p<!DOCTYPE html>
   <!-- Writing Skills Section -->
   <section id="writing" class="section">
     <div class="container">
-      <h2>Develop Your Writing Skills</h2>
+      <h2 class="section-title">Develop Your Writing Skills</h2>
       <div class="topics-grid">
         <div class="topic-card">
-          <i class="fas fa-paragraph"></i>
-          <h3>Paragraph Writing</h3>
-          <p>Turn ideas into well-structured paragraphs.</p>
+          <div class="card-content">
+            <i class="fas fa-paragraph"></i>
+            <h3>Paragraph Writing</h3>
+            <p>Turn ideas into well-structured paragraphs.</p>
+          </div>
         </div>
         <a href="writing/essay/essayContent.html" class="topic-card">
-          <i class="fas fa-pen"></i>
-          <h3>Essay Writing</h3>
-          <p>From introduction to conclusion—write essays that impress.</p>
+          <div class="card-content">
+            <i class="fas fa-pen"></i>
+            <h3>Essay Writing</h3>
+            <p>From introduction to conclusion—write essays that impress.</p>
+          </div>
         </a>
         <div class="topic-card">
-          <i class="fas fa-sticky-note"></i>
-          <h3>Notice Writing</h3>
-          <p>Deliver clear and concise messages with effective notice writing.</p>
+          <div class="card-content">
+            <i class="fas fa-sticky-note"></i>
+            <h3>Notice Writing</h3>
+            <p>Deliver clear and concise messages with effective notice writing.</p>
+          </div>
         </div>
         <div class="topic-card">
-          <i class="fas fa-book-open"></i>
-          <h3>Story Writing</h3>
-          <p>From plot twists to happy endings—write stories that inspire.</p>
+          <div class="card-content">
+            <i class="fas fa-book-open"></i>
+            <h3>Story Writing</h3>
+            <p>From plot twists to happy endings—write stories that inspire.</p>
+          </div>
         </div>
         <a href="writing/dialogue/dialogue.html" class="topic-card">
-          <i class="fas fa-comment-dots"></i>
-          <h3>Dialogue Writing</h3>
-           <p>Bring characters to life with authentic and engaging dialogues.</p>
+          <div class="card-content">
+            <i class="fas fa-comment-dots"></i>
+            <h3>Dialogue Writing</h3>
+             <p>Bring characters to life with authentic and engaging dialogues.</p>
+          </div>
         </a>
         <a href="writing/menu/menu.html" class="topic-card">
-          <i class="fas fa-utensils"></i>
-          <h3>Menu Writing</h3>
-          <p>Write mouth watering menu and impress your visitor.</p>
+          <div class="card-content">
+            <i class="fas fa-utensils"></i>
+            <h3>Menu Writing</h3>
+            <p>Write mouth watering menu and impress your visitor.</p>
+          </div>
         </a>
         <a href="writing/review/movieReviewContent.html" class="topic-card">
-          <i class="fas fa-film"></i>
-          <h3>Movie Review Writing</h3>
-          <p>From plot to performance—write reviews that resonate.</p>
+          <div class="card-content">
+            <i class="fas fa-film"></i>
+            <h3>Movie Review Writing</h3>
+            <p>From plot to performance—write reviews that resonate.</p>
+          </div>
         </a>
         <div class="topic-card">
-          <i class="fas fa-book"></i>
-          <h3>Book Review Writing</h3>
-          <p>Turn readers into explorers with your book reviews.</p>
+          <div class="card-content">
+            <i class="fas fa-book"></i>
+            <h3>Book Review Writing</h3>
+            <p>Turn readers into explorers with your book reviews.</p>
+          </div>
         </div>
         <a href="writing/newsReport/newsArticle.html" class="topic-card">
-          <i class="fas fa-newspaper"></i>
-          <h3>News Article Writing</h3>
-          <p>Turn events into reports; let everyone know it.</p>
+          <div class="card-content">
+            <i class="fas fa-newspaper"></i>
+            <h3>News Article Writing</h3>
+            <p>Turn events into reports; let everyone know it.</p>
+          </div>
         </a>
          <a href="writing/rulesRegulations/rulesWriting.html" class="topic-card">
-          <i class="fas fa-ban"></i>
-          <h3>Rules/Regulations Writing</h3>
-          <p>Oblige or prohibit: Learn to write rules effectively.</p>
+          <div class="card-content">
+            <i class="fas fa-ban"></i>
+            <h3>Rules/Regulations Writing</h3>
+            <p>Oblige or prohibit: Learn to write rules effectively.</p>
+          </div>
         </a>
         <a href="writing/chartInterpretation/chartInterpretation.html" class="topic-card">
-          <i class="fas fa-table"></i>
-          <h3>Chart Interpretation Writing</h3>
-          <p>Interpret charts or tables: Let the data speak itself.</p>
+          <div class="card-content">
+            <i class="fas fa-table"></i>
+            <h3>Chart Interpretation Writing</h3>
+            <p>Interpret charts or tables: Let the data speak itself.</p>
+          </div>
         </a>
         <a href="writing/condolence/condolence.html" class="topic-card">
-          <i class="fas fa-table"></i>
-          <h3>Condolence Writing</h3>
-          <p>Expressing Sympathy with Sincerity and Grace.</p>
+          <div class="card-content">
+            <i class="fas fa-table"></i>
+            <h3>Condolence Writing</h3>
+            <p>Expressing Sympathy with Sincerity and Grace.</p>
+          </div>
         </a>
          <a href="writing/congratulation/congratulation.html" class="topic-card">
-          <i class="fa-solid fa-trophy"></i>
-          <h3>Congratulation Writing</h3>
-          <p>Add joy to triumph: Write congratulation cards.</p>
+          <div class="card-content">
+            <i class="fa-solid fa-trophy"></i>
+            <h3>Congratulation Writing</h3>
+            <p>Add joy to triumph: Write congratulation cards.</p>
+          </div>
         </a>
         <a href="#writing/advertisement/advertisement.html" class="topic-card">
-          <i class="fas fa-ad"></i>
-          <h3>Advertisement Writing</h3>
-          <p>Sell anything: Learn the art of advertisement.</p>
+          <div class="card-content">
+            <i class="fas fa-ad"></i>
+            <h3>Advertisement Writing</h3>
+            <p>Sell anything: Learn the art of advertisement.</p>
+          </div>
         </a>
         <a href="writing/cv/cv.html" class="topic-card">
-          <i class="fa-solid fa-file-lines"></i>
-          <h3>CV Writing</h3>
-          <p>Impress and Earn: Write a CV in most impressive way.</p>
+          <div class="card-content">
+            <i class="fa-solid fa-file-lines"></i>
+            <h3>CV Writing</h3>
+            <p>Impress and Earn: Write a CV in most impressive way.</p>
+          </div>
         </a>
         <a href="writing/invitation/invitation.html" class="topic-card">
-          <i class="fa-solid fa-envelope-open-text"></i>
-          <h3>Invitation Writing</h3>
-          <p>Develop your relations: Write impressive invitations on important ocassions.</p>
+          <div class="card-content">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <h3>Invitation Writing</h3>
+            <p>Develop your relations: Write impressive invitations on important ocassions.</p>
+          </div>
         </a>
         <a href="writing/brochure/brochure.html" class="topic-card">
-          <i class="fa-solid fa-book-open"></i>
-          <h3>Brochure Writing</h3>
-          <p>Write effective brochures to attract people.</p>
+          <div class="card-content">
+            <i class="fa-solid fa-book-open"></i>
+            <h3>Brochure Writing</h3>
+            <p>Write effective brochures to attract people.</p>
+          </div>
         </a>
         <div class="topic-card">
-          <i class="fas fa-envelope"></i>
-          <h3>Letter Writing</h3>
-          <p>From formal to personal—write letters that leave an impact.</p>
+          <div class="card-content">
+            <i class="fas fa-envelope"></i>
+            <h3>Letter Writing</h3>
+            <p>From formal to personal—write letters that leave an impact.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
  
   <!-- Footer Section -->
- <footer class="footer">
-        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
-    </footer>
-</body>
+  <footer class="footer">
+    <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+  </footer>
 
+  <script src="script.js"></script>
+</body>
 </html>
