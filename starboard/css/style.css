@@ -209,16 +209,16 @@ body {
 /* Extra small devices (phones, 400px and down) */
 @media (max-width: 400px) {
     .logo-container img {
-        max-height: 8vw;
-        max-width: 80vw;
+        max-height: 14vw;
+        max-width: 90vw;
     }
 }
 
 /* Small devices (portrait tablets, 400px-768px) */
 @media (min-width: 401px) and (max-width: 768px) {
     .logo-container img {
-        max-height: 8vw;
-        max-width: 80vw;
+        max-height: 14vw;
+        max-width: 90vw;
     }
 }
 
@@ -605,6 +605,7 @@ body {
   --secondary: var(--theme-secondary);
 
 }
+
 
 
 
