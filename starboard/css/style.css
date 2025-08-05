@@ -249,7 +249,7 @@ body {
 /* Special cases for very tall screens */
 @media (max-height: 600px) {
     .logo-container img {
-        max-height: 8vh !important;
+        max-height: 10vh !important;
     }
 }
 /* Star Display Page */
@@ -605,6 +605,7 @@ body {
   --secondary: var(--theme-secondary);
 
 }
+
 
 
 
