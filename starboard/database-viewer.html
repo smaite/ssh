@@ -152,16 +152,24 @@
         <div class="tab-container">
             <div class="tab-btn active" data-tab="database-view">Database View</div>
             <div class="tab-btn" data-tab="class-management">Class Management</div>
+            <div class="tab-btn" data-tab="user-management">User Management</div>
         </div>
         
         <div id="database-view" class="tab-content active">
             <div class="card-container">
                 <h2 class="text-xl font-semibold mb-4 text-white">Database Structure</h2>
                 
-                <div class="mb-4">
+                <div class="mb-4 flex justify-between items-center">
                     <button id="refresh-db-btn" class="btn-primary py-2 px-4 rounded-lg">
                         <i class="fas fa-sync-alt mr-2"></i> Refresh Data
                     </button>
+                    
+                    <div class="flex">
+                        <input type="text" id="db-path-filter" placeholder="Filter by path (e.g. users/)" class="form-input mb-0 w-60 mr-2">
+                        <button id="view-path-btn" class="btn-primary py-2 px-4 rounded-lg">
+                            <i class="fas fa-search mr-2"></i> View Path
+                        </button>
+                    </div>
                 </div>
                 
                 <div id="database-tree" class="tree-view">
@@ -169,6 +177,32 @@
                         <i class="fas fa-spinner fa-spin text-2xl mb-2"></i>
                         <p>Loading database structure...</p>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Node Data Viewer/Editor -->
+            <div id="node-editor" class="card-container mt-4" style="display:none;">
+                <h2 class="text-xl font-semibold mb-4 text-white">Node Data Editor</h2>
+                <div class="mb-3">
+                    <span class="text-gray-400">Current Path:</span>
+                    <span id="current-path" class="ml-2 text-accent-cyan"></span>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="node-data" class="block text-white mb-2">Data (JSON format):</label>
+                    <textarea id="node-data" rows="10" class="form-input font-mono"></textarea>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <button id="save-node-btn" class="btn-primary py-2 px-4 rounded-lg">
+                        <i class="fas fa-save mr-2"></i> Save Changes
+                    </button>
+                    <button id="delete-node-btn" class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition">
+                        <i class="fas fa-trash-alt mr-2"></i> Delete Node
+                    </button>
+                    <button id="close-editor-btn" class="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded-lg transition">
+                        <i class="fas fa-times mr-2"></i> Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -201,6 +235,49 @@
                         <i class="fas fa-spinner fa-spin text-2xl mb-2"></i>
                         <p>Loading classes...</p>
                     </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="user-management" class="tab-content">
+            <div class="card-container">
+                <h2 class="text-xl font-semibold mb-4 text-white">User Accounts</h2>
+                
+                <div class="mb-4 flex justify-between items-center">
+                    <button id="refresh-users-btn" class="btn-primary py-2 px-4 rounded-lg">
+                        <i class="fas fa-sync-alt mr-2"></i> Refresh Users
+                    </button>
+                    
+                    <div class="flex items-center">
+                        <input type="text" id="user-search" placeholder="Search users..." class="form-input mb-0 mr-2 w-60">
+                        <select id="role-filter" class="form-input mb-0 w-40">
+                            <option value="">All Roles</option>
+                            <option value="teacher">Teachers</option>
+                            <option value="admin">Admins</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr class="text-left">
+                                <th class="py-2 px-4 border-b border-gray-600 text-accent-cyan">Name</th>
+                                <th class="py-2 px-4 border-b border-gray-600 text-accent-cyan">Email</th>
+                                <th class="py-2 px-4 border-b border-gray-600 text-accent-cyan">Role</th>
+                                <th class="py-2 px-4 border-b border-gray-600 text-accent-cyan">Status</th>
+                                <th class="py-2 px-4 border-b border-gray-600 text-accent-cyan">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table">
+                            <tr>
+                                <td colspan="5" class="text-center py-4 text-gray-400">
+                                    <i class="fas fa-spinner fa-spin text-2xl mb-2"></i>
+                                    <p>Loading users...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -275,11 +352,12 @@
         }
         
         // Render tree recursively
-        function renderTree(data, container, level = 0) {
+        function renderTree(data, container, level = 0, path = '') {
             for (const key in data) {
                 const item = document.createElement('div');
                 item.className = 'tree-item';
                 
+                const currentPath = path ? `${path}/${key}` : key;
                 const value = data[key];
                 const isObject = value !== null && typeof value === 'object';
                 
@@ -288,19 +366,39 @@
                     const keySpan = document.createElement('span');
                     keySpan.className = 'collapsible tree-key';
                     keySpan.textContent = key;
+                    keySpan.setAttribute('data-path', currentPath);
+                    
+                    // Add edit capability
+                    keySpan.addEventListener('dblclick', function() {
+                        openNodeEditor(currentPath, value);
+                    });
+                    
+                    // Add context menu
+                    keySpan.addEventListener('contextmenu', function(e) {
+                        e.preventDefault();
+                        openNodeEditor(currentPath, value);
+                    });
+                    
                     item.appendChild(keySpan);
                     container.appendChild(item);
+                    
+                    // Add icon to indicate node can be edited
+                    const editIcon = document.createElement('span');
+                    editIcon.innerHTML = ' <i class="fas fa-edit text-xs text-gray-400"></i>';
+                    editIcon.title = 'Double-click to edit';
+                    keySpan.appendChild(editIcon);
                     
                     const childContainer = document.createElement('div');
                     childContainer.className = 'tree-content';
                     container.appendChild(childContainer);
                     
-                    renderTree(value, childContainer, level + 1);
+                    renderTree(value, childContainer, level + 1, currentPath);
                 } else {
                     // Leaf node (primitive value)
                     const keySpan = document.createElement('span');
                     keySpan.className = 'tree-key';
                     keySpan.textContent = key + ': ';
+                    keySpan.setAttribute('data-path', currentPath);
                     
                     const valueSpan = document.createElement('span');
                     valueSpan.className = 'tree-value';
@@ -315,10 +413,155 @@
                         valueSpan.textContent = String(value);
                     }
                     
+                    // Add edit capability
+                    item.addEventListener('dblclick', function() {
+                        const nodeValue = value === null ? null : 
+                                         value === undefined ? undefined : value;
+                        openNodeEditor(currentPath, nodeValue);
+                    });
+                    
+                    // Add context menu
+                    item.addEventListener('contextmenu', function(e) {
+                        e.preventDefault();
+                        const nodeValue = value === null ? null : 
+                                         value === undefined ? undefined : value;
+                        openNodeEditor(currentPath, nodeValue);
+                    });
+                    
                     item.appendChild(keySpan);
                     item.appendChild(valueSpan);
+                    
+                    // Add icon to indicate node can be edited
+                    const editIcon = document.createElement('span');
+                    editIcon.innerHTML = ' <i class="fas fa-edit text-xs text-gray-400"></i>';
+                    editIcon.title = 'Double-click to edit';
+                    item.appendChild(editIcon);
+                    
                     container.appendChild(item);
                 }
+            }
+        }
+        
+        // Open the node editor for a specific path
+        function openNodeEditor(path, data) {
+            document.getElementById('current-path').textContent = path;
+            document.getElementById('node-data').value = JSON.stringify(data, null, 2);
+            document.getElementById('node-editor').style.display = 'block';
+            
+            // Scroll to editor
+            document.getElementById('node-editor').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Load data for a specific path
+        function loadPath(path) {
+            const dbRef = firebase.database().ref(path);
+            dbRef.once('value')
+                .then(snapshot => {
+                    const data = snapshot.val();
+                    const treeContainer = document.getElementById('database-tree');
+                    treeContainer.innerHTML = '';
+                    
+                    if (data === null) {
+                        treeContainer.innerHTML = '<p class="text-gray-400 p-4 text-center">No data found at this path</p>';
+                        return;
+                    }
+                    
+                    // Create root element
+                    const rootItem = document.createElement('div');
+                    rootItem.innerHTML = `<span class="collapsible open tree-key">${path || 'root'}</span>`;
+                    treeContainer.appendChild(rootItem);
+                    
+                    // Create content container
+                    const contentContainer = document.createElement('div');
+                    contentContainer.className = 'tree-content';
+                    treeContainer.appendChild(contentContainer);
+                    
+                    // If this is an object, render its children
+                    if (typeof data === 'object' && data !== null) {
+                        renderTree(data, contentContainer, 0, path);
+                    } else {
+                        // Display primitive value
+                        const item = document.createElement('div');
+                        item.className = 'tree-item';
+                        
+                        const valueSpan = document.createElement('span');
+                        valueSpan.className = 'tree-value';
+                        valueSpan.textContent = typeof data === 'string' ? `"${data}"` : String(data);
+                        
+                        item.appendChild(valueSpan);
+                        contentContainer.appendChild(item);
+                    }
+                    
+                    // Add event listeners to collapsible items
+                    document.querySelectorAll('.collapsible').forEach(item => {
+                        item.addEventListener('click', function() {
+                            this.classList.toggle('open');
+                        });
+                    });
+                    
+                    // Open the root node by default
+                    rootItem.querySelector('.collapsible').classList.add('open');
+                })
+                .catch(error => {
+                    console.error("Error loading path:", error);
+                    document.getElementById('database-tree').innerHTML = 
+                        `<p class="text-red-500 p-4">Error loading data: ${error.message}</p>`;
+                });
+        }
+        
+        // Save node data
+        function saveNodeData() {
+            const path = document.getElementById('current-path').textContent;
+            let data;
+            
+            try {
+                data = JSON.parse(document.getElementById('node-data').value);
+            } catch (error) {
+                alert(`Invalid JSON: ${error.message}`);
+                return;
+            }
+            
+            firebase.database().ref(path).set(data)
+                .then(() => {
+                    alert('Data saved successfully');
+                    document.getElementById('node-editor').style.display = 'none';
+                    
+                    // Refresh the tree view
+                    const pathFilter = document.getElementById('db-path-filter').value;
+                    if (pathFilter) {
+                        loadPath(pathFilter);
+                    } else {
+                        loadDatabaseStructure();
+                    }
+                })
+                .catch(error => {
+                    console.error("Error saving data:", error);
+                    alert(`Error saving data: ${error.message}`);
+                });
+        }
+        
+        // Delete a node
+        function deleteNode() {
+            const path = document.getElementById('current-path').textContent;
+            
+            if (confirm(`Are you sure you want to delete the node at ${path}?`)) {
+                firebase.database().ref(path).remove()
+                    .then(() => {
+                        alert('Node deleted successfully');
+                        document.getElementById('node-editor').style.display = 'none';
+                        
+                        // Refresh the tree view
+                        const pathFilter = document.getElementById('db-path-filter').value;
+                        if (pathFilter) {
+                            loadPath(pathFilter);
+                        } else {
+                            loadDatabaseStructure();
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error deleting node:", error);
+                        alert(`Error deleting node: ${error.message}`);
+                    });
             }
         }
         
@@ -435,9 +678,11 @@
             // Load data
             loadDatabaseStructure();
             loadClasses();
+            loadUsers();
             
             // Add event listeners
             document.getElementById('refresh-db-btn').addEventListener('click', loadDatabaseStructure);
+            document.getElementById('refresh-users-btn').addEventListener('click', loadUsers);
             
             document.getElementById('add-class-form').addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -451,7 +696,228 @@
                 
                 addClass(classId, className);
             });
+            
+            // View specific path
+            document.getElementById('view-path-btn').addEventListener('click', function() {
+                const path = document.getElementById('db-path-filter').value.trim();
+                loadPath(path);
+            });
+            
+            // Node editor buttons
+            document.getElementById('save-node-btn').addEventListener('click', saveNodeData);
+            document.getElementById('delete-node-btn').addEventListener('click', deleteNode);
+            document.getElementById('close-editor-btn').addEventListener('click', function() {
+                document.getElementById('node-editor').style.display = 'none';
+            });
+            
+            // User search functionality
+            document.getElementById('user-search').addEventListener('input', filterUsers);
+            document.getElementById('role-filter').addEventListener('change', filterUsers);
         });
+        
+        // Load users from Firebase
+        function loadUsers() {
+            const usersRef = firebase.database().ref('users');
+            usersRef.once('value')
+                .then(snapshot => {
+                    const data = snapshot.val();
+                    const tableBody = document.getElementById('users-table');
+                    tableBody.innerHTML = '';
+                    
+                    if (!data) {
+                        tableBody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-gray-400">No users found in database</td></tr>';
+                        return;
+                    }
+                    
+                    // Store users in global variable for filtering
+                    window.allUsers = data;
+                    
+                    renderUsers(data);
+                })
+                .catch(error => {
+                    console.error("Error loading users:", error);
+                    const tableBody = document.getElementById('users-table');
+                    tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-red-500">Error loading users: ${error.message}</td></tr>`;
+                });
+        }
+        
+        // Render users to the table
+        function renderUsers(users) {
+            const tableBody = document.getElementById('users-table');
+            tableBody.innerHTML = '';
+            let hasUsers = false;
+            
+            for (const userId in users) {
+                hasUsers = true;
+                const userData = users[userId];
+                
+                // Create a new table row
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-800 hover:bg-opacity-50 hover:bg-gray-800';
+                row.setAttribute('data-user-id', userId);
+                row.setAttribute('data-user-name', userData.name || '');
+                row.setAttribute('data-user-email', userData.email || '');
+                row.setAttribute('data-user-role', userData.role || '');
+                
+                // User name
+                const nameCell = document.createElement('td');
+                nameCell.className = 'py-3 px-4 text-white';
+                nameCell.textContent = userData.name || userData.displayName || 'No Name';
+                
+                // User email
+                const emailCell = document.createElement('td');
+                emailCell.className = 'py-3 px-4 text-white';
+                emailCell.textContent = userData.email || 'No Email';
+                
+                // User role
+                const roleCell = document.createElement('td');
+                roleCell.className = 'py-3 px-4';
+                
+                // Create role badge
+                const roleBadge = document.createElement('span');
+                roleBadge.className = 'px-2 py-1 rounded text-xs font-medium';
+                
+                if (userData.role === 'admin') {
+                    roleBadge.className += ' bg-purple-900 text-purple-200';
+                    roleBadge.textContent = 'Admin';
+                } else if (userData.role === 'teacher') {
+                    roleBadge.className += ' bg-blue-900 text-blue-200';
+                    roleBadge.textContent = 'Teacher';
+                } else {
+                    roleBadge.className += ' bg-gray-700 text-gray-300';
+                    roleBadge.textContent = userData.role || 'Unknown';
+                }
+                
+                roleCell.appendChild(roleBadge);
+                
+                // User approval status
+                const statusCell = document.createElement('td');
+                statusCell.className = 'py-3 px-4';
+                
+                // Create status badge
+                const statusBadge = document.createElement('span');
+                statusBadge.className = 'px-2 py-1 rounded text-xs font-medium';
+                
+                if (userData.approved === true) {
+                    statusBadge.className += ' bg-green-900 text-green-200';
+                    statusBadge.textContent = 'Approved';
+                } else if (userData.approved === false) {
+                    statusBadge.className += ' bg-red-900 text-red-200';
+                    statusBadge.textContent = 'Pending';
+                } else {
+                    statusBadge.className += ' bg-yellow-900 text-yellow-200';
+                    statusBadge.textContent = 'Unknown';
+                }
+                
+                statusCell.appendChild(statusBadge);
+                
+                // Actions
+                const actionsCell = document.createElement('td');
+                actionsCell.className = 'py-3 px-4';
+                
+                // Toggle approve button
+                const toggleBtn = document.createElement('button');
+                toggleBtn.className = userData.approved ? 'text-red-500 hover:text-red-300 mr-3' : 'text-green-500 hover:text-green-300 mr-3';
+                toggleBtn.innerHTML = userData.approved ? 
+                    '<i class="fas fa-user-times"></i>' : 
+                    '<i class="fas fa-user-check"></i>';
+                toggleBtn.title = userData.approved ? 'Revoke Access' : 'Approve User';
+                
+                toggleBtn.addEventListener('click', function() {
+                    toggleUserApproval(userId, userData);
+                });
+                
+                // Delete button
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'text-red-500 hover:text-red-300';
+                deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                deleteBtn.title = 'Delete User';
+                
+                deleteBtn.addEventListener('click', function() {
+                    if (confirm(`Are you sure you want to delete user ${userData.email}?`)) {
+                        deleteUser(userId);
+                    }
+                });
+                
+                actionsCell.appendChild(toggleBtn);
+                actionsCell.appendChild(deleteBtn);
+                
+                // Add all cells to the row
+                row.appendChild(nameCell);
+                row.appendChild(emailCell);
+                row.appendChild(roleCell);
+                row.appendChild(statusCell);
+                row.appendChild(actionsCell);
+                
+                // Add the row to the table
+                tableBody.appendChild(row);
+            }
+            
+            if (!hasUsers) {
+                tableBody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-gray-400">No users found in database</td></tr>';
+            }
+        }
+        
+        // Filter users based on search and role filter
+        function filterUsers() {
+            const searchTerm = document.getElementById('user-search').value.toLowerCase();
+            const roleFilter = document.getElementById('role-filter').value;
+            
+            if (!window.allUsers) return;
+            
+            const filteredUsers = {};
+            
+            for (const userId in window.allUsers) {
+                const user = window.allUsers[userId];
+                
+                // Check if user matches role filter
+                if (roleFilter && user.role !== roleFilter) {
+                    continue;
+                }
+                
+                // Check if user matches search term
+                const name = (user.name || user.displayName || '').toLowerCase();
+                const email = (user.email || '').toLowerCase();
+                
+                if (searchTerm && !name.includes(searchTerm) && !email.includes(searchTerm)) {
+                    continue;
+                }
+                
+                // User matches all filters
+                filteredUsers[userId] = user;
+            }
+            
+            renderUsers(filteredUsers);
+        }
+        
+        // Toggle user approval status
+        function toggleUserApproval(userId, userData) {
+            const newStatus = !userData.approved;
+            
+            firebase.database().ref(`users/${userId}/approved`).set(newStatus)
+                .then(() => {
+                    alert(`User ${newStatus ? 'approved' : 'access revoked'} successfully`);
+                    loadUsers();
+                })
+                .catch(error => {
+                    console.error("Error updating user:", error);
+                    alert(`Error updating user: ${error.message}`);
+                });
+        }
+        
+        // Delete a user
+        function deleteUser(userId) {
+            firebase.database().ref(`users/${userId}`).remove()
+                .then(() => {
+                    alert('User deleted successfully');
+                    loadUsers();
+                    loadDatabaseStructure();
+                })
+                .catch(error => {
+                    console.error("Error deleting user:", error);
+                    alert(`Error deleting user: ${error.message}`);
+                });
+        }
     </script>
 </body>
 </html> 
