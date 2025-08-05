@@ -1,14 +1,15 @@
 // Firebase configuration and initialization
 const firebaseConfig = {
-  apiKey: "AIzaSyAKub2UWzj08vywPYuQ1SHNruMNUa4mVAw",
-  authDomain: "dbs1-b8402.firebaseapp.com",
-  databaseURL: "https://dbs1-b8402-default-rtdb.asia-southeast1.firebasedatabase.app/",
-  projectId: "dbs1-b8402",
-  storageBucket: "dbs1-b8402.firebasestorage.app",
-  messagingSenderId: "149677040378",
-  appId: "1:149677040378:web:07b14d473f0559021cdf43",
-  measurementId: "G-ZZ2ZEPPJE5"
+  apiKey: "AIzaSyDbyfWUvGTHIY54AVFJqQKbVD1duIYFi7M",
+  authDomain: "starboard-a9a2e.firebaseapp.com",
+  databaseURL: "https://starboard-a9a2e-default-rtdb.firebaseio.com",
+  projectId: "starboard-a9a2e",
+  storageBucket: "starboard-a9a2e.appspot.com",
+  messagingSenderId: "965257254304",
+  appId: "1:965257254304:web:58ce1be7bcdec12b0540c5",
+  measurementId: "G-LQN94FYG6F"
 };
+
 
 
 // Initialize Firebase

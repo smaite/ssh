@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starboard - Database Viewer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../shared3D.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .header-container {
+            background: var(--card-bg);
+            border-bottom: 2px solid var(--accent-blue);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
+        }
+        
+        .card-container {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-blue);
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.5);
+        }
+        
+        .form-input {
+            background: rgba(30, 30, 50, 0.7);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.3s ease;
+            width: 100%;
+            padding: 8px 12px;
+            margin-bottom: 10px;
+        }
+        
+        .form-input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
+        }
+        
+        .tree-view {
+            font-family: monospace;
+            color: var(--text-primary);
+            padding: 10px;
+            background: rgba(20, 20, 40, 0.5);
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .tree-item {
+            padding: 3px 0;
+            margin-left: 20px;
+        }
+        
+        .tree-key {
+            color: var(--accent-cyan);
+        }
+        
+        .tree-value {
+            color: var(--accent-purple);
+        }
+        
+        .collapsible {
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .collapsible::before {
+            content: "▶";
+            display: inline-block;
+            margin-right: 6px;
+            transition: transform 0.2s;
+        }
+        
+        .collapsible.open::before {
+            transform: rotate(90deg);
+        }
+        
+        .collapsible + .tree-content {
+            display: none;
+        }
+        
+        .collapsible.open + .tree-content {
+            display: block;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .tab-container {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .tab-btn {
+            padding: 8px 16px;
+            border-radius: 8px 8px 0 0;
+            background: rgba(30, 30, 50, 0.7);
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    
+    <header class="header-container text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold glow-text">Starboard Database Viewer</h1>
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="btn-primary px-4 py-1 rounded-lg">Back to Home</a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container mx-auto p-4">
+        <div class="tab-container">
+            <div class="tab-btn active" data-tab="database-view">Database View</div>
+            <div class="tab-btn" data-tab="class-management">Class Management</div>
+        </div>
+        
+        <div id="database-view" class="tab-content active">
+            <div class="card-container">
+                <h2 class="text-xl font-semibold mb-4 text-white">Database Structure</h2>
+                
+                <div class="mb-4">
+                    <button id="refresh-db-btn" class="btn-primary py-2 px-4 rounded-lg">
+                        <i class="fas fa-sync-alt mr-2"></i> Refresh Data
+                    </button>
+                </div>
+                
+                <div id="database-tree" class="tree-view">
+                    <div class="text-center text-gray-400 py-4">
+                        <i class="fas fa-spinner fa-spin text-2xl mb-2"></i>
+                        <p>Loading database structure...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="class-management" class="tab-content">
+            <div class="card-container">
+                <h2 class="text-xl font-semibold mb-4 text-white">Add New Class</h2>
+                
+                <form id="add-class-form" class="mb-6">
+                    <div class="mb-4">
+                        <label for="class-id" class="block text-white mb-2">Class ID (e.g., class_5a)</label>
+                        <input type="text" id="class-id" placeholder="class_5a" class="form-input">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="class-name" class="block text-white mb-2">Class Name</label>
+                        <input type="text" id="class-name" placeholder="Class 5A" class="form-input">
+                    </div>
+                    
+                    <button type="submit" class="btn-primary py-2 px-4 rounded-lg">
+                        <i class="fas fa-plus mr-2"></i> Add Class
+                    </button>
+                </form>
+            </div>
+            
+            <div class="card-container">
+                <h2 class="text-xl font-semibold mb-4 text-white">Existing Classes</h2>
+                <div id="classes-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="text-center text-gray-400 py-4 col-span-3">
+                        <i class="fas fa-spinner fa-spin text-2xl mb-2"></i>
+                        <p>Loading classes...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    
+    <script src="../shared3D.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Initialize Firebase from auth.js config
+        
+        // Tab switching functionality
+        document.querySelectorAll('.tab-btn').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                const tabName = this.getAttribute('data-tab');
+                document.getElementById(tabName).classList.add('active');
+            });
+        });
+        
+        // Load database structure
+        function loadDatabaseStructure() {
+            const dbRef = firebase.database().ref();
+            dbRef.once('value')
+                .then(snapshot => {
+                    const data = snapshot.val();
+                    const treeContainer = document.getElementById('database-tree');
+                    treeContainer.innerHTML = '';
+                    
+                    if (!data) {
+                        treeContainer.innerHTML = '<p class="text-gray-400 p-4 text-center">No data found in database</p>';
+                        return;
+                    }
+                    
+                    // Create root element
+                    const rootItem = document.createElement('div');
+                    rootItem.innerHTML = '<span class="collapsible open tree-key">root</span>';
+                    treeContainer.appendChild(rootItem);
+                    
+                    // Create content container
+                    const contentContainer = document.createElement('div');
+                    contentContainer.className = 'tree-content';
+                    treeContainer.appendChild(contentContainer);
+                    
+                    // Render tree
+                    renderTree(data, contentContainer);
+                    
+                    // Add event listeners to collapsible items
+                    document.querySelectorAll('.collapsible').forEach(item => {
+                        item.addEventListener('click', function() {
+                            this.classList.toggle('open');
+                        });
+                    });
+                    
+                    // Open the root node by default
+                    rootItem.querySelector('.collapsible').classList.add('open');
+                })
+                .catch(error => {
+                    console.error("Error loading database:", error);
+                    document.getElementById('database-tree').innerHTML = 
+                        `<p class="text-red-500 p-4">Error loading database: ${error.message}</p>`;
+                });
+        }
+        
+        // Render tree recursively
+        function renderTree(data, container, level = 0) {
+            for (const key in data) {
+                const item = document.createElement('div');
+                item.className = 'tree-item';
+                
+                const value = data[key];
+                const isObject = value !== null && typeof value === 'object';
+                
+                if (isObject) {
+                    // Object/Array node
+                    const keySpan = document.createElement('span');
+                    keySpan.className = 'collapsible tree-key';
+                    keySpan.textContent = key;
+                    item.appendChild(keySpan);
+                    container.appendChild(item);
+                    
+                    const childContainer = document.createElement('div');
+                    childContainer.className = 'tree-content';
+                    container.appendChild(childContainer);
+                    
+                    renderTree(value, childContainer, level + 1);
+                } else {
+                    // Leaf node (primitive value)
+                    const keySpan = document.createElement('span');
+                    keySpan.className = 'tree-key';
+                    keySpan.textContent = key + ': ';
+                    
+                    const valueSpan = document.createElement('span');
+                    valueSpan.className = 'tree-value';
+                    
+                    if (value === null) {
+                        valueSpan.textContent = 'null';
+                    } else if (value === undefined) {
+                        valueSpan.textContent = 'undefined';
+                    } else if (typeof value === 'string') {
+                        valueSpan.textContent = `"${value}"`;
+                    } else {
+                        valueSpan.textContent = String(value);
+                    }
+                    
+                    item.appendChild(keySpan);
+                    item.appendChild(valueSpan);
+                    container.appendChild(item);
+                }
+            }
+        }
+        
+        // Load classes for class management tab
+        function loadClasses() {
+            const classesRef = firebase.database().ref('classes');
+            classesRef.once('value')
+                .then(snapshot => {
+                    const data = snapshot.val();
+                    const container = document.getElementById('classes-list');
+                    container.innerHTML = '';
+                    
+                    if (!data) {
+                        container.innerHTML = '<p class="text-gray-400 p-4 text-center col-span-3">No classes found in database</p>';
+                        return;
+                    }
+                    
+                    for (const classId in data) {
+                        const classData = data[classId];
+                        const className = classData.name || classData.Name || classId;
+                        
+                        const card = document.createElement('div');
+                        card.className = 'card-container flex flex-col';
+                        
+                        card.innerHTML = `
+                            <h3 class="text-lg font-bold mb-2 text-white">${className}</h3>
+                            <p class="text-gray-400 mb-4">ID: ${classId}</p>
+                            <div class="mt-auto flex justify-end">
+                                <button class="delete-class-btn text-red-500 hover:text-red-700 mr-4" data-class-id="${classId}">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </button>
+                                <button class="edit-class-btn text-blue-500 hover:text-blue-700" data-class-id="${classId}">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                            </div>
+                        `;
+                        
+                        container.appendChild(card);
+                    }
+                    
+                    // Add event listeners to delete buttons
+                    document.querySelectorAll('.delete-class-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const classId = this.getAttribute('data-class-id');
+                            if (confirm(`Are you sure you want to delete class ${classId}?`)) {
+                                deleteClass(classId);
+                            }
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error("Error loading classes:", error);
+                    document.getElementById('classes-list').innerHTML = 
+                        `<p class="text-red-500 p-4 col-span-3">Error loading classes: ${error.message}</p>`;
+                });
+        }
+        
+        // Add a new class
+        function addClass(classId, className) {
+            const classRef = firebase.database().ref('classes/' + classId);
+            
+            // Check if class already exists
+            classRef.once('value')
+                .then(snapshot => {
+                    if (snapshot.exists()) {
+                        alert(`Class with ID ${classId} already exists`);
+                        return;
+                    }
+                    
+                    // Add the class
+                    return classRef.set({
+                        name: className,
+                        createdAt: firebase.database.ServerValue.TIMESTAMP
+                    });
+                })
+                .then(() => {
+                    if (classId) { // Only if we didn't return early
+                        alert('Class added successfully');
+                        document.getElementById('class-id').value = '';
+                        document.getElementById('class-name').value = '';
+                        loadClasses();
+                        loadDatabaseStructure();
+                    }
+                })
+                .catch(error => {
+                    console.error("Error adding class:", error);
+                    alert(`Error adding class: ${error.message}`);
+                });
+        }
+        
+        // Delete a class
+        function deleteClass(classId) {
+            const classRef = firebase.database().ref('classes/' + classId);
+            
+            classRef.remove()
+                .then(() => {
+                    alert('Class deleted successfully');
+                    loadClasses();
+                    loadDatabaseStructure();
+                })
+                .catch(error => {
+                    console.error("Error deleting class:", error);
+                    alert(`Error deleting class: ${error.message}`);
+                });
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Firebase (if not already initialized in auth.js)
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            
+            // Load data
+            loadDatabaseStructure();
+            loadClasses();
+            
+            // Add event listeners
+            document.getElementById('refresh-db-btn').addEventListener('click', loadDatabaseStructure);
+            
+            document.getElementById('add-class-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const classId = document.getElementById('class-id').value.trim();
+                const className = document.getElementById('class-name').value.trim();
+                
+                if (!classId || !className) {
+                    alert('Please enter both Class ID and Class Name');
+                    return;
+                }
+                
+                addClass(classId, className);
+            });
+        });
+    </script>
+</body>
+</html> 

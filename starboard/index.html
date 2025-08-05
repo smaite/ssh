@@ -219,6 +219,18 @@
             </button>
         </div>
     </div>
+    <script>
+        // Debug code to view database structure
+        const dbRef = firebase.database().ref();
+        dbRef.once('value')
+          .then((snapshot) => {
+            console.log('Database structure:');
+            console.log(snapshot.val());
+          })
+          .catch((error) => {
+            console.error('Error retrieving database:', error);
+          });
+      </script>
 
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
