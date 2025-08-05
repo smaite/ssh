@@ -4,75 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brochure Writing Guide</title>
+    <link rel="stylesheet" href="../../shared3D.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        
-        h1 {
-            text-align: center;
-            color: #27ae60;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #2ecc71;
-            padding-bottom: 10px;
-        }
-        
         .instructions {
-            background-color: white;
-            border-radius: 8px;
+            background: var(--card-bg);
+            border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
             margin-bottom: 30px;
+            border: 2px solid var(--accent-blue);
         }
         
         .instructions ol {
             padding-left: 20px;
+            color: var(--text-primary);
         }
         
         .instructions li {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
         .button-container {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-bottom: 50px;
+            margin: 30px 0;
             flex-wrap: wrap;
         }
         
         .sample-btn {
             padding: 12px 25px;
-            background-color: #2ecc71;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .sample-btn:hover {
-            background-color: #27ae60;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.5);
         }
         
         .brochure-sample {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
             margin-bottom: 50px;
             display: none;
             opacity: 0;
             transition: opacity 0.5s ease, transform 0.5s ease;
             transform: translateY(20px);
             overflow: hidden;
+            border: 2px solid var(--accent-blue);
         }
         
         .brochure-sample.visible {
@@ -81,12 +70,12 @@
         }
         
         .brochure-sample h2 {
-            color: #27ae60;
+            color: var(--accent-cyan);
             text-align: center;
             margin-top: 0;
             padding: 15px;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #eee;
+            background: rgba(20, 20, 40, 0.5);
+            border-bottom: 1px solid var(--card-border);
         }
         
         .brochure-layout {
@@ -98,334 +87,260 @@
             flex: 1;
             min-width: 300px;
             padding: 20px;
-            box-sizing: border-box;
+            border: 1px solid var(--card-border);
         }
-        
+
         .brochure-panel img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            background-color: #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            border: 1px dashed #ccc;
-        }
-        
-        .brochure-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        
-        .brochure-subtitle {
-            font-size: 18px;
-            color: #7f8c8d;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
             margin-bottom: 15px;
         }
-        
-        .brochure-features {
-            margin: 15px 0;
-        }
-        
-        .brochure-features li {
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-        }
-        
-        .brochure-features li:before {
-            content: "✓";
-            color: #27ae60;
-            position: absolute;
-            left: 0;
-        }
-        
-        .brochure-contact {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        
-        .brochure-footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #2c3e50;
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
             color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 20px 0;
+            transition: all 0.3s ease;
         }
 
-        /* Sticky Footer Styling */
-        .footer {
-            background: #343a40;
-            color: #f8f9fa;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 1.2rem;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.5);
         }
 
-        .footer strong {
-            color: #ffc107;
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
-
-        .footer p {
-            margin: 0;
-            padding: 0;
-        }
-        
-        @media (max-width: 600px) {
-            body {
-                padding: 15px;
-            }
-            
-            .instructions, .brochure-panel {
-                padding: 15px;
-            }
-            
-            .button-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .sample-btn {
-                width: 100%;
-                max-width: 250px;
+        @media (max-width: 768px) {
+            .brochure-panel {
+                min-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <h1>Brochure Writing Guide</h1>
+    <div id="canvas-container"></div>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1 class="glow-text">Brochure Writing Guide</h1>
+            <p>Learn how to create effective and engaging brochures</p>
+        </div>
+    </header>
     
-    <div class="instructions">
-        <h2>Instructions for Creating Effective Brochures:</h2>
-        <ol>
-            <li><strong>Define your purpose</strong> -- Clearly identify what you want the brochure to achieve.</li>
-            <li><strong>Know your audience</strong> -- Tailor content and design to your target readers.</li>
-            <li><strong>Create a compelling headline</strong> -- Grab attention immediately.</li>
-            <li><strong>Use the rule of three</strong> -- Organize content into three main sections or panels.</li>
-            <li><strong>Highlight benefits</strong> -- Focus on what readers gain, not just features.</li>
-            <li><strong>Use visual hierarchy</strong> -- Make important elements stand out through size and placement.</li>
-            <li><strong>Include clear calls-to-action</strong> -- Tell readers exactly what to do next.</li>
-            <li><strong>Use high-quality images</strong> -- Visuals should support and enhance your message.</li>
-            <li><strong>Keep text concise</strong> -- Use bullet points and short paragraphs.</li>
-            <li><strong>Include contact information</strong> -- Make it easy for readers to follow up.</li>
-        </ol>
-    </div>
-    
-    <div class="button-container">
-        <button class="sample-btn" id="loadSample1">Travel Brochure</button>
-        <button class="sample-btn" id="loadSample2">Product Brochure</button>
-        <button class="sample-btn" id="loadSample3">School Brochure</button>
-        <button class="sample-btn" id="loadSample4">Event Brochure</button>
-    </div>
-    
-    <div class="brochure-sample" id="sample1">
-        <h2>Travel Brochure Example</h2>
-        <div class="brochure-layout">
-            <div class="brochure-panel">
-                <img src="mountain.jpg" alt="Travel destination placeholder">
-                <div class="brochure-title">Explore Nepal's Hidden Treasures</div>
-                <div class="brochure-subtitle">Journey Through the Himalayas</div>
-                <p>Discover untouched landscapes and rich cultural experiences in Nepal's most spectacular regions.</p>
-                <ul class="brochure-features">
-                    <li>10-day guided trekking adventure</li>
-                    <li>Authentic local homestays</li>
-                    <li>UNESCO World Heritage sites</li>
-                    <li>Small group tours (max 12 people)</li>
-                </ul>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="../../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#instructions" class="nav-link"><i class="fas fa-book"></i> Instructions</a></li>
+                <li><a href="#samples" class="nav-link"><i class="fas fa-images"></i> Samples</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section id="instructions">
+            <h2 class="section-title">How to Write a Brochure</h2>
+            
+            <div class="instructions">
+                <p>A brochure is a promotional document used to advertise a company, product, service, or event. Follow these steps to create an effective brochure:</p>
+                
+                <ol>
+                    <li><strong>Identify your purpose:</strong> Determine what you want to achieve with your brochure. Are you informing, selling, or persuading?</li>
+                    <li><strong>Know your audience:</strong> Understand who will be reading your brochure to tailor your content effectively.</li>
+                    <li><strong>Choose your format:</strong> Decide on the fold style (tri-fold, bi-fold, z-fold) based on your content needs.</li>
+                    <li><strong>Create compelling headlines:</strong> Use attention-grabbing headlines that clearly communicate benefits.</li>
+                    <li><strong>Keep it concise:</strong> Use short paragraphs, bullet points, and clear language.</li>
+                    <li><strong>Include visuals:</strong> Add relevant images, charts, or infographics to enhance understanding.</li>
+                    <li><strong>Add contact information:</strong> Make sure to include how readers can reach you (website, phone, email).</li>
+                    <li><strong>Include a call to action:</strong> Tell readers what you want them to do after reading.</li>
+                    <li><strong>Use high-quality design:</strong> Ensure your brochure looks professional with good color choices and typography.</li>
+                    <li><strong>Proofread carefully:</strong> Check for errors in grammar, spelling, and facts before finalizing.</li>
+                </ol>
             </div>
-            <div class="brochure-panel">
-                <img src="temple.jpg" alt="Travel destination placeholder">
-                <div class="brochure-title">Featured Itinerary</div>
-                <p><strong>Day 1-3:</strong> Kathmandu Valley cultural tour</p>
-                <p><strong>Day 4-7:</strong> Annapurna foothills trek</p>
-                <p><strong>Day 8-10:</strong> Chitwan wildlife safari</p>
-                <div class="brochure-contact">
-                    <p><strong>Book your adventure today!</strong></p>
-                    <p>Email: info@nepaltreks.com</p>
-                    <p>Phone: +977-1-4567890</p>
-                    <p>Website: www.nepaltreks.com</p>
+        </section>
+
+        <section id="samples">
+            <h2 class="section-title">Brochure Samples</h2>
+            <p>Click the buttons below to view different brochure examples:</p>
+            
+            <div class="button-container">
+                <button class="sample-btn" onclick="showBrochure('tourism')">Tourism Brochure</button>
+                <button class="sample-btn" onclick="showBrochure('school')">School Brochure</button>
+                <button class="sample-btn" onclick="showBrochure('tea')">Tea Industry Brochure</button>
+                <button class="sample-btn" onclick="showBrochure('trade')">Trade Fair Brochure</button>
+            </div>
+            
+            <!-- Tourism Brochure Sample -->
+            <div id="tourism-brochure" class="brochure-sample">
+                <h2>Tourism Brochure Example</h2>
+                <div class="brochure-layout">
+                    <div class="brochure-panel">
+                        <h3>Discover Nepal: The Himalayan Paradise</h3>
+                        <img src="mountain.jpg" alt="Nepal Mountains">
+                        <p>Nepal offers breathtaking mountain views, rich cultural heritage, and unforgettable adventures for travelers from around the world. From the towering peaks of the Himalayas to the lush jungles of the Terai, Nepal's diverse landscapes provide endless opportunities for exploration and discovery.</p>
+                        <h4>Why Visit Nepal?</h4>
+                        <ul>
+                            <li>Home to 8 of the world's 14 highest peaks</li>
+                            <li>Rich cultural heritage with diverse ethnic groups</li>
+                            <li>Adventurous activities from trekking to rafting</li>
+                            <li>Warm hospitality and friendly locals</li>
+                        </ul>
+                    </div>
+                    <div class="brochure-panel">
+                        <h3>Sacred Sites & Cultural Wonders</h3>
+                        <img src="temple.jpg" alt="Temple in Nepal">
+                        <p>Explore ancient temples, stupas, and monasteries that showcase Nepal's rich religious heritage. Visit UNESCO World Heritage Sites like Pashupatinath Temple, Boudhanath Stupa, and Bhaktapur Durbar Square.</p>
+                        <h4>Popular Destinations:</h4>
+                        <ul>
+                            <li>Kathmandu Valley: Cultural hub with historic sites</li>
+                            <li>Pokhara: Serene lakes and adventure sports</li>
+                            <li>Chitwan: Wildlife safaris and jungle experiences</li>
+                            <li>Lumbini: Birthplace of Lord Buddha</li>
+                        </ul>
+                        <p>Contact: Nepal Tourism Board<br>
+                        Email: info@tourism.gov.np<br>
+                        Phone: +977-1-4256909</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="brochure-footer">
-            "The mountains are calling and I must go" - John Muir
-        </div>
-    </div>
-    
-    <div class="brochure-sample" id="sample2">
-        <h2>Product Brochure Example</h2>
-        <div class="brochure-layout">
-            <div class="brochure-panel">
-                <img src="tea1.jpg" alt="Product placeholder">
-                <div class="brochure-title">Organic Himalayan Tea Collection</div>
-                <div class="brochure-subtitle">Pure Taste from Nepal's Highlands</div>
-                <p>Handpicked from the pristine slopes of the Himalayas, our organic teas offer unparalleled flavor and health benefits.</p>
-                <ul class="brochure-features">
-                    <li>100% organic certification</li>
-                    <li>Fair trade practices</li>
-                    <li>Antioxidant rich</li>
-                    <li>6 unique flavor profiles</li>
-                </ul>
-            </div>
-            <div class="brochure-panel">
-                <img src="tea2.jpg" alt="Product placeholder">
-                <div class="brochure-title">Our Tea Varieties</div>
-                <p><strong>Golden Tips:</strong> Premium first-flush black tea</p>
-                <p><strong>Mountain Mist:</strong> Delicate white tea</p>
-                <p><strong>Sunrise Green:</strong> Energizing green tea</p>
-                <p><strong>Herbal Infusion:</strong> Caffeine-free blends</p>
-                <div class="brochure-contact">
-                    <p><strong>Available at:</strong></p>
-                    <p>Select stores nationwide</p>
-                    <p>Online at www.himalayantea.com</p>
-                    <p>Bulk orders: sales@himalayantea.com</p>
+            
+            <!-- School Brochure Sample -->
+            <div id="school-brochure" class="brochure-sample">
+                <!-- School brochure content -->
+                <h2>School Brochure Example</h2>
+                <div class="brochure-layout">
+                    <div class="brochure-panel">
+                        <h3>Excellence Academy: Shaping Future Leaders</h3>
+                        <img src="school.jpg" alt="School Building">
+                        <p>Excellence Academy is committed to providing quality education in a nurturing environment where every student can reach their full potential. Our modern facilities and dedicated faculty ensure that students receive the best possible education.</p>
+                        <h4>Our Vision</h4>
+                        <p>To create a learning community that empowers students to become responsible, creative, and compassionate global citizens.</p>
+                        <h4>Our Facilities</h4>
+                        <ul>
+                            <li>Modern classrooms with smart boards</li>
+                            <li>Well-equipped science and computer labs</li>
+                            <li>Extensive library with digital resources</li>
+                            <li>Indoor and outdoor sports facilities</li>
+                        </ul>
+                    </div>
+                    <div class="brochure-panel">
+                        <h3>Academic Excellence & Beyond</h3>
+                        <img src="students.jpg" alt="Students in classroom">
+                        <p>Our comprehensive curriculum combines academic rigor with co-curricular activities to ensure holistic development of every child. We focus on both traditional and innovative teaching methodologies.</p>
+                        <h4>Why Choose Us?</h4>
+                        <ul>
+                            <li>Consistently high academic results</li>
+                            <li>Low student-teacher ratio for personalized attention</li>
+                            <li>Emphasis on character development and values</li>
+                            <li>Career counseling and university placements</li>
+                        </ul>
+                        <p>Contact: Admissions Office<br>
+                        Email: admissions@excellenceacademy.edu<br>
+                        Phone: 555-123-4567</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="brochure-footer">
-            "Every cup tells a story of the mountains"
-        </div>
-    </div>
-    
-    <div class="brochure-sample" id="sample3">
-        <h2>School Brochure Example</h2>
-        <div class="brochure-layout">
-            <div class="brochure-panel">
-                <img src="school.jpg" alt="School placeholder">
-                <div class="brochure-title">Bright Future Academy</div>
-                <div class="brochure-subtitle">Educating Tomorrow's Leaders</div>
-                <p>Established in 2005, we provide holistic education combining academic excellence with character development.</p>
-                <ul class="brochure-features">
-                    <li>Cambridge and National curricula</li>
-                    <li>Student-teacher ratio 15:1</li>
-                    <li>STEM-focused programs</li>
-                    <li>Extracurricular activities</li>
-                </ul>
-            </div>
-            <div class="brochure-panel">
-                <img src="students.jpg" alt="School placeholder">
-                <div class="brochure-title">Admissions 2024</div>
-                <p><strong>Programs Offered:</strong></p>
-                <p>• Preschool to Grade 12</p>
-                <p>• International Baccalaureate</p>
-                <p>• Vocational training</p>
-                <p><strong>Facilities:</strong></p>
-                <p>Modern labs, library, sports complex</p>
-                <div class="brochure-contact">
-                    <p><strong>Open House Dates:</strong></p>
-                    <p>March 15 & April 5, 2024</p>
-                    <p>Contact: admissions@brightfuture.edu.np</p>
-                    <p>01-4785236</p>
+            
+            <!-- Tea Industry Brochure -->
+            <div id="tea-brochure" class="brochure-sample">
+                <h2>Tea Industry Brochure Example</h2>
+                <div class="brochure-layout">
+                    <div class="brochure-panel">
+                        <h3>Himalayan Tea Estates: A Legacy of Excellence</h3>
+                        <img src="tea1.jpg" alt="Tea Gardens">
+                        <p>Nestled in the foothills of the Himalayas, our tea gardens produce some of the finest teas in the world. The perfect combination of altitude, climate, and soil creates the ideal conditions for growing exceptional tea leaves.</p>
+                        <h4>Our Tea Varieties</h4>
+                        <ul>
+                            <li>Premium Orthodox Black Tea</li>
+                            <li>Silver Tip White Tea</li>
+                            <li>Organic Green Tea</li>
+                            <li>Specialty Oolong Tea</li>
+                        </ul>
+                    </div>
+                    <div class="brochure-panel">
+                        <h3>Sustainable Practices & Quality Assurance</h3>
+                        <img src="tea2.jpg" alt="Tea Processing">
+                        <p>We are committed to sustainable and ethical tea production. Our estates follow organic farming practices and provide fair wages and benefits to our workers. Each batch of tea undergoes rigorous quality testing before packaging.</p>
+                        <h4>Why Choose Himalayan Tea?</h4>
+                        <ul>
+                            <li>Hand-picked tea leaves for superior quality</li>
+                            <li>Traditional processing methods preserved</li>
+                            <li>Environmentally sustainable practices</li>
+                            <li>Rich, distinctive flavor profiles</li>
+                        </ul>
+                        <p>Contact: Himalayan Tea Estates<br>
+                        Email: info@himalayanteaestates.com<br>
+                        Phone: +977-987-654321</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="brochure-footer">
-            "Empowering students to reach their highest potential"
-        </div>
-    </div>
-    
-    <div class="brochure-sample" id="sample4">
-        <h2>Event Brochure Example</h2>
-        <div class="brochure-layout">
-            <div class="brochure-panel">
-                <img src="trade1.jpg" alt="Event placeholder">
-                <div class="brochure-title">Nepal International Trade Fair 2024</div>
-                <div class="brochure-subtitle">Connecting Businesses Across Borders</div>
-                <p>Join South Asia's premier business networking event featuring exhibitors from 20+ countries.</p>
-                <ul class="brochure-features">
-                    <li>300+ exhibitors</li>
-                    <li>B2B matchmaking sessions</li>
-                    <li>Industry seminars</li>
-                    <li>Product demonstrations</li>
-                </ul>
-            </div>
-            <div class="brochure-panel">
-                <img src="trade2.jpg" alt="Event placeholder">
-                <div class="brochure-title">Event Details</div>
-                <p><strong>Date:</strong> November 15-18, 2024</p>
-                <p><strong>Venue:</strong> Bhrikuti Mandap, Kathmandu</p>
-                <p><strong>Timing:</strong> 10:00 AM - 6:00 PM daily</p>
-                <p><strong>Themes:</strong></p>
-                <p>• Sustainable Business</p>
-                <p>• Digital Transformation</p>
-                <p>• Regional Cooperation</p>
-                <div class="brochure-contact">
-                    <p><strong>Registration:</strong> www.nepaltradefair.com</p>
-                    <p><strong>Exhibitor inquiries:</strong> exhibits@tradefair.com</p>
-                    <p>+977-1-4123456</p>
+            
+            <!-- Trade Fair Brochure -->
+            <div id="trade-brochure" class="brochure-sample">
+                <h2>Trade Fair Brochure Example</h2>
+                <div class="brochure-layout">
+                    <div class="brochure-panel">
+                        <h3>International Trade Expo 2023: Connecting Global Markets</h3>
+                        <img src="trade1.jpg" alt="Trade Fair">
+                        <p>Join us for the largest trade fair in the region, bringing together businesses, entrepreneurs, and investors from over 50 countries. This premier event offers unparalleled opportunities for networking, partnerships, and market expansion.</p>
+                        <h4>Event Highlights</h4>
+                        <ul>
+                            <li>500+ exhibitors across various industries</li>
+                            <li>Business matchmaking sessions</li>
+                            <li>Industry-specific pavilions</li>
+                            <li>Live product demonstrations</li>
+                        </ul>
+                    </div>
+                    <div class="brochure-panel">
+                        <h3>Program & Registration Details</h3>
+                        <img src="trade2.jpg" alt="Business Meeting">
+                        <p>The three-day expo features keynote speeches, panel discussions, workshops, and networking events designed to facilitate meaningful business connections and knowledge sharing.</p>
+                        <h4>Schedule:</h4>
+                        <ul>
+                            <li>Day 1: Opening ceremony and keynote addresses</li>
+                            <li>Day 2: Industry panels and B2B meetings</li>
+                            <li>Day 3: Innovation showcase and closing ceremony</li>
+                        </ul>
+                        <p><strong>Date:</strong> September 15-17, 2023<br>
+                        <strong>Venue:</strong> International Convention Center<br>
+                        <strong>Registration:</strong> www.tradexpo2023.com<br>
+                        <strong>Contact:</strong> info@tradexpo2023.com</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="brochure-footer">
-            "Your gateway to South Asian markets"
+        </section>
+        
+        <div style="text-align: center;">
+            <a href="../../index.html" class="back-btn"><i class="fas fa-home"></i> Back to Home</a>
         </div>
     </div>
 
-    <footer class="footer">
-        <p>Content developed by <strong>Nabaraj Dhungana</strong></p>
-    </footer>
-    
+    <script src="../../shared3D.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadSample1Btn = document.getElementById('loadSample1');
-            const loadSample2Btn = document.getElementById('loadSample2');
-            const loadSample3Btn = document.getElementById('loadSample3');
-            const loadSample4Btn = document.getElementById('loadSample4');
-            const samples = [
-                document.getElementById('sample1'),
-                document.getElementById('sample2'),
-                document.getElementById('sample3'),
-                document.getElementById('sample4')
-            ];
-            
-            function hideAllSamples() {
-                samples.forEach(sample => {
-                    sample.style.display = 'none';
-                    sample.classList.remove('visible');
-                });
-            }
-            
-            function showSample(sample) {
-                hideAllSamples();
-                sample.style.display = 'block';
-                // Trigger reflow to enable transition
-                void sample.offsetWidth;
-                sample.classList.add('visible');
-            }
-            
-            loadSample1Btn.addEventListener('click', function() {
-                showSample(samples[0]);
+        function showBrochure(type) {
+            // Hide all brochures
+            document.querySelectorAll('.brochure-sample').forEach(sample => {
+                sample.classList.remove('visible');
+                sample.style.display = 'none';
             });
             
-            loadSample2Btn.addEventListener('click', function() {
-                showSample(samples[1]);
-            });
+            // Show selected brochure
+            const selectedBrochure = document.getElementById(type + '-brochure');
+            selectedBrochure.style.display = 'block';
             
-            loadSample3Btn.addEventListener('click', function() {
-                showSample(samples[2]);
-            });
+            // Use setTimeout to trigger the animation after the display is set
+            setTimeout(() => {
+                selectedBrochure.classList.add('visible');
+            }, 10);
             
-            loadSample4Btn.addEventListener('click', function() {
-                showSample(samples[3]);
-            });
-            
-            // Initially hide all samples
-            hideAllSamples();
-        });
+            // Scroll to the brochure
+            selectedBrochure.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     </script>
 </body>
 </html>

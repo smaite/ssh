@@ -3,247 +3,408 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Obligations and Prohibitions</title>
+    <title>Rules and Regulations Writing Guide</title>
+    <link rel="stylesheet" href="../../shared3D.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      color: #333;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      color: #ff6f61;
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .instructions, .sample-box {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-    }
-    .instructions h2, .sample-box h2 {
-      color: #6b5b95;
-      font-size: 1.8rem;
+        .rules-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
+            margin-bottom: 30px;
+            border: 2px solid var(--accent-blue);
+        }
+        
+        .rules-section h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 8px;
+        }
+        
+        .instructions {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
+            margin-bottom: 30px;
+            border: 2px solid var(--accent-blue);
+        }
+        
+        .instructions ol, .instructions ul {
+            padding-left: 20px;
+            color: var(--text-primary);
+        }
+        
+        .instructions li {
       margin-bottom: 15px;
     }
-    .instructions ul {
-      list-style-type: disc;
+        
+        .example-container {
+            background: rgba(20, 20, 40, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid var(--card-border);
+        }
+        
+        .example-heading {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .example-rules {
       padding-left: 20px;
     }
-    ul li {
+        
+        .example-rules li {
+            margin-bottom: 10px;
       line-height: 1.6;
-      margin-bottom: 10px;
     }
-    .btn-container {
+        
+        .tabs {
       display: flex;
       justify-content: center;
+            flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .btn {
-      background-color: #13ad0e;
-      color: #fff;
-      border: none;
+            margin-bottom: 30px;
+        }
+        
+        .tab-btn {
       padding: 10px 20px;
-      border-radius: 5px;
+            background: rgba(20, 20, 40, 0.5);
+            color: white;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
       cursor: pointer;
-      font-size: 1rem;
-      transition: background-color 0.3s;
-      flex: 1 1 auto;
-      text-align: center;
-    }
-    .btn:hover {
-      background-color: #ed480c;
-    }
-    .sample-box {
-      background-color: #ffff96;
-      color: #333;
-      margin-bottom: 3rem;
-    }
-    .sample-box ul {
-      list-style-type: disc;
-      padding-left: 20px;
-    }
-   /* Sticky Footer Styling */
-.footer {
-    background: #343a40;
-    color: #f8f9fa;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 1.2rem;
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Ensures it stays above other elements */
-}
-
-.footer strong {
-    color: #ffc107;
-    font-weight: bold;
-    font-size: 1.3rem;
-}
-
-.footer p {
-    margin: 0;
-    padding: 0;
-}
-
-    /* Responsive Design */
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.5);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .dos-donts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-      .instructions h2, .sample-box h2 {
-        font-size: 1.5rem;
-      }
-      .btn {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-      }
-      .btn-container {
-        flex-direction: column;
-        gap: 8px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-      .instructions h2, .sample-box h2 {
-        font-size: 1.3rem;
-      }
-      .btn {
-        font-size: 0.8rem;
-        padding: 6px 12px;
-      }
-      .instructions, .sample-box {
-        padding: 15px;
-      }
+            .dos-donts {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .dos, .donts {
+            background: rgba(20, 20, 40, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .dos h4 {
+            color: var(--success-color);
+            margin-bottom: 10px;
+        }
+        
+        .donts h4 {
+            color: var(--danger-color);
+            margin-bottom: 10px;
+        }
+        
+        .dos ul, .donts ul {
+            padding-left: 20px;
+        }
+        
+        .dos li, .donts li {
+            margin-bottom: 10px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.5);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Writing Obligations and Prohibitions</h1>
+    <div id="canvas-container"></div>
+    
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1 class="glow-text">Rules and Regulations Writing Guide</h1>
+            <p>Learn how to create clear, effective, and enforceable rules</p>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="../../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#guide" class="nav-link"><i class="fas fa-book"></i> Writing Guide</a></li>
+                <li><a href="#elements" class="nav-link"><i class="fas fa-list-check"></i> Key Elements</a></li>
+                <li><a href="#examples" class="nav-link"><i class="fas fa-file-alt"></i> Examples</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <!-- Instructions Section -->
+  <div class="container">
+        <section id="guide">
+            <h2 class="section-title">Rules Writing Fundamentals</h2>
+
     <div class="instructions">
-      <h2>Instructions for Writing Obligations and Prohibitions</h2>
-      <ul>
-        <li><strong>Understand the Purpose:</strong> Identify the specific rules and guidelines needed for a particular place or situation.</li>
-        <li><strong>Use Clear and Direct Language:</strong> Write in simple and precise sentences.</li>
-        <li><strong>Structure the Statements Properly:</strong> Use words like "must," "should," "is required to" for obligations, and "must not," "is not allowed" for prohibitions.</li>
-        <li><strong>Use Variety in Sentence Formation:</strong> Avoid repeating the same sentence structure.</li>
-        <li><strong>Make It Specific and Relevant:</strong> Tailor the rules to the setting.</li>
-        <li><strong>Maintain a Formal Tone:</strong> Use a respectful and authoritative tone.</li>
+                <p>Rules and regulations are formal statements that define what actions are permitted or prohibited in specific contexts. Well-written rules provide clear guidance, promote fairness, and create a safe, orderly environment.</p>
+                
+                <div class="dos-donts">
+                    <div class="dos">
+                        <h4><i class="fas fa-check-circle"></i> Do's</h4>
+                        <ul>
+                            <li>Be clear and specific</li>
+                            <li>Use simple, straightforward language</li>
+                            <li>State rules positively when possible</li>
+                            <li>Group related rules together</li>
+                            <li>Include consequences for violations</li>
+                            <li>Explain the purpose behind important rules</li>
       </ul>
     </div>
-
-    <!-- Buttons to Load Samples -->
-    <div class="btn-container">
-      <button class="btn" onclick="loadSample(1)">Assembly Rules</button>
-      <button class="btn" onclick="loadSample(2)">Library Rules</button>
-      <button class="btn" onclick="loadSample(3)">Laboratory Rules</button>
-      <button class="btn" onclick="loadSample(4)">Hostel Rules</button>
-      <button class="btn" onclick="loadSample(5)">Zoo Rules</button>
+                    <div class="donts">
+                        <h4><i class="fas fa-times-circle"></i> Don'ts</h4>
+                        <ul>
+                            <li>Use ambiguous or vague language</li>
+                            <li>Include unnecessary jargon</li>
+                            <li>Create rules that are impossible to enforce</li>
+                            <li>Write excessively long or complex rules</li>
+                            <li>Include subjective language open to interpretation</li>
+                            <li>Make rules that contradict each other</li>
+                        </ul>
     </div>
-
-    <!-- Sample Box -->
-    <div class="sample-box" id="sampleBox">
-      <h2>Sample Obligations and Prohibitions</h2>
-      <p>Click a button above to load a sample.</p>
     </div>
   </div>
- <footer class="footer">
-        <p>Content developed by <strong>Nabaraj Dhungana</strong></p>
-    </footer>
-  <script>
-    const samples = [
-      {
-        title: "Obligations and Prohibitions for a School Assembly",
-        content: `
-          <ul>
-            <li>All students must stand in a straight line and maintain discipline throughout the assembly.</li>
-            <li>It is mandatory for students to wear the proper school uniform and arrive on time.</li>
-            <li>Students should listen attentively to speeches, prayers, and announcements without unnecessary talking.</li>
-            <li>No student is allowed to use mobile phones, chew gum, or engage in disruptive behavior during the assembly.</li>
-            <li>Running, pushing, or making loud noises in the assembly area is strictly prohibited.</li>
-            <li>Respecting teachers, staff, and fellow students is essential; any form of misconduct will not be tolerated.</li>
-          </ul>
-        `
-      },
-      {
-        title: "Obligations and Prohibitions for a Library",
-        content: `
-          <ul>
-            <li>Students must keep quiet inside the library to ensure a peaceful reading environment. Loud talking, shouting, or unnecessary noise is strictly prohibited.</li>
-            <li>All books must be handled with care. Marking, tearing, or damaging library materials in any way is not allowed.</li>
-            <li>Eating or drinking inside the library is strictly forbidden to prevent damage to books and maintain cleanliness.</li>
-            <li>Students must use the library furniture properly. Reserving seats for friends is not allowed.</li>
-            <li>No student is allowed to keep a book more than 15 days. Keeping longer than the designated period will result in a fine.</li>
-            <li>Before leaving, students must return books to the proper place and ensure the library remains tidy for the next user.</li>
-          </ul>
-        `
-      },
-      {
-        title: "Obligations and Prohibitions for a Laboratory",
-        content: `
-          <ul>
-            <li>Students are required to wear lab coats and safety goggles at all times to ensure safety.</li>
-            <li>All experiments must be conducted strictly under the guidance of the instructor, following the given procedures carefully.</li>
-            <li>Conducting unauthorized experiments is strictly prohibited.</li>
-            <li>No student is allowed to touch or operate any laboratory equipment without explicit permission.</li>
-            <li>Students must clean their workspace and return all materials to their designated places after completing the experiment.</li>
-            <li>In case of any accident, spill, or hazardous situation, students must immediately inform the instructor and follow emergency protocols.</li>
-          </ul>
-        `
-      },
-      {
-        title: "Obligations and Prohibitions for a School Hostel",
-        content: `
-          <ul>
-            <li>Students must follow the hostel schedule strictly, including wake-up, study, and meal times.</li>
-            <li>Keeping rooms clean and organized is a shared responsibility; everyone should contribute.</li>
-            <li>No student is allowed to leave the hostel premises without prior permission from the warden.</li>
-            <li>Bringing or using prohibited items such as mobile phones (if restricted), cigarettes, or any intoxicants is strictly forbidden.</li>
-            <li>Loud music, shouting, or any disturbance that affects others’ study and rest is not allowed.</li>
-            <li>All students must respect hostel staff and fellow residents, ensuring a peaceful and friendly environment.</li>
-          </ul>
-        `
-      },
-      {
-        title: "Obligations and Prohibitions for Visitors in a Zoo",
-        content: `
-          <ul>
-            <li>All visitors must follow the designated pathways and stay within the allowed areas. Wandering into restricted zones can be dangerous and is strictly prohibited.</li>
-            <li>Feeding the animals is not allowed. They have special diets, and outside food may harm them.</li>
-            <li>Littering inside the zoo premises is strictly forbidden. Use the dustbins provided to keep the environment clean and safe for both animals and visitors.</li>
-            <li>Visitors should maintain silence near animal enclosures. Loud noises can disturb or stress the animals, affecting their well-being.</li>
-            <li>Do not tease, touch, or try to provoke the animals in any way. Such actions are harmful and may lead to serious consequences.</li>
-            <li>Respect the zoo rules and staff instructions at all times. Cooperation ensures a pleasant experience for everyone while keeping the animals safe and comfortable.</li>
-          </ul>
-        `
-      }
-    ];
+        </section>
 
-    function loadSample(index) {
-      const sampleBox = document.getElementById("sampleBox");
-      sampleBox.innerHTML = `
-        <h2>${samples[index - 1].title}</h2>
-        ${samples[index - 1].content}
-      `;
+        <section id="elements">
+            <h2 class="section-title">Key Elements of Rules Writing</h2>
+            
+            <div class="rules-section">
+                <h3>1. Structure and Organization</h3>
+                <p>Effective rules documents have a logical structure that makes information easy to find and understand:</p>
+                <ul>
+                    <li><strong>Title and Introduction:</strong> Begin with a clear title that identifies the purpose and scope of the rules</li>
+                    <li><strong>Categories:</strong> Group related rules into logical categories or sections</li>
+                    <li><strong>Numbering:</strong> Use a consistent numbering system for easy reference</li>
+                    <li><strong>Hierarchical Organization:</strong> Organize from general to specific rules</li>
+          </ul>
+            </div>
+            
+            <div class="rules-section">
+                <h3>2. Language and Clarity</h3>
+                <p>Rules must be understood by everyone who needs to follow them:</p>
+                <ul>
+                    <li><strong>Simple Language:</strong> Use everyday words and avoid unnecessary technical terms</li>
+                    <li><strong>Active Voice:</strong> Write in active voice to clearly indicate who should do what</li>
+                    <li><strong>Specificity:</strong> Provide concrete details rather than vague instructions</li>
+                    <li><strong>Consistent Terminology:</strong> Use the same terms throughout the document</li>
+          </ul>
+                <p><strong>Example:</strong></p>
+                <p>Instead of: <em>"Proper attire must be worn at all times."</em><br>
+                Write: <em>"Students must wear the complete school uniform (white shirt, blue pants/skirt, black shoes) during school hours."</em></p>
+            </div>
+            
+            <div class="rules-section">
+                <h3>3. Completeness and Enforceability</h3>
+                <p>Rules should address all necessary aspects and be realistically enforceable:</p>
+                <ul>
+                    <li><strong>Comprehensiveness:</strong> Cover all important situations and scenarios</li>
+                    <li><strong>Exceptions:</strong> Clearly state any exceptions to the rules</li>
+                    <li><strong>Consequences:</strong> Specify the consequences of breaking each rule</li>
+                    <li><strong>Authority:</strong> Identify who has the authority to enforce the rules</li>
+          </ul>
+            </div>
+            
+            <div class="rules-section">
+                <h3>4. Format and Presentation</h3>
+                <p>The visual presentation affects how easily rules are found and understood:</p>
+                <ul>
+                    <li><strong>Headings and Subheadings:</strong> Use clear headings to organize sections</li>
+                    <li><strong>Bullet Points:</strong> Use bullet points or numbered lists for clarity</li>
+                    <li><strong>Bold or Italics:</strong> Highlight key terms or important points</li>
+                    <li><strong>White Space:</strong> Include adequate spacing to improve readability</li>
+                    <li><strong>Tables:</strong> Use tables to organize complex information</li>
+          </ul>
+            </div>
+        </section>
+
+        <section id="examples">
+            <h2 class="section-title">Rules Examples</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('school')">School Rules</button>
+                <button class="tab-btn" onclick="openTab('library')">Library Rules</button>
+                <button class="tab-btn" onclick="openTab('hostel')">Hostel Rules</button>
+            </div>
+            
+            <div id="school" class="tab-content active">
+                <div class="example-container">
+                    <div class="example-heading">BRIGHT FUTURE ACADEMY: STUDENT CODE OF CONDUCT</div>
+                    
+                    <p><strong>A. Attendance and Punctuality</strong></p>
+                    <ol class="example-rules">
+                        <li>Students must arrive at school by 8:30 AM. Gates will close at 8:45 AM.</li>
+                        <li>Students arriving after 8:45 AM must report to the school office to obtain a late slip.</li>
+                        <li>Three late arrivals in one month will result in detention.</li>
+                        <li>Absence requires a written note from parents/guardians upon return to school.</li>
+                        <li>For absences of three or more consecutive days, a medical certificate is required.</li>
+                    </ol>
+                    
+                    <p><strong>B. Uniform and Appearance</strong></p>
+                    <ol class="example-rules">
+                        <li>Complete school uniform (white shirt, blue pants/skirt, black shoes) must be worn on all school days.</li>
+                        <li>PE uniform is to be worn only during designated physical education classes.</li>
+                        <li>Hair should be neat and of natural color. Boys' hair should not touch the collar.</li>
+                        <li>No jewelry except for watches and small stud earrings for girls is permitted.</li>
+                        <li>Nails should be kept short and clean. Nail polish is not permitted.</li>
+                    </ol>
+                    
+                    <p><strong>C. Classroom Behavior</strong></p>
+                    <ol class="example-rules">
+                        <li>Students must stand when a teacher enters the classroom.</li>
+                        <li>Permission must be sought before speaking during class discussions.</li>
+                        <li>Mobile phones must be turned off and kept in bags during all classes.</li>
+                        <li>Students must complete all assigned homework and submit it on time.</li>
+                        <li>Respect must be shown to teachers and fellow students at all times.</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div id="library" class="tab-content">
+                <div class="example-container">
+                    <div class="example-heading">COMMUNITY LIBRARY RULES AND REGULATIONS</div>
+                    
+                    <p><strong>A. Library Hours and Access</strong></p>
+                    <ol class="example-rules">
+                        <li>The library is open Monday through Friday from 9:00 AM to 6:00 PM, and Saturday from 10:00 AM to 4:00 PM.</li>
+                        <li>A valid library card must be presented to borrow materials.</li>
+                        <li>Children under 12 years must be accompanied by an adult.</li>
+                        <li>The reference section is available for in-library use only.</li>
+                    </ol>
+                    
+                    <p><strong>B. Borrowing and Returns</strong></p>
+                    <ol class="example-rules">
+                        <li>Members may borrow up to 4 books at one time for a period of 14 days.</li>
+                        <li>Books may be renewed once for an additional 14 days, provided there is no waiting list.</li>
+                        <li>A fine of Rs. 5 per day will be charged for overdue books.</li>
+                        <li>Lost or damaged materials must be replaced or paid for at current market value.</li>
+                        <li>Reference materials, newspapers, and current periodicals may not be borrowed.</li>
+                    </ol>
+                    
+                    <p><strong>C. Library Conduct</strong></p>
+                    <ol class="example-rules">
+                        <li>Silence must be maintained in all reading areas.</li>
+                        <li>Mobile phones must be set to silent mode; calls must be taken outside the library.</li>
+                        <li>Food and drinks are not permitted inside the library.</li>
+                        <li>Library materials must not be marked, underlined, or damaged in any way.</li>
+                        <li>Computer usage is limited to 1 hour per person when others are waiting.</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div id="hostel" class="tab-content">
+                <div class="example-container">
+                    <div class="example-heading">STUDENT HOSTEL RULES AND REGULATIONS</div>
+                    
+                    <p><strong>A. Room Allocation and Maintenance</strong></p>
+                    <ol class="example-rules">
+                        <li>Rooms are allocated by the Hostel Warden; room exchanges are not permitted without prior approval.</li>
+                        <li>Students are responsible for the cleanliness and maintenance of their rooms.</li>
+                        <li>Room inspections will be conducted weekly without prior notice.</li>
+                        <li>No nails, screws, or tape may be used on walls; damage to room property will incur repair costs.</li>
+                        <li>Electrical appliances (other than laptops, mobile chargers, and electric kettles) are not permitted.</li>
+                    </ol>
+                    
+                    <p><strong>B. Timing and Attendance</strong></p>
+                    <ol class="example-rules">
+                        <li>All students must return to the hostel by 8:00 PM (weekdays) and 9:00 PM (weekends).</li>
+                        <li>Attendance will be taken every night at 9:30 PM; absence without permission will be reported.</li>
+                        <li>Students wishing to stay overnight outside the hostel must obtain written permission from the Warden.</li>
+                        <li>Weekday outings require advance permission and valid reasons.</li>
+                        <li>Study hours must be observed from 7:00 PM to 9:00 PM on weekdays.</li>
+                    </ol>
+                    
+                    <p><strong>C. Visitors and Common Areas</strong></p>
+                    <ol class="example-rules">
+                        <li>Visitors are permitted only in designated visiting areas from 4:00 PM to 7:00 PM.</li>
+                        <li>No visitors are allowed in student rooms at any time.</li>
+                        <li>Common rooms and facilities must be used responsibly and kept clean.</li>
+                        <li>Noise levels must be kept low at all times; complete silence must be maintained after 10:00 PM.</li>
+                        <li>Cooking in rooms is strictly prohibited; meals must be eaten in the dining area only.</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="rules-section">
+                <h3>Analysis of Effective Rules</h3>
+                <p>The examples above demonstrate these key characteristics of well-written rules:</p>
+                <ul>
+                    <li><strong>Specificity:</strong> Each rule provides concrete details about what is required or prohibited</li>
+                    <li><strong>Organization:</strong> Rules are grouped into logical categories for easy reference</li>
+                    <li><strong>Clarity:</strong> Simple language ensures that expectations are clearly understood</li>
+                    <li><strong>Consequences:</strong> Many rules specify what happens if they are not followed</li>
+                    <li><strong>Completeness:</strong> Rules cover all important aspects of the relevant situation</li>
+          </ul>
+            </div>
+        </section>
+        
+        <div style="text-align: center;">
+            <a href="../../index.html" class="back-btn"><i class="fas fa-home"></i> Back to Home</a>
+        </div>
+    </div>
+    
+    <script src="../../shared3D.js"></script>
+    <script>
+        function openTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            // Remove active class from all buttons
+            const tabButtons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Show the selected tab content and mark its button as active
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
     }
   </script>
 </body>

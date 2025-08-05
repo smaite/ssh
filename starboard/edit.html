@@ -5,16 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Starboard - Edit Stars</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../shared3D.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link href="css/style.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+        .header-container {
+            background: var(--card-bg);
+            border-bottom: 2px solid var(--accent-blue);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
+        }
+        
+        .logout-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.5);
+        }
+        
+        .student-row {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-blue);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3), 0 0 10px rgba(0, 102, 255, 0.2);
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .student-row:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4), 0 0 15px rgba(0, 102, 255, 0.4);
+        }
+        
+        .add-student-form {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-blue);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3), 0 0 10px rgba(0, 102, 255, 0.2);
+        }
+        
+        .form-input {
+            background: rgba(30, 30, 50, 0.7);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
+        }
+        
+        .modal-bg {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-blue);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 25px rgba(0, 102, 255, 0.4);
+        }
+    </style>
 </head>
-<body class="min-h-screen bg-gray-50">
-    <header class="bg-purple-700 text-white p-4 shadow-md">
+<body>
+    <div id="canvas-container"></div>
+    
+    <header class="header-container text-white p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Student Starboard: Pashchimanchal English School</h1>
+            <h1 class="text-2xl font-bold glow-text">Student Starboard: Pashchimanchal English School</h1>
             <div class="flex items-center space-x-4">
                 <div id="class-name" class="text-xl"></div>
-                <button id="logout-btn" class="bg-white text-purple-700 px-4 py-1 rounded-lg hover:bg-purple-100 transition">Logout</button>
+                <button id="logout-btn" class="logout-btn px-4 py-1 rounded-lg hover:bg-purple-100 transition">Logout</button>
             </div>
         </div>
     </header>
@@ -23,34 +94,34 @@
         <div id="students-list" class="mt-6 space-y-4">
             <!-- Students will be added here dynamically -->
         </div>
-<!-- Add Student Form -->
-<div class="mt-8 p-4 bg-white rounded-lg shadow">
-  <h3 class="text-lg font-semibold mb-3">Add New Student</h3>
-  <div class="flex gap-2">
-    <input 
-      id="new-student-name" 
-      type="text" 
-      placeholder="Student Name" 
-      class="flex-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
-    >
-    <button 
-      id="add-student-btn" 
-      class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700"
-    >
-      Add Student
-    </button>
-  </div>
-</div>
+        <!-- Add Student Form -->
+        <div class="mt-8 p-4 add-student-form">
+            <h3 class="text-lg font-semibold mb-3 text-white">Add New Student</h3>
+            <div class="flex gap-2">
+                <input 
+                    id="new-student-name" 
+                    type="text" 
+                    placeholder="Student Name" 
+                    class="flex-1 px-3 py-2 form-input focus:ring-2 focus:ring-purple-500"
+                >
+                <button 
+                    id="add-student-btn" 
+                    class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-purple-700 transition transform hover:-translate-y-1 hover:shadow-lg"
+                >
+                    Add Student
+                </button>
+            </div>
+        </div>
     </main>
 
     <!-- Comment Modal -->
-    <div id="comment-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
-            <h3 class="text-xl font-semibold mb-4">Add Comment</h3>
-            <textarea id="comment-text" class="w-full px-3 py-2 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500" rows="3" placeholder="Why are you adding/removing this star?"></textarea>
+    <div id="comment-modal" class="fixed inset-0 modal-bg flex items-center justify-center hidden z-50">
+        <div class="modal-content p-6 rounded-lg shadow-xl w-full max-w-md">
+            <h3 class="text-xl font-semibold mb-4 text-white">Add Comment</h3>
+            <textarea id="comment-text" class="w-full px-3 py-2 form-input mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500" rows="3" placeholder="Why are you adding/removing this star?"></textarea>
             <div class="flex justify-end space-x-2">
-                <button id="cancel-comment" class="px-4 py-2 border rounded-lg hover:bg-gray-100">Cancel</button>
-                <button id="confirm-comment" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">Confirm</button>
+                <button id="cancel-comment" class="px-4 py-2 border border-gray-600 rounded-lg hover:bg-gray-700 text-white transition">Cancel</button>
+                <button id="confirm-comment" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition transform hover:-translate-y-1 hover:shadow-lg">Confirm</button>
             </div>
         </div>
     </div>
@@ -64,6 +135,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
     
     <!-- Your scripts -->
+    <script src="../shared3D.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/star-edit.js"></script>
 </body>

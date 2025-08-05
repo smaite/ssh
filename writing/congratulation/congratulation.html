@@ -3,316 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Congratulation Writing Guide</title>
+    <title>Congratulations Message Writing Guide</title>
+    <link rel="stylesheet" href="../../shared3D.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
         }
         
-        h1 {
-            text-align: center;
-            color: #27ae60;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #2ecc71;
-            padding-bottom: 10px;
+        .congrats-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
+            overflow: hidden;
+            border: 2px solid var(--accent-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .congrats-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 20px rgba(0, 102, 255, 0.5);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-content h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+        }
+        
+        .card-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
         
         .instructions {
-            background-color: white;
-            border-radius: 8px;
+            background: var(--card-bg);
+            border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
             margin-bottom: 30px;
+            border: 2px solid var(--accent-blue);
+        }
+        
+        .instructions h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
         }
         
         .instructions ol {
             padding-left: 20px;
+            color: var(--text-primary);
         }
         
         .instructions li {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
-        .button-container {
-            display: flex;
-            justify-content: center;
+        .dos-donts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-        
-        .sample-btn {
-            padding: 12px 25px;
-            background-color: #2ecc71;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .sample-btn:hover {
-            background-color: #27ae60;
-            transform: translateY(-2px);
-        }
-        
-        .congrats-sample {
-            text-align: center;
-            background-color: white;
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            display: none;
-            border-left: 5px solid #2ecc71;
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            transform: translateY(20px);
-        }
-        
-        .congrats-sample.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .congrats-sample h2 {
-            color: #27ae60;
-            text-align: center;
-            margin-top: 0;
-        }
-        
-        .photo-placeholder {
-            width: 100px;
-            height: 100px;
-            border: 1px dashed #999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 15px auto;
-            background-color: #f9f9f9;
-            color: #777;
-        }
-        
-        .congrats-image {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .signature {
-            text-align: center;
-            font-weight: bold;
             margin-top: 20px;
         }
         
-        .signature p {
-            padding: 0;
-            margin: 0;
+        @media (max-width: 768px) {
+            .dos-donts {
+                grid-template-columns: 1fr;
+            }
         }
-
-        /* Video Container */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
+        
+        .dos, .donts {
+            background: rgba(20, 20, 40, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .dos h4 {
+            color: var(--success-color);
+            margin-bottom: 10px;
+        }
+        
+        .donts h4 {
+            color: var(--danger-color);
+            margin-bottom: 10px;
+        }
+        
+        .dos ul, .donts ul {
+            padding-left: 20px;
+        }
+        
+        .dos li, .donts li {
+            margin-bottom: 10px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
             margin: 20px 0;
+            transition: all 0.3s ease;
         }
         
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 4px;
-        }
-
-        /* Sticky Footer Styling */
-        .footer {
-            background: #343a40;
-            color: #f8f9fa;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 1.2rem;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .footer strong {
-            color: #ffc107;
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
-
-        .footer p {
-            margin: 0;
-            padding: 0;
-        }
-        
-        @media (max-width: 600px) {
-            body {
-                padding: 15px;
-            }
-            
-            .instructions, .congrats-sample {
-                padding: 15px;
-            }
-            
-            .button-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .sample-btn {
-                width: 100%;
-                max-width: 250px;
-            }
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.5);
         }
     </style>
 </head>
 <body>
-    <h1>Congratulation Writing Guide</h1>
+    <div id="canvas-container"></div>
     
-    <div class="instructions">
-        <h2>Instructions for Writing Effective Congratulations:</h2>
-        <ol>
-            <li><strong>Header</strong> -- Use celebratory phrases like "Heartfelt Congratulations" or "Warmest Wishes".</li>
-            <li><strong>Photo placeholder</strong> -- Include space for a celebratory image if appropriate.</li>
-            <li><strong>Border</strong> -- Frame your content with a decorative border for a polished look.</li>
-            <li><strong>Express Joy</strong> -- Begin with genuine enthusiasm about the achievement.</li>
-            <li><strong>Mention the Achievement</strong> -- Specifically acknowledge what they've accomplished.</li>
-            <li><strong>Highlight Their Qualities</strong> -- Recognize the traits that helped them succeed.</li>
-            <li><strong>Offer Continued Support</strong> -- Express your ongoing encouragement.</li>
-            <li><strong>Wish for Future Success</strong> -- Conclude with positive wishes for their future.</li>
-            <li><strong>Use an Uplifting Tone</strong> -- Keep the language positive and encouraging.</li>
-            <li><strong>Keep It Concise</strong> -- Aim for 80-120 words of meaningful content.</li>
-            <li><strong>Proofread Carefully</strong> -- Ensure perfect grammar and spelling.</li>
-        </ol>
-    </div>
-    
-    <div class="button-container">
-        <button class="sample-btn" id="loadSample1">Load Sample 1</button>
-        <button class="sample-btn" id="loadSample2">Load Sample 2</button>
-        <button class="sample-btn" id="loadSample3">Load Sample 3</button>
-        <button class="sample-btn" id="loadSample4">Video Example</button>
-    </div>
-    
-    <div class="congrats-sample" id="sample1">
-        <h2>Heartfelt Congratulations</h2>
-        <div class="photo-placeholder">Achievement Photo</div>
-        <h3>To: Anjali Sharma</h3>
-        <p>I am absolutely thrilled to hear about your outstanding achievement in securing first place in the National Science Olympiad! This remarkable accomplishment is a testament to your dedication, intelligence, and hard work.</p>
-        <p>Your passion for science and your relentless pursuit of excellence have truly paid off. You've not only made your school proud but have also inspired your fellow students to aim higher.</p>
-        <p>As you celebrate this well-deserved success, know that we are all cheering for you and looking forward to your future achievements. May this be just the beginning of many more successes to come!</p>
-        <div class="signature">
-            <p>Dr. Ramesh Patel</p>
-            <p>Principal</p>
-            <p>Bright Future Academy</p>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1 class="glow-text">Congratulations Message Writing</h1>
+            <p>Learn how to write heartfelt and impactful congratulatory messages</p>
         </div>
-    </div>
+    </header>
     
-    <div class="congrats-sample" id="sample2">
-        <h2>Warmest Congratulations</h2>
-        <div class="photo-placeholder">Team Photo</div>
-        <h3>To: Sunshine Football Team</h3>
-        <p>What an incredible victory at the State Championship Finals! Your teamwork, discipline, and sportsmanship throughout the tournament were truly inspiring to watch.</p>
-        <p>Each player contributed uniquely to this success, demonstrating both individual skill and collective harmony. The way you supported each other, especially during challenging moments, shows the true spirit of sports.</p>
-        <p>This championship is just the beginning of your journey. Keep striving for excellence while maintaining the values that make you such an exceptional team.</p>
-        <div class="signature">
-            <p>Coach Michael Johnson</p>
-            <p>Head Coach</p>
-            <p>Sunshine Sports Academy</p>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="../../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#guide" class="nav-link"><i class="fas fa-book"></i> Writing Guide</a></li>
+                <li><a href="#examples" class="nav-link"><i class="fas fa-clipboard"></i> Examples</a></li>
+            </ul>
         </div>
-    </div>
-    
-    <div class="congrats-sample" id="sample3">
-        <h2>Congratulations Card Sample</h2>
-        <img src="congrats3.png" alt="Congratulations Card Example" class="congrats-image">
-        <div class="signature">
-            <p>Example Congratulations Card</p>
-            <p>Traditional Design</p>
-        </div>
-    </div>
-    
-    <div class="congrats-sample" id="sample4">
-        <h2>Congratulations Video Example</h2>
-        <div class="video-container">
-           <iframe width="560" height="315" src="https://www.youtube.com/embed/z0B647RAe0w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </nav>
 
-        </div>
-        <div class="signature">
-            <p>Video Demonstration</p>
-            <p>How to Write Congratulations Messages</p>
+    <div class="container">
+        <section id="guide">
+            <h2 class="section-title">How to Write a Congratulations Message</h2>
+            
+            <div class="instructions">
+                <p>A congratulatory message expresses joy and recognition for someone's achievement or special occasion. A well-written message can make the recipient feel valued and appreciated.</p>
+                
+                <h3>Basic Structure</h3>
+                <ol>
+                    <li><strong>Opening:</strong> Express your congratulations directly and enthusiastically.</li>
+                    <li><strong>Acknowledge:</strong> Mention the specific achievement or occasion.</li>
+                    <li><strong>Personalize:</strong> Add specific details that show you understand the significance.</li>
+                    <li><strong>Express Well-wishes:</strong> Include hopes for continued success or happiness.</li>
+                    <li><strong>Closing:</strong> End with a warm sentiment and your name.</li>
+                </ol>
+                
+                <div class="dos-donts">
+                    <div class="dos">
+                        <h4><i class="fas fa-check-circle"></i> Do's</h4>
+                        <ul>
+                            <li>Be specific about what you're congratulating</li>
+                            <li>Show genuine enthusiasm</li>
+                            <li>Personalize your message</li>
+                            <li>Acknowledge the effort that led to success</li>
+                            <li>Keep it positive and uplifting</li>
+                        </ul>
+                    </div>
+                    <div class="donts">
+                        <h4><i class="fas fa-times-circle"></i> Don'ts</h4>
+                        <ul>
+                            <li>Make it about yourself</li>
+                            <li>Compare their achievement to others'</li>
+                            <li>Include backhanded compliments</li>
+                            <li>Write generic messages that could apply to anyone</li>
+                            <li>Downplay their achievement</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="examples">
+            <h2 class="section-title">Example Congratulations Messages</h2>
+            
+            <div class="card-container">
+                <div class="congrats-card">
+                    <img src="congrats3.png" alt="Congratulations Card" class="card-image">
+                    <div class="card-content">
+                        <h3>For Academic Success</h3>
+                        <p>"Dear [Name], Congratulations on your outstanding achievement in the SEE examinations! Your hard work and dedication have truly paid off with these exceptional results. I've always admired your commitment to your studies and your ability to overcome challenges. This achievement is just the beginning of your journey. I'm confident that your future will be filled with even greater success. Wishing you all the best as you move forward to higher education!"</p>
+                    </div>
+                </div>
+                
+                <div class="congrats-card">
+                    <img src="congrats3.png" alt="Congratulations Card" class="card-image">
+                    <div class="card-content">
+                        <h3>For a New Job</h3>
+                        <p>"Dear [Name], Congratulations on your new position at [Company]! I was thrilled to hear about this wonderful opportunity. This role sounds perfect for someone with your talents and experience in [specific skill]. Your persistence in searching for the right fit has finally paid off! I'm looking forward to hearing all about your new workplace and the exciting projects you'll be working on. Wishing you a smooth transition and great success in this new chapter of your career!"</p>
+                    </div>
+                </div>
+                
+                <div class="congrats-card">
+                    <img src="congrats3.png" alt="Congratulations Card" class="card-image">
+                    <div class="card-content">
+                        <h3>For a Wedding</h3>
+                        <p>"Dear [Names], Warmest congratulations on your wedding! Your love story has been an inspiration to all who know you, and it brings me so much joy to see you taking this next step together. May your marriage be blessed with love that grows stronger with each passing day, endless laughter, and the kind of partnership that makes life's challenges easier to face. Wishing you a lifetime of happiness as you build your new life together!"</p>
+                    </div>
+                </div>
+                
+                <div class="congrats-card">
+                    <img src="congrats3.png" alt="Congratulations Card" class="card-image">
+                    <div class="card-content">
+                        <h3>For a New Baby</h3>
+                        <p>"Dear [Names], Congratulations on the arrival of your beautiful baby [boy/girl]! What wonderful news to celebrate. Your little one is truly blessed to have such loving and caring parents. Welcoming a new life into the world is one of life's greatest joys, and I couldn't be happier for your growing family. May your home be filled with laughter, love, and precious moments together. Wishing health and happiness to you all!"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <h3>Formal Congratulations Letter Format</h3>
+                <p>When writing a formal congratulations letter (such as from an organization or for a professional achievement):</p>
+                <ol>
+                    <li>Use letterhead if representing an organization</li>
+                    <li>Include the date and formal salutation</li>
+                    <li>Express congratulations clearly in the opening paragraph</li>
+                    <li>Acknowledge the specific achievement and its significance</li>
+                    <li>Mention how the achievement reflects positively on the recipient's character or abilities</li>
+                    <li>Express confidence in their continued success</li>
+                    <li>Close with appropriate formal sentiment</li>
+                    <li>Sign with your full name and position (if relevant)</li>
+                </ol>
+            </div>
+        </section>
+        
+        <div style="text-align: center;">
+            <a href="../../index.html" class="back-btn"><i class="fas fa-home"></i> Back to Home</a>
         </div>
     </div>
-
-    <footer class="footer">
-        <p>Content developed by <strong>Nabaraj Dhungana</strong></p>
-    </footer>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadSample1Btn = document.getElementById('loadSample1');
-            const loadSample2Btn = document.getElementById('loadSample2');
-            const loadSample3Btn = document.getElementById('loadSample3');
-            const loadSample4Btn = document.getElementById('loadSample4');
-            const samples = [
-                document.getElementById('sample1'),
-                document.getElementById('sample2'),
-                document.getElementById('sample3'),
-                document.getElementById('sample4')
-            ];
-            
-            function hideAllSamples() {
-                samples.forEach(sample => {
-                    sample.style.display = 'none';
-                    sample.classList.remove('visible');
-                });
-            }
-            
-            function showSample(sample) {
-                hideAllSamples();
-                sample.style.display = 'block';
-                // Trigger reflow to enable transition
-                void sample.offsetWidth;
-                sample.classList.add('visible');
-            }
-            
-            loadSample1Btn.addEventListener('click', function() {
-                showSample(samples[0]);
-            });
-            
-            loadSample2Btn.addEventListener('click', function() {
-                showSample(samples[1]);
-            });
-            
-            loadSample3Btn.addEventListener('click', function() {
-                showSample(samples[2]);
-            });
-            
-            loadSample4Btn.addEventListener('click', function() {
-                showSample(samples[3]);
-            });
-            
-            // Initially hide all samples
-            hideAllSamples();
-        });
-    </script>
+    <script src="../../shared3D.js"></script>
 </body>
 </html>

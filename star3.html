@@ -169,7 +169,7 @@
             <button id="login-btn" class="btn"><i class="fas fa-user"></i> Login</button>
             <button id="signup-btn" class="btn"><i class="fas fa-user-plus"></i> Sign up</button>
             <button id="logout-btn" class="btn" style="display: none;"><i class="fas fa-sign-out-alt"></i> Logout</button>
-        </div>
+    </div>
 
         <!-- Login Form -->
         <div id="login-form" class="auth-form">
@@ -185,7 +185,7 @@
             <button id="submit-login" class="btn"><i class="fas fa-sign-in-alt"></i> Login</button>
             <button class="cancel-btn btn btn-danger"><i class="fas fa-times"></i> Cancel</button>
             <div id="login-message"></div>
-        </div>
+    </div>
 
         <!-- Signup Form -->
         <div id="signup-form" class="auth-form">
@@ -229,19 +229,33 @@
             </div>
         </div>
     </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyAKub2UWzj08vywPYuQ1SHNruMNUa4mVAw",
+          authDomain: "dbs1-b8402.firebaseapp.com",
+          projectId: "dbs1-b8402",
+          storageBucket: "dbs1-b8402.firebasestorage.app",
+          messagingSenderId: "149677040378",
+          appId: "1:149677040378:web:07b14d473f0559021cdf43",
+          measurementId: "G-ZZ2ZEPPJE5"
+        };
 
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      </script>
     <script src="shared3D.js"></script>
     <script>
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
         
+        // Firebase Configuration
         // Initialize Firebase (uncommnet this if you have the actual config)
         // firebase.initializeApp(firebaseConfig);
         // const db = firebase.firestore();
@@ -419,7 +433,7 @@
                 updateClassList();
                 studentsGrid.innerHTML = '';
                 showResponse(`Class "${selectedClass}" deleted`, 'success');
-            } else {
+                    } else {
                 showResponse('Please select a class to delete', 'error');
             }
         });

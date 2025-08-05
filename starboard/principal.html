@@ -6,98 +6,115 @@
     <title>Starboard - Principal Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.css" rel="stylesheet">
+    <link rel="stylesheet" href="../shared3D.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        .header-container {
+            background: var(--card-bg);
+            border-bottom: 2px solid var(--accent-blue);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
+        }
+        
+        .logout-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.5);
+        }
+        
+        .card-container {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-blue);
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.5);
+        }
+        
+        .table-header {
+            background: rgba(30, 30, 50, 0.7);
+            color: var(--text-primary);
+        }
+        
+        .table-row {
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .table-row:hover {
+            background: rgba(30, 30, 50, 0.3);
+        }
+    </style>
 </head>
-<body class="min-h-screen bg-gray-50">
-    <header class="bg-purple-700 text-white p-4 shadow-md">
+<body>
+    <div id="canvas-container"></div>
+    
+    <header class="header-container text-white p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Starboard - Principal Dashboard</h1>
-            <button id="logout-btn" class="bg-white text-purple-700 px-4 py-1 rounded-lg hover:bg-purple-100 transition">Logout</button>
+            <h1 class="text-2xl font-bold glow-text">Starboard - Principal Dashboard</h1>
+            <button id="logout-btn" class="logout-btn px-4 py-1 rounded-lg hover:bg-purple-100 transition">Logout</button>
         </div>
     </header>
 
-
-<!--   
-<div class="bg-white rounded-lg shadow-md p-6 mb-6">
-  <h2 class="text-xl font-semibold mb-4">Manage Classes</h2>
-  
- 
-  <div class="mb-6">
-    <h3 class="font-medium mb-2">Create New Class</h3>
-    <div class="flex gap-2">
-       <input id="new-class-name" type="text" placeholder="Class Name" 
-             class="flex-1 px-3 py-2 border rounded-lg">
-      <button id="add-class-btn" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
-        Add Class
-      </button>
-    </div>
-  </div>
-
- 
-  <div>
-    <h3 class="font-medium mb-2">Assign Teachers</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <select id="assign-class-select" class="px-3 py-2 border rounded-lg">
-        <option value="">Select Class</option>
-      </select>
-      
-      <select id="assign-teacher-select" class="px-3 py-2 border rounded-lg">
-        <option value="">Select Teacher</option>
-      </select>
-      
-      <button id="assign-teacher-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-        Assign
-      </button>
-    </div>
-  </div>
-</div>
--->
-
     <main class="container mx-auto p-4">
-        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 class="text-xl font-semibold mb-4">Filters</h2>
+        <div class="card-container p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4 text-white">Filters</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                    <label class="block text-gray-700 mb-2">Teacher</label>
-                    <select id="teacher-filter" class="w-full px-3 py-2 border rounded-lg">
+                    <label class="block text-white mb-2">Teacher</label>
+                    <select id="teacher-filter" class="w-full px-3 py-2 border rounded-lg bg-opacity-30 bg-gray-800 text-white border-gray-600">
                         <option value="">All Teachers</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-gray-700 mb-2">Class</label>
-                    <select id="class-filter" class="w-full px-3 py-2 border rounded-lg">
+                    <label class="block text-white mb-2">Class</label>
+                    <select id="class-filter" class="w-full px-3 py-2 border rounded-lg bg-opacity-30 bg-gray-800 text-white border-gray-600">
                         <option value="">All Classes</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-gray-700 mb-2">Date Range</label>
-                    <input type="text" id="date-range" class="w-full px-3 py-2 border rounded-lg" placeholder="Select date range">
+                    <label class="block text-white mb-2">Date Range</label>
+                    <input type="text" id="date-range" class="w-full px-3 py-2 border rounded-lg bg-opacity-30 bg-gray-800 text-white border-gray-600" placeholder="Select date range">
                 </div>
             </div>
             <div class="mt-4">
-                <button id="apply-filters" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">Apply Filters</button>
-                <button id="reset-filters" class="ml-2 bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">Reset</button>
+                <button id="apply-filters" class="btn-primary px-4 py-2 rounded-lg">Apply Filters</button>
+                <button id="reset-filters" class="ml-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">Reset</button>
             </div>
         </div>
         
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="card-container p-6">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-semibold">Star Activity Log</h2>
-                <div id="stats" class="text-gray-600"></div>
+                <h2 class="text-xl font-semibold text-white">Star Activity Log</h2>
+                <div id="stats" class="text-gray-300"></div>
             </div>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white">
+                <table class="min-w-full">
                     <thead>
-                        <tr class="bg-gray-100">
-                            <th class="py-2 px-4 border">Date</th>
-                            <th class="py-2 px-4 border">Teacher</th>
-                            <th class="py-2 px-4 border">Action</th>
-                            <th class="py-2 px-4 border">Student</th>
-                            <th class="py-2 px-4 border">Class</th>
-                            <th class="py-2 px-4 border">Comment</th>
+                        <tr class="table-header">
+                            <th class="py-2 px-4 border-b border-gray-600">Date</th>
+                            <th class="py-2 px-4 border-b border-gray-600">Teacher</th>
+                            <th class="py-2 px-4 border-b border-gray-600">Action</th>
+                            <th class="py-2 px-4 border-b border-gray-600">Student</th>
+                            <th class="py-2 px-4 border-b border-gray-600">Class</th>
+                            <th class="py-2 px-4 border-b border-gray-600">Comment</th>
                         </tr>
                     </thead>
-                    <tbody id="logs-table">
+                    <tbody id="logs-table" class="text-gray-200">
                         <!-- Logs will be added here dynamically -->
                     </tbody>
                 </table>
@@ -116,8 +133,8 @@
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.min.js"></script>
     
     <!-- Your scripts -->
+    <script src="../shared3D.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/principal.js"></script>
 </body>
-
 </html>

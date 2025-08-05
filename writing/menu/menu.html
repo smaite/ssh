@@ -3,1028 +3,501 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Writing Lesson</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <title>Menu Writing Guide</title>
+    <link rel="stylesheet" href="../../shared3D.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            background: #fff;
-            padding: 30px;
-            margin-bottom: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-            animation: fadeIn 1s ease-in;
-        }
-
-        h1 {
-            color: #2c3e50;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .instructions {
-            text-align: left;
-            font-size: 1.1em;
-            color: #34495e;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .instructions ol {
-            padding-left: 20px;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-
-        button {
-            padding: 12px 25px;
-            font-size: 1em;
-            color: #fff;
-            background: #3498db;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: transform 0.3s, background 0.3s;
-        }
-
-        button:hover {
-            background: #2980b9;
-            transform: scale(1.05);
-        }
-
-        #menuDisplay {
-            background: #ecf0f1;
-            padding: 20px;
-            border-radius: 10px;
-            min-height: 100px;
-            text-align: left;
-            color: #2c3e50;
-            font-size: 1.1em;
-            transition: all 0.5s ease;
-            position: relative;
-        }
-
-        /* Styles for menu1.html (Hotel Annapurna) */
-        .header {
-            text-align: center;
-            background: #f34f3c;
-            color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-
-        .header p {
-            margin: 5px 0;
-            font-size: 1.2em;
-        }
-
-        .tagline {
-            font-style: italic;
-            color: #f1c40f;
-        }
-
-        .section {
-            background: #fff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            text-align: center;
-            color: #2c3e50;
-        }
-
-        .menu-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            margin: 10px 0;
-            background: #f4f4f4;
-            border-radius: 5px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .menu-item h3 {
-            margin: 0;
-            color: #e74c3c;
-        }
-
-        .menu-item p {
-            margin: 5px 0;
-            color: #666;
-        }
-
-        .menu-item .price {
-            font-weight: bold;
-            color: #27ae60;
-        }
-
-        .promo-line {
-            text-align: center;
-            font-size: 1.2em;
-            color: #e74c3c;
-            margin: 30px 0;
-            font-weight: bold;
-        }
-
-        /* Styles for menu2.html (Himali Daanfe Restaurant) */
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-        
-        :root {
-            --primary-color: #1A5F7A;
-            --accent-color: #E8C07D;
-            --dark-text: #272829;
-            --light-text: #4F4F4F;
-            --background: #F9F7F3;
-            --card-background: #FFFFFF;
-        }
-
-        .menu-container {
-            background: var(--card-background);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .header-banner {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .restaurant-name {
-            font-family: 'Lora', serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .menu-container .tagline {
-            font-family: 'Lora', serif;
-            font-style: italic;
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 10px;
-            color: inherit;
-        }
-
-        .contact-info {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
-
-        .menu-content {
-            padding: 30px;
-        }
-
         .menu-section {
-            margin-bottom: 30px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .section-icon {
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-        }
-
-        .section-title {
-            font-family: 'Lora', serif;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 80px;
-            height: 2px;
-            background-color: var(--accent-color);
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .menu-container .menu-item {
-            padding: 15px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            background-color: #f9f9f9;
-            border-left: 3px solid var(--accent-color);
-        }
-
-        .menu-container .menu-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            align-items: flex-start;
-        }
-
-        .item-name {
-            font-weight: 600;
-            color: var(--dark-text);
-            font-size: 1.1rem;
-        }
-
-        .item-price {
-            font-weight: 700;
-            color: var(--primary-color);
-            background-color: var(--accent-color);
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        .item-description {
-            font-size: 0.85rem;
-            color: var(--light-text);
-            line-height: 1.4;
-        }
-
-        .chef-recommends {
-            position: relative;
-        }
-
-        .chef-badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: #ff6b6b;
-            color: white;
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-weight: 600;
-            z-index: 1;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .extra-info {
-            padding: 15px;
-            text-align: center;
-            font-size: 1rem;
-            color: var(--primary-color);
-            border-top: 1px solid #eee;
-        }
-
-        /* Styles for menu3.html (Delight Nepali Restaurant) */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
-        
-        :root {
-            --delight-primary: #8B3A3A;
-            --delight-secondary: #D9A566;
-            --delight-background: #FFF8F0;
-            --delight-text: #333333;
-            --delight-light-accent: #F3E5D8;
-        }
-
-        .delight-container {
-            background: white;
-            padding: 30px;
+            background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
+            margin-bottom: 30px;
+            border: 2px solid var(--accent-blue);
         }
-
-        .delight-container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: var(--delight-primary);
-        }
-
-        .delight-container .header {
-            text-align: center;
-            margin-bottom: 25px;
-            position: relative;
-            background: none;
-            color: inherit;
-        }
-
-        .delight-container .restaurant-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--delight-primary);
-            margin-bottom: 5px;
-            position: relative;
-            display: inline-block;
-        }
-
-      .delight-container .restaurant-name::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 2px;
-            background: var(--delight-secondary);
-        }
-
-        .address {
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-            color: #666;
-        }
-
-        .delight-container .tagline {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: var(--delight-secondary);
-            font-size: 1.1rem;
-            margin-top: 10px;
-            letter-spacing: 0.5px;
-        }
-
-        .decorative-element {
-            font-size: 1.5rem;
-            text-align: center;
-            color: var(--delight-secondary);
-            margin: 10px 0;
-        }
-
-        .delight-container .menu-section {
-            margin-bottom: 20px;
-        }
-
-        .delight-container .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--delight-primary);
-            margin-bottom: 10px;
-            text-align: center;
-            position: relative;
-            display: inline-block;
-            padding: 0 10px;
-        }
-
-        .delight-container .section-title::before, .delight-container .section-title::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            width: 1px;
-            height: 1px;
-            background: var(--delight-secondary);
-        }
-
-        .delight-container .section-title::before {
-            left: -40px;
-        }
-
-        .delight-container .section-title::after {
-            right: -40px;
-        }
-
-        .section-wrapper {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-       
-        .delight-container .menu-items {
-            padding: 0 10px;
-        }
-
-        .delight-container .menu-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px dashed #ddd;
-            transition: all 0.3s ease;
-        }
-
-        .delight-container .menu-item:last-child {
-            border-bottom: none;
-        }
-
-        .delight-container .menu-item:hover {
-            transform: translateX(5px);
-            color: var(--delight-primary);
-        }
-
-        .delight-container .item-name {
-            font-weight: 500;
-        }
-
-        .delight-container .item-price {
-            font-weight: 600;
-            color: var(--delight-primary);
-        }
-
-        .delight-container .extra-info {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 1rem;
-            color: var(--delight-primary);
-        }
-
-        /* Styles for menu4.html (Borcelle Coffee Shop) */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
         
-        :root {
-            --beige-background: #f5f1e6;
-            --dark-brown: #42291c;
-            --medium-brown: #8a6d5d;
-            --light-brown: #c3a995;
-            --borcelle-text: #42291c;
+        .menu-section h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 8px;
         }
-
-        .borcelle-container {
-            background: var(--beige-background);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            padding: 30px;
-            position: relative;
+        
+        .instructions {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 102, 255, 0.3);
+            margin-bottom: 30px;
+            border: 2px solid var(--accent-blue);
         }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 5px;
+        
+        .instructions ol, .instructions ul {
+            padding-left: 20px;
+            color: var(--text-primary);
         }
-
-        .logo i {
-            font-size: 24px;
-            color: var(--medium-brown);
-        }
-
-        .brand-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            color: var(--dark-brown);
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .coffee-shop-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-style: italic;
-            color: var(--medium-brown);
-            text-align: center;
-            margin-bottom: 5px;
-        }
-
-        .menu-heading {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark-brown);
-            text-align: center;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-
-        .menu-divider {
-            border-top: 1px solid var(--medium-brown);
-            margin: 15px 0;
-            opacity: 0.5;
-        }
-
-        .borcelle-container .menu-section {
-            margin-bottom: 20px;
-        }
-
-        .borcelle-container .section-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        
+        .instructions li {
             margin-bottom: 15px;
         }
-
-        .section-title-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--dark-brown);
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        
+        .menu-example {
+            background: rgba(20, 20, 40, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid var(--card-border);
+            font-family: 'Times New Roman', serif;
         }
-
-        .borcelle-container .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px 40px;
+        
+        .menu-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--accent-cyan);
         }
-
-        .borcelle-container .menu-item {
+        
+        .menu-category {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin: 20px 0 10px;
+            text-align: center;
+            color: var(--accent-purple);
+            border-bottom: 1px solid var(--accent-blue);
+            padding-bottom: 5px;
+        }
+        
+        .menu-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 12px;
+            margin: 15px 0;
+            border-bottom: 1px dotted var(--card-border);
+            padding-bottom: 5px;
         }
-
-        .borcelle-container .item-name {
-            font-weight: 400;
-            color: var(--borcelle-text);
-            max-width: 75%;
+        
+        .item-name {
+            font-weight: bold;
         }
-
-        .borcelle-container .item-price {
-            font-weight: 700;
-            color: var(--dark-brown);
+        
+        .item-description {
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            color: var(--text-secondary);
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        
+        .item-price {
+            font-weight: bold;
+            margin-left: 10px;
+            color: var(--accent-cyan);
         }
-     /* Sticky Footer Styling */
-.footer {
-    background: #343a40;
-    color: #f8f9fa;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 1.2rem;
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Ensures it stays above other elements */
-}
-
-.footer strong {
-    color: #ffc107;
-    font-weight: bold;
-    font-size: 1.3rem;
-}
-
-.footer p {
-    margin: 0;
-    padding: 0;
-}
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-                
-            }
-            #menuDisplay {
-             padding: 10px;
-            }
-            h1 {
-                font-size: 1.8em;
-            }
-            button {
-                padding: 10px 20px;
-                font-size: 0.9em;
-            }
-            .menu-grid {
+        
+        .menu-footer {
+            text-align: center;
+            font-style: italic;
+            margin-top: 20px;
+            color: var(--text-secondary);
+        }
+        
+        .dos-donts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .dos-donts {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        .dos, .donts {
+            background: rgba(20, 20, 40, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .dos h4 {
+            color: var(--success-color);
+            margin-bottom: 10px;
+        }
+        
+        .donts h4 {
+            color: var(--danger-color);
+            margin-bottom: 10px;
+        }
+        
+        .dos ul, .donts ul {
+            padding-left: 20px;
+        }
+        
+        .dos li, .donts li {
+            margin-bottom: 10px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.5);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background: rgba(20, 20, 40, 0.5);
+            color: white;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.5);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Menu Writing Lesson</h1>
-        <div class="instructions">
-            <h2>Instructions</h2>
-            <ol>
-                <li><strong>Start with a Title:</strong> Begin by writing a creative and appealing title for your menu, such as “Café Delight Menu” or “Tasty Treats,” to grab attention and set the tone. You can also write the name and address of the hotel. Adding a tagline is impressive!</li>
-                <li><strong>Organize into Sections:</strong> Divide your menu into clear sections like “Starters,” “Main Course,” “Desserts,” and “Beverages” to make it easy to read and navigate.</li>
-                <li><strong>List Items with Descriptions:</strong> Write the name of each dish followed by a short, appetizing description.  Keep it simple but tempting.</li>
-                <li><strong>Add Prices:</strong> Include a price for each item aligned neatly next to the dish name or description to help customers decide.</li>
-                <li><strong>Use Clear and Neat Formatting:</strong> Write in a simple, readable handwriting and style, and use bullet points, numbers, or spacing to separate items so the menu looks organized and professional.</li>
-                <li><strong>Check Spelling and Grammar:</strong> Proofread your menu to ensure there are no mistakes, as errors can make it look unprofessional.</li>
-            </ol>
+    <div id="canvas-container"></div>
+    
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1 class="glow-text">Menu Writing Guide</h1>
+            <p>Learn how to create effective and appealing menus</p>
         </div>
-        <div class="buttons">
-            <button onclick="loadMenu(0)">Load Menu 1</button>
-            <button onclick="loadMenu(1)">Load Menu 2</button>
-            <button onclick="loadMenu(2)">Load Menu 3</button>
-            <button onclick="loadMenu(3)">Load Menu 4</button>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="../../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#guide" class="nav-link"><i class="fas fa-book"></i> Writing Guide</a></li>
+                <li><a href="#elements" class="nav-link"><i class="fas fa-layer-group"></i> Key Elements</a></li>
+                <li><a href="#examples" class="nav-link"><i class="fas fa-utensils"></i> Examples</a></li>
+            </ul>
         </div>
-        <div id="menuDisplay">Click a button above to load a menu!</div>
-    </div>
-    <footer class="footer">
-        <p>Content developed by <strong>Nabaraj Dhungana</strong></p>
-    </footer>
-    <script>
-        // Array storing the full HTML content of each menu page
-        const menus = [
-            // menu1.html (Hotel Annapurna)
-            `
-            <div class="header">
-                <h1>Hotel Annapurna</h1>
-                <p>New Road, Siddharthanagar</p>
-                <p class="tagline">"Experience the Authentic Flavors of Nepal"</p>
-            </div>
-            <div class="section">
-                <h2>Menu</h2>
-                <div class="menu-item">
-                    <div>
-                        <h3>Momo</h3>
-                        <p>Steamed dumplings filled with chicken or vegetables, served with spicy tomato chutney.</p>
-                    </div>
-                    <div class="price">Rs. 200</div>
-                </div>
-                <div class="menu-item">
-                    <div>
-                        <h3>Dal Bhat</h3>
-                        <p>Traditional Nepali meal with lentil soup, rice, vegetables, and pickles.</p>
-                    </div>
-                    <div class="price">Rs. 250</div>
-                </div>
-                <div class="menu-item">
-                    <div>
-                        <h3>Sel Roti</h3>
-                        <p>Traditional Nepali rice doughnut, crispy and sweet.</p>
-                    </div>
-                    <div class="price">Rs. 100</div>
-                </div>
-                <div class="menu-item">
-                    <div>
-                        <h3>Thakali Thali</h3>
-                        <p>A flavorful platter with rice, lentils, curry, spinach, and pickles.</p>
-                    </div>
-                    <div class="price">Rs. 300</div>
-                </div>
-                <div class="menu-item">
-                    <div>
-                        <h3>Chiya (Nepali Tea)</h3>
-                        <p>Spiced milk tea, a perfect way to end your meal.</p>
-                    </div>
-                    <div class="price">Rs. 50</div>
-                </div>
-                <div class="menu-item">
-                    <div>
-                        <h3>Yomari</h3>
-                        <p>Sweet rice flour dumplings filled with molasses and sesame seeds.</p>
-                    </div>
-                    <div class="price">Rs. 120</div>
-                </div>
-            </div>
-            <div class="promo-line">
-                "Savor the Taste of Nepal – Where Every Bite Tells a Story!"
-            </div>
-            `,
-            // menu2.html (Himali Daanfe Restaurant)
-            `
-            <div class="menu-container">
-                <div class="header-banner">
-                    <h1 class="restaurant-name">Himali Daanfe Restaurant</h1>
-                    <p class="tagline">"Authentic Flavors of the Himalayas"</p>
-                    <p class="contact-info">New Road, Kathmandu, Nepal | Tel: +977-1-4567890</p>
-                </div>
-                <div class="menu-content">
-                    <div class="menu-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-drumstick-bite"></i>
-                            </div>
-                            <h2 class="section-title">Appetizers</h2>
-                        </div>
-                        <div class="menu-grid">
-                            <div class="menu-item chef-recommends">
-                                <div class="chef-badge">Chef's Choice</div>
-                                <div class="item-header">
-                                    <h3 class="item-name">Vegetable Pakoras</h3>
-                                    <span class="item-price">Rs. 90</span>
-                                </div>
-                                <p class="item-description">Assorted vegetables dipped in gram flour batter and deep-fried to perfection. Served with mint chutney.</p>
-                            </div>
-                            <div class="menu-item">
-                                <div class="item-header">
-                                    <h3 class="item-name">Chicken Choila</h3>
-                                    <span class="item-price">Rs. 140</span>
-                                </div>
-                                <p class="item-description">Grilled chicken marinated with Nepali spices and herbs. A traditional Newari dish.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-utensils"></i>
-                            </div>
-                            <h2 class="section-title">Main Course</h2>
-                        </div>
-                        <div class="menu-grid">
-                            <div class="menu-item chef-recommends">
-                                <div class="chef-badge">Chef's Choice</div>
-                                <div class="item-header">
-                                    <h3 class="item-name">Thakali Thali Set</h3>
-                                    <span class="item-price">Rs. 280</span>
-                                </div>
-                                <p class="item-description">Complete meal with rice, dal, seasonal vegetables, meat curry, pickle, papad and yogurt.</p>
-                            </div>
-                            <div class="menu-item">
-                                <div class="item-header">
-                                    <h3 class="item-name">Chicken Momo</h3>
-                                    <span class="item-price">Rs. 150</span>
-                                </div>
-                                <p class="item-description">Steamed dumplings filled with minced chicken, herbs and spices. Served with tomato chutney.</p>
-                            </div>
-                            <div class="menu-item">
-                                <div class="item-header">
-                                    <h3 class="item-name">Vegetable Biryani</h3>
-                                    <span class="item-price">Rs. 160</span>
-                                </div>
-                                <p class="item-description">Fragrant basmati rice cooked with mixed vegetables, herbs, and aromatic spices.</p>
-                            </div>
-                            <div class="menu-item">
-                                <div class="item-header">
-                                    <h3 class="item-name">Dhindo Set</h3>
-                                    <span class="item-price">Rs. 200</span>
-                                </div>
-                                <p class="item-description">Traditional Nepali dish made of buckwheat or millet flour, served with local vegetables and pickle.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-ice-cream"></i>
-                            </div>
-                            <h2 class="section-title">Desserts</h2>
-                        </div>
-                        <div class="menu-grid">
-                            <div class="menu-item">
-                                <div class="item-header">
-                                    <h3 class="item-name">Sikarni</h3>
-                                    <span class="item-price">Rs. 80</span>
-                                </div>
-                                <p class="item-description">Sweetened yogurt flavored with cardamom, cinnamon, and nuts.</p>
-                            </div>
-                            <div class="menu-item">
-                                <div class="item-header">
-                                    <h3 class="item-name">Kheer</h3>
-                                    <span class="item-price">Rs. 90</span>
-                                </div>
-                                <p class="item-description">Traditional rice pudding with coconut, raisins, and cardamom. Served chilled.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="extra-info">
-                    <p>All prices are inclusive of taxes | We use locally-sourced organic ingredients wherever possible</p>
-                </div>
-            </div>
-            `,
-            // menu3.html (Delight Nepali Restaurant)
-            `
-            <div class="delight-container">
-                <div class="header">
-                    <h1 class="restaurant-name animate__animated animate__fadeIn">Delight Nepali Restaurant</h1>
-                    <p class="address">Tinkune, Kathmandu, Nepal</p>
-                    <p class="tagline animate__animated animate__fadeIn">"Taste the Tradition, Savor the Flavor"</p>
-                </div>
-                <div class="decorative-element">❖ ❖ ❖</div>
-                <div class="menu-section">
-                    <div class="section-wrapper">
-                    <h3 class="section-title"><i class="fa-solid fa-mug-hot section-icon"></i> Tea & Coffee</h3>
-                    </div>
-                    <div class="menu-items">
-                        <div class="menu-item">
-                            <span class="item-name">Milk Tea</span>
-                            <span class="item-price">Rs. 30</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Black Tea</span>
-                            <span class="item-price">Rs. 25</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Coffee</span>
-                            <span class="item-price">Rs. 50</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-section">
-                    <div class="section-wrapper">
-                        <h3 class="section-title"><i class="fa-solid fa-utensils section-icon"></i>Main Course</h3>
-                    </div>
-                    <div class="menu-items">
-                        <div class="menu-item">
-                            <span class="item-name">Dal Bhat Tarkari</span>
-                            <span class="item-price">Rs. 150</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Momo (Dumplings)</span>
-                            <span class="item-price">Rs. 120</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Chowmein</span>
-                            <span class="item-price">Rs. 80</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-section">
-                    <div class="section-wrapper">
-                        <h3 class="section-title"><i class="fa-solid fa-cake-candles section-icon"></i>Desserts</h3>
-                    </div>
-                    <div class="menu-items">
-                        <div class="menu-item">
-                            <span class="item-name">Jalebi</span>
-                            <span class="item-price">Rs. 50</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Rasbari</span>
-                            <span class="item-price">Rs. 70</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Kaju Katli</span>
-                            <span class="item-price">Rs. 100</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="decorative-element">❖ ❖ ❖</div>
-                <div class="extra-info">
-                    <p>We use fresh, locally-sourced ingredients for all our dishes</p>
-                </div>
-            </div>
-            `,
-            // menu4.html (Borcelle Coffee Shop)
-            `
-            <div class="borcelle-container">
-                <div class="logo">
-                    <i class="fas fa-coffee"></i>
-                </div>
-                <div class="brand-name">BORCELLE</div>
-                <div class="coffee-shop-text">Coffee Shop</div>
-                <h1 class="menu-heading">MENU</h1>
-                <div class="menu-divider"></div>
-                <div class="menu-section">
-                    <div class="section-title">
-                        <i class="fas fa-coffee section-icon"></i>
-                        <h2 class="section-title-text">COFFEE</h2>
-                    </div>
-                    <div class="menu-grid">
-                        <div class="menu-item">
-                            <span class="item-name">Espresso</span>
-                            <span class="item-price">Rs. 120</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Macchiato</span>
-                            <span class="item-price">Rs. 120</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Flat White</span>
-                            <span class="item-price">Rs. 120</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Latte</span>
-                            <span class="item-price">Rs. 150</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Cappuccino</span>
-                            <span class="item-price">Rs. 150</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Americano</span>
-                            <span class="item-price">Rs. 150</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-divider"></div>
-                <div class="menu-section">
-                    <div class="section-title">
-                        <i class="fas fa-mug-hot section-icon"></i>
-                        <h2 class="section-title-text">TEA</h2>
-                    </div>
-                    <div class="menu-grid">
-                        <div class="menu-item">
-                            <span class="item-name">Lemon Tea</span>
-                            <span class="item-price">Rs. 80</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Black Tea</span>
-                            <span class="item-price">Rs. 80</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Green Tea</span>
-                            <span class="item-price">Rs. 100</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Mint Tea</span>
-                            <span class="item-price">Rs. 100</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-divider"></div>
-                <div class="menu-section">
-                    <div class="section-title">
-                        <i class="fas fa-glass section-icon"></i>
-                        <h2 class="section-title-text">NON-COFFEE</h2>
-                    </div>
-                    <div class="menu-grid">
-                        <div class="menu-item">
-                            <span class="item-name">Hot Chocolate</span>
-                            <span class="item-price">Rs. 120</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Smoothie</span>
-                            <span class="item-price">Rs. 120</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Lemonade</span>
-                            <span class="item-price">Rs. 120</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Vanilla Milkshake</span>
-                            <span class="item-price">Rs. 200</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-divider"></div>
-                <div class="menu-section">
-                    <div class="section-title">
-                        <i class="fas fa-cookie section-icon"></i>
-                        <h2 class="section-title-text">DESSERTS</h2>
-                    </div>
-                    <div class="menu-grid">
-                        <div class="menu-item">
-                            <span class="item-name">Strawberry Waffle</span>
-                            <span class="item-price">Rs. 200</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Chocolate Waffle</span>
-                            <span class="item-price">Rs. 200</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Brownies</span>
-                            <span class="item-price">Rs. 200</span>
-                        </div>
-                        <div class="menu-item">
-                            <span class="item-name">Lemon Pie</span>
-                            <span class="item-price">Rs. 180</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `
-        ];
+    </nav>
 
-        function loadMenu(index) {
-            document.getElementById('menuDisplay').innerHTML = menus[index];
+    <div class="container">
+        <section id="guide">
+            <h2 class="section-title">Menu Writing Fundamentals</h2>
+            
+            <div class="instructions">
+                <p>A well-designed menu is more than just a list of foods and prices—it's a critical marketing tool that influences customer choices and enhances the dining experience. Effective menu writing requires thoughtful description, strategic organization, and attention to visual appeal.</p>
+                
+                <div class="dos-donts">
+                    <div class="dos">
+                        <h4><i class="fas fa-check-circle"></i> Do's</h4>
+                        <ul>
+                            <li>Use descriptive language that appeals to the senses</li>
+                            <li>Organize items logically (appetizers → main courses → desserts)</li>
+                            <li>Highlight signature dishes or special items</li>
+                            <li>Include clear, accurate pricing</li>
+                            <li>Use appropriate formatting for readability</li>
+                            <li>Indicate dietary information (vegetarian, gluten-free, etc.)</li>
+                        </ul>
+                    </div>
+                    <div class="donts">
+                        <h4><i class="fas fa-times-circle"></i> Don'ts</h4>
+                        <ul>
+                            <li>Use technical cooking terms without explanation</li>
+                            <li>Include too many options in each category</li>
+                            <li>Overuse generic descriptions like "delicious" or "tasty"</li>
+                            <li>Make menu text too small or difficult to read</li>
+                            <li>Forget to proofread for spelling errors</li>
+                            <li>Use currency symbols repeatedly (once per section is sufficient)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="elements">
+            <h2 class="section-title">Key Elements of Menu Writing</h2>
+            
+            <div class="menu-section">
+                <h3>1. Descriptive Language</h3>
+                <p>Use vivid, appetizing language that appeals to all senses:</p>
+                <ul>
+                    <li><strong>Taste:</strong> savory, tangy, sweet, zesty, rich</li>
+                    <li><strong>Texture:</strong> crispy, tender, creamy, flaky, juicy</li>
+                    <li><strong>Preparation Method:</strong> slow-roasted, hand-crafted, freshly baked</li>
+                    <li><strong>Origin:</strong> locally sourced, traditional, authentic, farm-fresh</li>
+                </ul>
+                <p><strong>Example:</strong></p>
+                <p>Instead of: <em>"Tomato soup"</em><br>
+                Write: <em>"Creamy tomato basil soup simmered with garden herbs and served with house-made croutons"</em></p>
+            </div>
+            
+            <div class="menu-section">
+                <h3>2. Organization</h3>
+                <p>Arrange menu items in a logical sequence that matches how people typically eat:</p>
+                <ol>
+                    <li>Appetizers/Starters</li>
+                    <li>Soups and Salads</li>
+                    <li>Main Courses (possibly subdivided by protein: seafood, poultry, meat, vegetarian)</li>
+                    <li>Side Dishes</li>
+                    <li>Desserts</li>
+                    <li>Beverages</li>
+                </ol>
+                <p>Consider using clear headings and visual dividers between sections to improve navigation.</p>
+            </div>
+            
+            <div class="menu-section">
+                <h3>3. Item Names and Descriptions</h3>
+                <p>Create memorable names for dishes and follow them with informative descriptions:</p>
+                <ul>
+                    <li><strong>Name:</strong> Can be creative or straightforward, but should give an idea of the dish</li>
+                    <li><strong>Description:</strong> List key ingredients, preparation method, and accompaniments</li>
+                    <li><strong>Special Features:</strong> Note if the dish is signature, seasonal, or has dietary attributes</li>
+                </ul>
+                <p><strong>Structure:</strong> [Name] + [Key ingredients/preparation] + [Accompaniments] + [Special notes]</p>
+                <p><strong>Example:</strong> <em>"Himalayan Herb-Crusted Lamb - Tender lamb loin coated with local mountain herbs, served with saffron-infused mashed potatoes and seasonal vegetables. (GF)"</em></p>
+            </div>
+            
+            <div class="menu-section">
+                <h3>4. Typography and Layout</h3>
+                <p>The visual presentation of your menu affects readability and customer engagement:</p>
+                <ul>
+                    <li>Use a readable font size (minimum 12pt)</li>
+                    <li>Limit font varieties to 2-3 complementary styles</li>
+                    <li>Create visual hierarchy with headings, subheadings, and item names</li>
+                    <li>Consider using boxes, lines, or white space to separate sections</li>
+                    <li>Place high-profit items in prominent positions (top of sections or in highlighted boxes)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="examples">
+            <h2 class="section-title">Menu Examples</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('restaurant')">Restaurant Menu</button>
+                <button class="tab-btn" onclick="openTab('cafe')">Café Menu</button>
+                <button class="tab-btn" onclick="openTab('street')">Street Food Menu</button>
+            </div>
+            
+            <div id="restaurant" class="tab-content active">
+                <div class="menu-example">
+                    <div class="menu-title">HIMALAYAN HEIGHTS RESTAURANT</div>
+                    <p style="text-align: center;">Traditional Nepali Cuisine with a Modern Twist</p>
+                    
+                    <div class="menu-category">APPETIZERS</div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Crispy Momos</div>
+                            <div class="item-description">Pan-fried dumplings filled with spiced chicken, served with homemade tomato achar</div>
+                        </div>
+                        <div class="item-price">Rs. 350</div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Aloo Sadeko</div>
+                            <div class="item-description">Spicy potato salad tossed with fresh coriander, green chilies, and roasted cumin (V, GF)</div>
+                        </div>
+                        <div class="item-price">Rs. 250</div>
+                    </div>
+                    
+                    <div class="menu-category">MAIN COURSES</div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Himalayan Herb-Crusted Lamb</div>
+                            <div class="item-description">Tender lamb loin coated with local mountain herbs, served with saffron-infused mashed potatoes and seasonal vegetables (GF)</div>
+                        </div>
+                        <div class="item-price">Rs. 1200</div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Kathmandu Valley Thali</div>
+                            <div class="item-description">A traditional platter featuring dal, steamed rice, seasonal vegetables, choice of meat curry, papad, and pickles</div>
+                        </div>
+                        <div class="item-price">Rs. 850</div>
+                    </div>
+                    
+                    <div class="menu-category">DESSERTS</div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Saffron Sikarni</div>
+                            <div class="item-description">Cardamom and saffron-flavored yogurt dessert topped with crushed pistachios and fresh seasonal fruits (GF)</div>
+                        </div>
+                        <div class="item-price">Rs. 300</div>
+                    </div>
+                    
+                    <div class="menu-footer">
+                        <p>V - Vegetarian | GF - Gluten Free</p>
+                        <p>All prices are subject to 10% service charge and 13% VAT</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="cafe" class="tab-content">
+                <div class="menu-example">
+                    <div class="menu-title">MOUNTAIN BREW CAFÉ</div>
+                    <p style="text-align: center;">Artisanal Coffee & Homemade Treats</p>
+                    
+                    <div class="menu-category">HOT BEVERAGES</div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Himalayan Single Origin</div>
+                            <div class="item-description">Hand-picked beans from the high altitude farms of Gulmi, dark roasted with notes of chocolate and citrus</div>
+                        </div>
+                        <div class="item-price">Rs. 180</div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Masala Chiya</div>
+                            <div class="item-description">Traditional Nepali spiced milk tea with cardamom, cinnamon, and cloves</div>
+                        </div>
+                        <div class="item-price">Rs. 120</div>
+                    </div>
+                    
+                    <div class="menu-category">SWEET TREATS</div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Apple Cinnamon Muffin</div>
+                            <div class="item-description">Warm muffin made with Jumla apples and topped with a crunchy cinnamon streusel</div>
+                        </div>
+                        <div class="item-price">Rs. 150</div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Sel Roti</div>
+                            <div class="item-description">Traditional ring-shaped sweet rice bread served with house-made berry compote</div>
+                        </div>
+                        <div class="item-price">Rs. 120</div>
+                    </div>
+                    
+                    <div class="menu-category">LIGHT MEALS</div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Avocado Toast</div>
+                            <div class="item-description">Sourdough bread topped with smashed avocado, cherry tomatoes, and a sprinkle of Himalayan pink salt (V)</div>
+                        </div>
+                        <div class="item-price">Rs. 320</div>
+                    </div>
+                    
+                    <div class="menu-footer">
+                        <p>V - Vegetarian | VG - Vegan</p>
+                        <p>All our baked goods are made fresh daily</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="street" class="tab-content">
+                <div class="menu-example">
+                    <div class="menu-title">TASTY CORNER FOOD CART</div>
+                    <p style="text-align: center;">Authentic Street Food Favorites</p>
+                    
+                    <div class="menu-category">SNACKS</div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Chatpate</div>
+                            <div class="item-description">Spicy mix of puffed rice, chickpeas, potatoes, and tangy tamarind sauce (V)</div>
+                        </div>
+                        <div class="item-price">Rs. 80</div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Jhol Momo</div>
+                            <div class="item-description">Steamed dumplings served in a spicy, tangy soup. Choice of chicken, buff, or veggie</div>
+                        </div>
+                        <div class="item-price">Rs. 120</div>
+                    </div>
+                    
+                    <div class="menu-category">ROLLS & WRAPS</div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Chicken Sekuwa Roll</div>
+                            <div class="item-description">Grilled spiced chicken pieces wrapped in roomali roti with fresh veggies and mint chutney</div>
+                        </div>
+                        <div class="item-price">Rs. 150</div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Paneer Tikka Roll</div>
+                            <div class="item-description">Marinated cottage cheese cubes with bell peppers wrapped in roomali roti (V)</div>
+                        </div>
+                        <div class="item-price">Rs. 130</div>
+                    </div>
+                    
+                    <div class="menu-category">BEVERAGES</div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Lassi</div>
+                            <div class="item-description">Sweet or salty yogurt drink, served chilled</div>
+                        </div>
+                        <div class="item-price">Rs. 80</div>
+                    </div>
+                    
+                    <div class="menu-footer">
+                        <p>V - Vegetarian | Extra spicy available on request</p>
+                        <p>All items prepared fresh to order</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div style="text-align: center;">
+            <a href="../../index.html" class="back-btn"><i class="fas fa-home"></i> Back to Home</a>
+        </div>
+    </div>
+    
+    <script src="../../shared3D.js"></script>
+    <script>
+        function openTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            // Remove active class from all buttons
+            const tabButtons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Show the selected tab content and mark its button as active
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
         }
     </script>
 </body>
