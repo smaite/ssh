@@ -1,0 +1,322 @@
+/* 3D AMOLED Black Theme - Shared Styles */
+:root {
+  --amoled-black: #000000;
+  --deep-black: #050505;
+  --accent-purple: #8610f2;
+  --accent-blue: #0066ff;
+  --accent-cyan: #00e1ff;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --card-bg: rgba(15, 15, 20, 0.85);
+  --card-hover: rgba(25, 25, 35, 0.9);
+  --card-border: rgba(80, 80, 255, 0.3);
+  --danger-color: #ff3366;
+  --success-color: #00cc99;
+  --warning-color: #ffcc00;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--amoled-black);
+  overflow-x: hidden;
+  perspective: 1000px;
+}
+
+#canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header Styles */
+header, .header {
+  background: linear-gradient(120deg, var(--accent-purple), var(--accent-blue), var(--accent-purple));
+  color: var(--text-primary);
+  padding: 15px 0;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.7);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+  margin-bottom: 20px;
+  animation: header-glow 8s infinite alternate;
+}
+
+@keyframes header-glow {
+  0%, 100% {
+    box-shadow: 0 5px 25px rgba(0, 102, 255, 0.7);
+  }
+  50% {
+    box-shadow: 0 5px 35px rgba(134, 16, 242, 0.9);
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+}
+
+/* Navigation */
+nav, .nav {
+  background: rgba(20, 20, 30, 0.9);
+  color: var(--text-primary);
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+nav ul, .nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav ul li, .nav ul li {
+  margin: 0 10px;
+  transition: transform 0.3s ease;
+}
+
+nav ul li a, .nav ul li a, .btn, button {
+  color: var(--text-primary);
+  padding: 8px 12px;
+  text-decoration: none;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: rgba(30, 30, 50, 0.5);
+  border: none;
+  cursor: pointer;
+}
+
+nav ul li a i, .nav ul li a i, .btn i {
+  margin-right: 6px;
+}
+
+nav ul li a:hover, .nav ul li a:hover, .btn:hover, button:hover {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(80, 80, 255, 0.6);
+}
+
+/* Form elements */
+input, select, textarea {
+  background: rgba(30, 30, 50, 0.7);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
+}
+
+/* Button Styles */
+.btn-danger {
+  background: linear-gradient(135deg, var(--danger-color), #990033);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, var(--success-color), #006633);
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, var(--warning-color), #cc9900);
+}
+
+/* Card Styles */
+.card {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--card-border);
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4),
+              0 0 15px rgba(80, 80, 255, 0.5);
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: rgba(20, 20, 30, 0.7);
+}
+
+table th, table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid rgba(100, 100, 255, 0.2);
+}
+
+table th {
+  background: rgba(30, 30, 60, 0.9);
+  color: var(--accent-cyan);
+  font-weight: bold;
+}
+
+table tbody tr {
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+table tbody tr:hover {
+  background: rgba(40, 40, 80, 0.7);
+  transform: scale(1.01);
+}
+
+/* Text Effects */
+.glow-text {
+  text-shadow: 0 0 5px var(--accent-cyan), 0 0 15px var(--accent-blue);
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px var(--accent-cyan), 0 0 15px var(--accent-blue);
+  }
+  100% {
+    text-shadow: 0 0 10px var(--accent-cyan), 0 0 30px var(--accent-blue), 0 0 40px var(--accent-purple);
+  }
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.8s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  background: var(--deep-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent-blue), var(--accent-purple));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--accent-cyan), var(--accent-blue));
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .container {
+    width: 95%;
+  }
+  
+  table {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 0.95rem;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  nav ul, .nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  nav ul li, .nav ul li {
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
+  }
+  
+  nav ul li a, .nav ul li a {
+    display: block;
+    width: 100%;
+  }
+  
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  input, select, textarea, button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    width: 98%;
+    padding: 10px;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
+  
+  .card {
+    padding: 15px;
+  }
+} 

@@ -57,6 +57,16 @@ header {
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.7);
   clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
   margin-bottom: 10px;
+  animation: header-glow 8s infinite alternate;
+}
+
+@keyframes header-glow {
+  0%, 100% {
+    box-shadow: 0 5px 25px rgba(0, 102, 255, 0.7);
+  }
+  50% {
+    box-shadow: 0 5px 35px rgba(134, 16, 242, 0.9);
+  }
 }
 
 header h1 {
@@ -153,6 +163,14 @@ nav ul li a.nav-link:hover {
   text-transform: uppercase;
   letter-spacing: 1px;
   transform-style: preserve-3d;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-title.fade-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-title:after {
@@ -164,6 +182,7 @@ nav ul li a.nav-link:hover {
   width: 100px;
   height: 3px;
   background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+  box-shadow: 0 0 10px rgba(0, 102, 255, 0.8);
 }
 
 /* Topics Grid */
@@ -184,6 +203,23 @@ nav ul li a.nav-link:hover {
   overflow: hidden;
   transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.topic-card.fade-in {
+  animation: card-fade-in 0.8s forwards;
+}
+
+@keyframes card-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card-content {
@@ -202,10 +238,33 @@ nav ul li a.nav-link:hover {
   border: 1px solid var(--card-border);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   transition: all 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.card-content::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 102, 255, 0.1) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.6s;
+  pointer-events: none;
+}
+
+.topic-card:hover .card-content::before {
+  opacity: 0.8;
 }
 
 .topic-card:hover {
   transform: translateY(-10px) rotateX(5deg) rotateY(10deg);
+  z-index: 10;
 }
 
 .topic-card:hover .card-content {
@@ -222,11 +281,23 @@ nav ul li a.nav-link:hover {
   color: var(--accent-blue);
   filter: drop-shadow(0 0 8px rgba(0, 100, 255, 0.6));
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .topic-card:hover i {
   transform: scale(1.2);
   color: var(--accent-cyan);
+  animation: icon-pulse 1.5s infinite alternate;
+}
+
+@keyframes icon-pulse {
+  0% {
+    filter: drop-shadow(0 0 8px rgba(0, 100, 255, 0.6));
+  }
+  100% {
+    filter: drop-shadow(0 0 15px rgba(0, 225, 255, 0.9));
+  }
 }
 
 .topic-card h3 {
@@ -247,6 +318,21 @@ nav ul li a.nav-link:hover {
 
 #writing {
   margin-bottom: 80px;
+}
+
+/* 3D Effect for Card Grid */
+.topics-grid {
+  transform-style: preserve-3d;
+  animation: grid-float 12s infinite ease-in-out;
+}
+
+@keyframes grid-float {
+  0%, 100% {
+    transform: translateZ(0);
+  }
+  50% {
+    transform: translateZ(10px);
+  }
 }
 
 /* Sticky Footer Styling */
@@ -274,6 +360,21 @@ nav ul li a.nav-link:hover {
 .footer p {
   margin: 0;
   padding: 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  background: var(--deep-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent-blue), var(--accent-purple));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--accent-cyan), var(--accent-blue));
 }
 
 /* Responsive Design */
