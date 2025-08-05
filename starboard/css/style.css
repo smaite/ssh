@@ -217,7 +217,7 @@ body {
 /* Small devices (portrait tablets, 400px-768px) */
 @media (min-width: 401px) and (max-width: 768px) {
     .logo-container img {
-        max-height: 12vw;
+        max-height: 8vw;
         max-width: 80vw;
     }
 }
@@ -605,5 +605,6 @@ body {
   --secondary: var(--theme-secondary);
 
 }
+
 
 
