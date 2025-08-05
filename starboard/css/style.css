@@ -226,7 +226,7 @@ body {
 @media (min-width: 769px) and (max-width: 1024px) {
     .logo-container img {
         max-height: 10vw;
-        max-width: 60vw;
+        max-width: 80vw;
     }
 }
 
@@ -605,6 +605,7 @@ body {
   --secondary: var(--theme-secondary);
 
 }
+
 
 
 
