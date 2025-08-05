@@ -209,7 +209,7 @@ body {
 /* Extra small devices (phones, 400px and down) */
 @media (max-width: 400px) {
     .logo-container img {
-        max-height: 12vw;
+        max-height: 8vw;
         max-width: 80vw;
     }
 }
@@ -605,6 +605,7 @@ body {
   --secondary: var(--theme-secondary);
 
 }
+
 
 
 
